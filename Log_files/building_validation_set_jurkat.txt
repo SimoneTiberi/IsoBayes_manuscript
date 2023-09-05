@@ -1,0 +1,79 @@
+Warning message:
+In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/building_validation_set_jurkat.txt', reason 'No such file or directory'
+Isoform Validation with MetaMorpheus data (psm)
+NoArgC
+Number of proteins: 18498
+NoAspN
+Number of proteins: 21507
+NoChym
+Number of proteins: 21648
+NoGluC
+Number of proteins: 18900
+NoLysC
+Number of proteins: 20500
+NoTrypsin
+Number of proteins: 20563
+Gene Validation with MetaMorpheus data (psm)
+NoArgC
+Number of Gene: 17119
+NoAspN
+Number of Gene: 17693
+NoChym
+Number of Gene: 17616
+NoGluC
+Number of Gene: 17131
+NoLysC
+Number of Gene: 17458
+NoTrypsin
+Number of Gene: 17440
+Isoform Validation with MetaMorpheus data (intensities)
+NoArgC
+Peptides with intensity equal to 0: 2.127%
+NA's intensity: 65.032%
+Number of proteins: 18498
+NoAspN
+Peptides with intensity equal to 0: 2.023%
+NA's intensity: 70.877%
+Number of proteins: 21507
+NoChym
+Peptides with intensity equal to 0: 2.212%
+NA's intensity: 68.419%
+Number of proteins: 21648
+NoGluC
+Peptides with intensity equal to 0: 2.054%
+NA's intensity: 62.819%
+Number of proteins: 18900
+NoLysC
+Peptides with intensity equal to 0: 1.95%
+NA's intensity: 70.069%
+Number of proteins: 20500
+NoTrypsin
+Peptides with intensity equal to 0: 2.215%
+NA's intensity: 68.93%
+Number of proteins: 20563
+Gene Validation with MetaMorpheus data (intensities)
+NoArgC
+Peptides with intensity equal to 0: 2.127%
+NA's intensity: 65.032%
+Number of Gene: 17119
+NoAspN
+Peptides with intensity equal to 0: 2.023%
+NA's intensity: 70.877%
+Number of Gene: 17693
+NoChym
+Peptides with intensity equal to 0: 2.212%
+NA's intensity: 68.419%
+Number of Gene: 17616
+NoGluC
+Peptides with intensity equal to 0: 2.054%
+NA's intensity: 62.819%
+Number of Gene: 17131
+NoLysC
+Peptides with intensity equal to 0: 1.95%
+NA's intensity: 70.069%
+Number of Gene: 17458
+NoTrypsin
+Peptides with intensity equal to 0: 2.215%
+NA's intensity: 68.93%
+Number of Gene: 17440

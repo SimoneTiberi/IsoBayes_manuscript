@@ -1,0 +1,40 @@
+---------- MM_psm_mRNA_PEP ----------
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_psm_mRNA ----------
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_psm_PEP ----------
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_psm ----------
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image

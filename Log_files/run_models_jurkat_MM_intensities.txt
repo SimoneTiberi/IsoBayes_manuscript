@@ -1,0 +1,188 @@
+---------- MM_intensities_mRNA_PEP ----------
+ArgC
+Saving 7 x 7 in image
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+GluC
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities_mRNA ----------
+ArgC
+Saving 7 x 7 in image
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+GluC
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities_PEP ----------
+ArgC
+Saving 7 x 7 in image
+AspN
+Saving 7 x 7 in image
+Chym
+Saving 7 x 7 in image
+GluC
+Saving 7 x 7 in image
+LysC
+Saving 7 x 7 in image
+Trypsin
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities ----------
+ArgC
+Saving 7 x 7 in image
+
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Error in `geom_line()` at IsoBayes_paper/utils_function/prior_plot.R:2:2:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 1st layer.
+Caused by error:
+! object 'model' not found
+Run `rlang::last_trace()` to see where the error occurred.
+[1] 11
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Error: object 'proteases' not found
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Error in eval(parse(text = text, keep.source = FALSE), envir) : 
+  object 'PATH_RES_ABUNDANCE' not found
+Error: object 'PATH_RES_ABUNDANCE' not found
+Error: object 'PATH_RES_ABUNDANCE' not found
+Error: object 'PATH_RES_ABUNDANCE' not found
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Warning message:
+In sink() : no sink to remove
+Error: object 'PATH_RES_ABUNDANCE' not found
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+|--------------------------------------------------|
+|==================================================|
+Saving 7 x 7 in image
+|--------------------------------------------------|
+|==================================================|
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+|--------------------------------------------------|
+|==================================================|
+Saving 7 x 7 in image

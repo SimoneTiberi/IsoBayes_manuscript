@@ -1,0 +1,945 @@
+------------------------------------
+Processing ./OnlyArgC ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.01 s (CPU), 2.01 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.11 s (CPU), 0.11 s (Wall)] -- 
+IDFileConverter took 2.12 s (wall), 2.13 s (CPU), 0.10 s (system), 2.03 s (user); Peak Memory Usage: 367 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.52 s (CPU), 1.53 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.08 s (CPU), 0.08 s (Wall)] -- 
+IDFileConverter took 1.61 s (wall), 1.60 s (CPU), 0.08 s (system), 1.52 s (user); Peak Memory Usage: 307 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.10 s (CPU), 1.11 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.07 s (CPU), 0.06 s (Wall)] -- 
+IDFileConverter took 1.18 s (wall), 1.17 s (CPU), 0.05 s (system), 1.12 s (user); Peak Memory Usage: 240 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.61 s (CPU), 2.62 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.14 s (CPU), 0.14 s (Wall)] -- 
+IDFileConverter took 2.77 s (wall), 2.76 s (CPU), 0.10 s (system), 2.66 s (user); Peak Memory Usage: 443 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.26 s (CPU), 3.28 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.16 s (CPU), 0.16 s (Wall)] -- 
+IDFileConverter took 3.45 s (wall), 3.43 s (CPU), 0.12 s (system), 3.31 s (user); Peak Memory Usage: 531 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.02 s (CPU), 4.02 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.19 s (CPU), 0.19 s (Wall)] -- 
+IDFileConverter took 4.23 s (wall), 4.23 s (CPU), 0.11 s (system), 4.12 s (user); Peak Memory Usage: 608 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.65 s (CPU), 3.66 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.85 s (wall), 3.84 s (CPU), 0.16 s (system), 3.68 s (user); Peak Memory Usage: 578 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.52 s (CPU), 3.53 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.18 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.72 s (wall), 3.72 s (CPU), 0.11 s (system), 3.61 s (user); Peak Memory Usage: 558 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.92 s (CPU), 2.94 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.14 s (CPU), 0.14 s (Wall)] -- 
+IDFileConverter took 3.09 s (wall), 3.07 s (CPU), 0.11 s (system), 2.96 s (user); Peak Memory Usage: 491 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.40 s (CPU), 2.40 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.12 s (CPU), 0.13 s (Wall)] -- 
+IDFileConverter took 2.53 s (wall), 2.53 s (CPU), 0.13 s (system), 2.40 s (user); Peak Memory Usage: 427 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.98 s (CPU), 1.98 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.10 s (CPU), 0.11 s (Wall)] -- 
+IDFileConverter took 2.10 s (wall), 2.09 s (CPU), 0.10 s (system), 1.99 s (user); Peak Memory Usage: 366 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+IDMerger took 7.13 s (wall), 7.14 s (CPU), 0.21 s (system), 6.93 s (user); Peak Memory Usage: 310 MB.
+Progress of 'Loading idXML':
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+-- done [took 3.94 s (CPU), 3.94 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Arg-C
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.20 s (CPU), 0.19 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (0s)
+Mapping 147835 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+  94.60 %               -- done [took 3.98 s (CPU), 1.04 s (Wall)] -- 
+Merge took: 0.03 s (wall), 0.03 s (CPU), 0.00 s (system), 0.03 s (user)
+Memory usage (Aho-Corasick): 256 MB (working set delta), 256 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 431468 hits for 132069 of 147835 peptides.
+Peptide hits passing enzyme filter: 431468
+     ... rejected by enzyme filter: 76020
+Unmatched peptide: PPNAPSQDGKEAKAGEAPTENPAPPTQQSSAE
+Unmatched peptide: MLSESKEGEEKEEVTMDTSENR
+<Unmatched peptide: PPNAPSQDGKEAKAGEAPTENPAPPTQQSSAE> occurred 2 times
+Unmatched peptide: PKEAENPEGEEKEAATLEVER
+Unmatched peptide: PNLPTFRGSGSTANLPSCSNGTAGSSRR
+<Unmatched peptide: PKEAENPEGEEKEAATLEVER> occurred 2 times
+Unmatched peptide: PPLSPKSGAEVEAGDAAER
+Unmatched peptide: MLSESKEGEEKEEVTMDTSENR
+Unmatched peptide: AGDLLEDSPKRPKEAENPEGEEKEAATLEVER
+Unmatched peptide: PPLSPKSGAEVEAGDAAER
+Unmatched peptide: DPSPEADAPVLGSPEKEEAASEPPAAAPDAAPPPPDR
+<Unmatched peptide: AGDLLEDSPKRPKEAENPEGEEKEAATLEVER> occurred 2 times
+Unmatched peptide: TVMDGGLESDGPNMTENGLEDESR
+<Unmatched peptide: DPSPEADAPVLGSPEKEEAASEPPAAAPDAAPPPPDR> occurred 2 times
+Unmatched peptide: ...
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 15766 (10 %)
+  target/decoy:
+    match to target DB only: 91937 (62 %)
+    match to decoy DB only : 40093 (27 %)
+    match to both          : 39 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 15766
+    unique match (to 1 protein)     : 45586
+    non-unique match (to >1 protein): 86483
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 84069 (84069 new)
+  matched target proteins: 46636 (55 %)
+  matched decoy proteins : 37433 (44 %)
+  orphaned proteins      : 19 (all removed)
+-----------------------------------
+PeptideIndexer found unmatched peptides, which could not be associated to a protein.
+Potential solutions:
+   - check your FASTA database is identical to the search DB (or use 'auto')
+   - set 'enzyme:specificity' and 'enzyme:name' to 'auto' to match the parameters of the search engine
+   - increase 'aaa_max' to allow more ambiguous amino acids
+   - as a last resort: use the 'unmatched_action' option to accept or even remove unmatched peptides
+     (note that unmatched peptides cannot be used for FDR calculation or quantification)
+Result files will be written, but PeptideIndexer will exit with an error code.
+Progress of 'Storing idXML':
+  34.24 %               -- done [took 1.42 s (CPU), 1.43 s (Wall)] -- 
+PeptideIndexer took 7.94 s (wall), 10.91 s (CPU), 0.22 s (system), 10.69 s (user); Peak Memory Usage: 597 MB.
+Loading input file: ./OnlyArgC/merge_index.idXML
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Merging peptide ids.
+Merging protein ids.
+PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+132069 suitable PeptideHits of 91746 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 30.49 s (wall), 8.81 s (CPU), 0.20 s (system), 8.61 s (user); Peak Memory Usage: 366 MB.
+<PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.> occurred 15766 times
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 84069 protein hit(s),
+91746 peptide identification(s) with 147835 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 19868 protein hit(s),
+40678 peptide identification(s) with 40678 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 6.11 s (wall), 6.10 s (CPU), 0.13 s (system), 5.97 s (user); Peak Memory Usage: 252 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Successfully switched 40678 PSM scores.
+IDScoreSwitcher took 2.19 s (wall), 2.19 s (CPU), 0.07 s (system), 2.12 s (user); Peak Memory Usage: 105 MB.
+------------------------------------
+Processing ./OnlyAspN ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.11 s (CPU), 1.11 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.06 s (CPU), 0.07 s (Wall)] -- 
+IDFileConverter took 1.18 s (wall), 1.18 s (CPU), 0.05 s (system), 1.13 s (user); Peak Memory Usage: 230 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 0.97 s (CPU), 0.98 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.07 s (CPU), 0.06 s (Wall)] -- 
+IDFileConverter took 1.04 s (wall), 1.04 s (CPU), 0.05 s (system), 0.99 s (user); Peak Memory Usage: 210 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 0.90 s (CPU), 0.90 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.05 s (CPU), 0.06 s (Wall)] -- 
+IDFileConverter took 0.96 s (wall), 0.95 s (CPU), 0.05 s (system), 0.90 s (user); Peak Memory Usage: 197 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.38 s (CPU), 1.39 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.09 s (CPU), 0.09 s (Wall)] -- 
+IDFileConverter took 1.48 s (wall), 1.48 s (CPU), 0.08 s (system), 1.40 s (user); Peak Memory Usage: 273 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.65 s (CPU), 1.66 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.11 s (CPU), 0.10 s (Wall)] -- 
+IDFileConverter took 1.77 s (wall), 1.76 s (CPU), 0.08 s (system), 1.68 s (user); Peak Memory Usage: 317 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.82 s (CPU), 1.82 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.11 s (CPU), 0.11 s (Wall)] -- 
+IDFileConverter took 1.94 s (wall), 1.94 s (CPU), 0.08 s (system), 1.86 s (user); Peak Memory Usage: 342 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.70 s (CPU), 1.71 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.11 s (CPU), 0.11 s (Wall)] -- 
+IDFileConverter took 1.82 s (wall), 1.81 s (CPU), 0.08 s (system), 1.73 s (user); Peak Memory Usage: 326 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.49 s (CPU), 1.50 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.09 s (CPU), 0.09 s (Wall)] -- 
+IDFileConverter took 1.59 s (wall), 1.59 s (CPU), 0.08 s (system), 1.51 s (user); Peak Memory Usage: 295 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.27 s (CPU), 1.28 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.08 s (CPU), 0.08 s (Wall)] -- 
+IDFileConverter took 1.36 s (wall), 1.36 s (CPU), 0.06 s (system), 1.30 s (user); Peak Memory Usage: 264 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.09 s (CPU), 1.10 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.07 s (CPU), 0.07 s (Wall)] -- 
+IDFileConverter took 1.17 s (wall), 1.16 s (CPU), 0.05 s (system), 1.11 s (user); Peak Memory Usage: 230 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.04 s (CPU), 1.05 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.06 s (CPU), 0.07 s (Wall)] -- 
+IDFileConverter took 1.12 s (wall), 1.11 s (CPU), 0.04 s (system), 1.07 s (user); Peak Memory Usage: 222 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+IDMerger took 4.26 s (wall), 4.25 s (CPU), 0.11 s (system), 4.14 s (user); Peak Memory Usage: 198 MB.
+Progress of 'Loading idXML':
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+-- done [took 2.56 s (CPU), 2.57 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Asp-N
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.18 s (CPU), 0.18 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (0s)
+Mapping 95234 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+-- done [took 3.07 s (CPU), 0.80 s (Wall)] -- 
+Merge took: 0.02 s (wall), 0.03 s (CPU), 0.00 s (system), 0.03 s (user)
+Memory usage (Aho-Corasick): 130 MB (working set delta), 130 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 340741 hits for 95234 of 95234 peptides.
+Peptide hits passing enzyme filter: 340741
+     ... rejected by enzyme filter: 11915
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 0 (0 %)
+  target/decoy:
+    match to target DB only: 87384 (91 %)
+    match to decoy DB only : 7841 (8 %)
+    match to both          : 9 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 0
+    unique match (to 1 protein)     : 25260
+    non-unique match (to >1 protein): 69974
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 43277 (43277 new)
+  matched target proteins: 29936 (69 %)
+  matched decoy proteins : 13341 (30 %)
+  orphaned proteins      : 51 (all removed)
+-----------------------------------
+Progress of 'Storing idXML':
+  85.91 %               -- done [took 0.94 s (CPU), 0.95 s (Wall)] -- 
+PeptideIndexer took 5.10 s (wall), 7.40 s (CPU), 0.16 s (system), 7.24 s (user); Peak Memory Usage: 387 MB.
+Loading input file: ./OnlyAspN/merge_index.idXML
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Merging peptide ids.
+Merging protein ids.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+95234 suitable PeptideHits of 81713 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 31.88 s (wall), 6.17 s (CPU), 0.20 s (system), 5.97 s (user); Peak Memory Usage: 272 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 43277 protein hit(s),
+81713 peptide identification(s) with 95234 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 21932 protein hit(s),
+66460 peptide identification(s) with 66460 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 4.69 s (wall), 4.67 s (CPU), 0.10 s (system), 4.57 s (user); Peak Memory Usage: 185 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Successfully switched 66460 PSM scores.
+IDScoreSwitcher took 3.47 s (wall), 3.47 s (CPU), 0.09 s (system), 3.38 s (user); Peak Memory Usage: 146 MB.
+------------------------------------
+Processing ./OnlyChym ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 0.85 s (CPU), 0.86 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.05 s (CPU), 0.05 s (Wall)] -- 
+IDFileConverter took 0.91 s (wall), 0.91 s (CPU), 0.04 s (system), 0.87 s (user); Peak Memory Usage: 191 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.00 s (CPU), 1.01 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.06 s (CPU), 0.06 s (Wall)] -- 
+IDFileConverter took 1.07 s (wall), 1.07 s (CPU), 0.05 s (system), 1.02 s (user); Peak Memory Usage: 215 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.39 s (CPU), 1.39 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.08 s (CPU), 0.08 s (Wall)] -- 
+IDFileConverter took 1.48 s (wall), 1.48 s (CPU), 0.10 s (system), 1.38 s (user); Peak Memory Usage: 270 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.58 s (CPU), 1.59 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.09 s (CPU), 0.09 s (Wall)] -- 
+IDFileConverter took 1.69 s (wall), 1.68 s (CPU), 0.05 s (system), 1.63 s (user); Peak Memory Usage: 309 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.42 s (CPU), 1.43 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.09 s (CPU), 0.09 s (Wall)] -- 
+IDFileConverter took 1.52 s (wall), 1.52 s (CPU), 0.05 s (system), 1.47 s (user); Peak Memory Usage: 284 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.31 s (CPU), 1.32 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.08 s (CPU), 0.08 s (Wall)] -- 
+IDFileConverter took 1.40 s (wall), 1.39 s (CPU), 0.06 s (system), 1.33 s (user); Peak Memory Usage: 269 MB.
+IDMerger took 2.06 s (wall), 2.06 s (CPU), 0.06 s (system), 2.00 s (user); Peak Memory Usage: 138 MB.
+Progress of 'Loading idXML':
+-- done [took 1.35 s (CPU), 1.35 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Chymotrypsin
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (0s)
+Mapping 44061 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+  91.72 %               -- done [took 3.21 s (CPU), 0.81 s (Wall)] -- 
+Merge took: 0.01 s (wall), 0.02 s (CPU), 0.00 s (system), 0.02 s (user)
+Memory usage (Aho-Corasick): 73 MB (working set delta), 73 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 153399 hits for 44061 of 44061 peptides.
+Peptide hits passing enzyme filter: 153399
+     ... rejected by enzyme filter: 5215
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 0 (0 %)
+  target/decoy:
+    match to target DB only: 36710 (83 %)
+    match to decoy DB only : 7333 (16 %)
+    match to both          : 18 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 0
+    unique match (to 1 protein)     : 12359
+    non-unique match (to >1 protein): 31702
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 37422 (37422 new)
+  matched target proteins: 24231 (64 %)
+  matched decoy proteins : 13191 (35 %)
+  orphaned proteins      : 1 (all removed)
+-----------------------------------
+Progress of 'Storing idXML':
+-- done [took 0.46 s (CPU), 0.46 s (Wall)] -- 
+PeptideIndexer took 3.10 s (wall), 5.53 s (CPU), 0.14 s (system), 5.39 s (user); Peak Memory Usage: 268 MB.
+Loading input file: ./OnlyChym/merge_index.idXML
+Merging peptide ids.
+Merging protein ids.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+44061 suitable PeptideHits of 38772 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 10.81 s (wall), 2.86 s (CPU), 0.08 s (system), 2.78 s (user); Peak Memory Usage: 143 MB.
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 37422 protein hit(s),
+38772 peptide identification(s) with 44061 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 12960 protein hit(s),
+21910 peptide identification(s) with 21910 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 2.07 s (wall), 2.08 s (CPU), 0.08 s (system), 2.00 s (user); Peak Memory Usage: 106 MB.
+Successfully switched 21910 PSM scores.
+IDScoreSwitcher took 1.17 s (wall), 1.16 s (CPU), 0.01 s (system), 1.15 s (user); Peak Memory Usage: 66 MB.
+------------------------------------
+Processing ./OnlyGluC ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.23 s (CPU), 2.22 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.12 s (CPU), 0.12 s (Wall)] -- 
+IDFileConverter took 2.35 s (wall), 2.36 s (CPU), 0.11 s (system), 2.25 s (user); Peak Memory Usage: 391 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.08 s (CPU), 3.08 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.16 s (CPU), 0.16 s (Wall)] -- 
+IDFileConverter took 3.24 s (wall), 3.25 s (CPU), 0.14 s (system), 3.11 s (user); Peak Memory Usage: 513 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.59 s (CPU), 3.59 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.78 s (wall), 3.77 s (CPU), 0.14 s (system), 3.63 s (user); Peak Memory Usage: 581 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.54 s (CPU), 3.55 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.19 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.75 s (wall), 3.73 s (CPU), 0.18 s (system), 3.55 s (user); Peak Memory Usage: 549 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.11 s (CPU), 4.12 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.20 s (CPU), 0.20 s (Wall)] -- 
+IDFileConverter took 4.33 s (wall), 4.33 s (CPU), 0.13 s (system), 4.20 s (user); Peak Memory Usage: 623 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 5.35 s (CPU), 5.37 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.25 s (CPU), 0.25 s (Wall)] -- 
+IDFileConverter took 5.64 s (wall), 5.62 s (CPU), 0.20 s (system), 5.42 s (user); Peak Memory Usage: 743 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 5.35 s (CPU), 5.35 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.25 s (CPU), 0.24 s (Wall)] -- 
+IDFileConverter took 5.62 s (wall), 5.61 s (CPU), 0.26 s (system), 5.35 s (user); Peak Memory Usage: 762 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.68 s (CPU), 4.68 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.22 s (CPU), 0.23 s (Wall)] -- 
+IDFileConverter took 4.92 s (wall), 4.92 s (CPU), 0.18 s (system), 4.74 s (user); Peak Memory Usage: 698 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.90 s (CPU), 3.90 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.19 s (CPU), 0.19 s (Wall)] -- 
+IDFileConverter took 4.10 s (wall), 4.10 s (CPU), 0.14 s (system), 3.96 s (user); Peak Memory Usage: 618 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.38 s (CPU), 3.40 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.58 s (wall), 3.57 s (CPU), 0.14 s (system), 3.43 s (user); Peak Memory Usage: 560 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.28 s (CPU), 3.31 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.49 s (wall), 3.46 s (CPU), 0.14 s (system), 3.32 s (user); Peak Memory Usage: 546 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+IDMerger took 9.80 s (wall), 9.80 s (CPU), 0.30 s (system), 9.50 s (user); Peak Memory Usage: 394 MB.
+Progress of 'Loading idXML':
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+-- done [took 5.37 s (CPU), 5.38 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Glu-C+P
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.19 s (CPU), 0.17 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (1s)
+Mapping 213492 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+  1.68 %                 96.63 %               -- done [took 4.49 s (CPU), 1.19 s (Wall)] -- 
+Merge took: 0.04 s (wall), 0.06 s (CPU), 0.00 s (system), 0.06 s (user)
+Memory usage (Aho-Corasick): 424 MB (working set delta), 424 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 659618 hits for 203656 of 213492 peptides.
+Peptide hits passing enzyme filter: 659618
+     ... rejected by enzyme filter: 49770
+Unmatched peptide: AEGESSGPKVQPIE
+Unmatched peptide: TVMRSLSPEE
+Unmatched peptide: TQATEWGVPKNPE
+Unmatched peptide: EPSFPVGHAQESCPIGTPAAE
+Unmatched peptide: TEQSSESLRCNVE
+Unmatched peptide: KSEGGAGAE
+Unmatched peptide: PVSLELGDVSLVSVSPE
+Unmatched peptide: GVILTNESAASTGQPDNDVTEGQRAGE
+Unmatched peptide: PASSTIHPPGGSLEPE
+Unmatched peptide: KNEPQTNE
+Unmatched peptide: ESDSVGSDSGTSHSLPSTCLLPPEPE
+Unmatched peptide: PLQSMDEQE
+Unmatched peptide: KAKVDQMNSE
+Unmatched peptide: KDKKNEGDSVTTPTSAVPQEE
+Unmatched peptide: ...
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 9836 (4 %)
+  target/decoy:
+    match to target DB only: 144845 (67 %)
+    match to decoy DB only : 58624 (27 %)
+    match to both          : 187 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 9836
+    unique match (to 1 protein)     : 62072
+    non-unique match (to >1 protein): 141584
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 95702 (95702 new)
+  matched target proteins: 51243 (53 %)
+  matched decoy proteins : 44459 (46 %)
+  orphaned proteins      : 11 (all removed)
+-----------------------------------
+PeptideIndexer found unmatched peptides, which could not be associated to a protein.
+Potential solutions:
+   - check your FASTA database is identical to the search DB (or use 'auto')
+   - set 'enzyme:specificity' and 'enzyme:name' to 'auto' to match the parameters of the search engine
+   - increase 'aaa_max' to allow more ambiguous amino acids
+   - as a last resort: use the 'unmatched_action' option to accept or even remove unmatched peptides
+     (note that unmatched peptides cannot be used for FDR calculation or quantification)
+Result files will be written, but PeptideIndexer will exit with an error code.
+Progress of 'Storing idXML':
+  13.42 %                 66.36 %               -- done [took 2.02 s (CPU), 2.02 s (Wall)] -- 
+PeptideIndexer took 11.01 s (wall), 14.33 s (CPU), 0.35 s (system), 13.98 s (user); Peak Memory Usage: 829 MB.
+Loading input file: ./OnlyGluC/merge_index.idXML
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Merging peptide ids.
+Merging protein ids.
+PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+203656 suitable PeptideHits of 109434 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 50.41 s (wall), 13.12 s (CPU), 0.36 s (system), 12.76 s (user); Peak Memory Usage: 497 MB.
+<PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.> occurred 9836 times
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 95702 protein hit(s),
+109434 peptide identification(s) with 213492 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 20820 protein hit(s),
+64473 peptide identification(s) with 64473 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 8.40 s (wall), 8.38 s (CPU), 0.17 s (system), 8.21 s (user); Peak Memory Usage: 331 MB.
+Successfully switched 64473 PSM scores.
+IDScoreSwitcher took 3.31 s (wall), 3.30 s (CPU), 0.04 s (system), 3.26 s (user); Peak Memory Usage: 130 MB.
+------------------------------------
+Processing ./OnlyLysC ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.72 s (CPU), 1.72 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.10 s (CPU), 0.10 s (Wall)] -- 
+IDFileConverter took 1.83 s (wall), 1.82 s (CPU), 0.06 s (system), 1.76 s (user); Peak Memory Usage: 322 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.11 s (CPU), 2.10 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.12 s (CPU), 0.12 s (Wall)] -- 
+IDFileConverter took 2.23 s (wall), 2.23 s (CPU), 0.08 s (system), 2.15 s (user); Peak Memory Usage: 383 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.06 s (CPU), 2.05 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.11 s (CPU), 0.12 s (Wall)] -- 
+IDFileConverter took 2.18 s (wall), 2.18 s (CPU), 0.12 s (system), 2.06 s (user); Peak Memory Usage: 380 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.84 s (CPU), 2.84 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.16 s (CPU), 0.16 s (Wall)] -- 
+IDFileConverter took 3.02 s (wall), 3.01 s (CPU), 0.14 s (system), 2.87 s (user); Peak Memory Usage: 481 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.84 s (CPU), 3.85 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.21 s (CPU), 0.21 s (Wall)] -- 
+IDFileConverter took 4.08 s (wall), 4.07 s (CPU), 0.19 s (system), 3.88 s (user); Peak Memory Usage: 601 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.39 s (CPU), 4.40 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.24 s (CPU), 0.24 s (Wall)] -- 
+IDFileConverter took 4.65 s (wall), 4.65 s (CPU), 0.17 s (system), 4.48 s (user); Peak Memory Usage: 665 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.25 s (CPU), 4.25 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.24 s (CPU), 0.23 s (Wall)] -- 
+IDFileConverter took 4.50 s (wall), 4.50 s (CPU), 0.18 s (system), 4.32 s (user); Peak Memory Usage: 651 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 4.04 s (CPU), 4.04 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.22 s (CPU), 0.22 s (Wall)] -- 
+IDFileConverter took 4.28 s (wall), 4.27 s (CPU), 0.12 s (system), 4.15 s (user); Peak Memory Usage: 632 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.04 s (CPU), 3.04 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.18 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.22 s (wall), 3.23 s (CPU), 0.12 s (system), 3.11 s (user); Peak Memory Usage: 514 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.57 s (CPU), 2.57 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.15 s (CPU), 0.15 s (Wall)] -- 
+IDFileConverter took 2.72 s (wall), 2.72 s (CPU), 0.10 s (system), 2.62 s (user); Peak Memory Usage: 451 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 2.42 s (CPU), 2.42 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.14 s (CPU), 0.14 s (Wall)] -- 
+IDFileConverter took 2.56 s (wall), 2.57 s (CPU), 0.12 s (system), 2.45 s (user); Peak Memory Usage: 433 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+IDMerger took 8.68 s (wall), 8.63 s (CPU), 0.22 s (system), 8.41 s (user); Peak Memory Usage: 352 MB.
+Progress of 'Loading idXML':
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+-- done [took 5.58 s (CPU), 5.58 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Lys-C
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (0s)
+Mapping 203159 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+  0.28 %               -- done [took 4.04 s (CPU), 1.08 s (Wall)] -- 
+Merge took: 0.04 s (wall), 0.05 s (CPU), 0.00 s (system), 0.05 s (user)
+Memory usage (Aho-Corasick): 274 MB (working set delta), 274 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 723947 hits for 203159 of 203159 peptides.
+Peptide hits passing enzyme filter: 723947
+     ... rejected by enzyme filter: 23394
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 0 (0 %)
+  target/decoy:
+    match to target DB only: 167200 (82 %)
+    match to decoy DB only : 35809 (17 %)
+    match to both          : 150 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 0
+    unique match (to 1 protein)     : 54894
+    non-unique match (to >1 protein): 148265
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 78758 (78758 new)
+  matched target proteins: 45395 (57 %)
+  matched decoy proteins : 33363 (42 %)
+  orphaned proteins      : 9 (all removed)
+-----------------------------------
+Progress of 'Storing idXML':
+  23.82 %                 73.73 %               -- done [took 2.03 s (CPU), 2.04 s (Wall)] -- 
+PeptideIndexer took 10.34 s (wall), 13.33 s (CPU), 0.33 s (system), 13.00 s (user); Peak Memory Usage: 658 MB.
+Loading input file: ./OnlyLysC/merge_index.idXML
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Merging peptide ids.
+Merging protein ids.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+203159 suitable PeptideHits of 136625 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 55.89 s (wall), 12.58 s (CPU), 0.37 s (system), 12.21 s (user); Peak Memory Usage: 502 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 78758 protein hit(s),
+136625 peptide identification(s) with 203159 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 28212 protein hit(s),
+108086 peptide identification(s) with 108086 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 9.09 s (wall), 9.03 s (CPU), 0.21 s (system), 8.82 s (user); Peak Memory Usage: 339 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Successfully switched 108086 PSM scores.
+IDScoreSwitcher took 5.64 s (wall), 5.63 s (CPU), 0.16 s (system), 5.47 s (user); Peak Memory Usage: 200 MB.
+------------------------------------
+Processing ./OnlyTrypsin ...
+------------------------------------
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 1.14 s (CPU), 1.14 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.06 s (CPU), 0.07 s (Wall)] -- 
+IDFileConverter took 1.21 s (wall), 1.21 s (CPU), 0.07 s (system), 1.14 s (user); Peak Memory Usage: 242 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.40 s (CPU), 3.41 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.18 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.60 s (wall), 3.59 s (CPU), 0.13 s (system), 3.46 s (user); Peak Memory Usage: 556 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.13 s (CPU), 3.13 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.15 s (CPU), 0.16 s (Wall)] -- 
+IDFileConverter took 3.30 s (wall), 3.29 s (CPU), 0.15 s (system), 3.14 s (user); Peak Memory Usage: 513 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.76 s (CPU), 3.77 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.18 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.97 s (wall), 3.96 s (CPU), 0.12 s (system), 3.84 s (user); Peak Memory Usage: 593 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.31 s (CPU), 3.32 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.50 s (wall), 3.50 s (CPU), 0.18 s (system), 3.32 s (user); Peak Memory Usage: 545 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.42 s (CPU), 3.43 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.62 s (wall), 3.60 s (CPU), 0.11 s (system), 3.49 s (user); Peak Memory Usage: 564 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.27 s (CPU), 3.28 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.17 s (CPU), 0.17 s (Wall)] -- 
+IDFileConverter took 3.46 s (wall), 3.45 s (CPU), 0.12 s (system), 3.33 s (user); Peak Memory Usage: 537 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.74 s (CPU), 3.75 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.19 s (CPU), 0.19 s (Wall)] -- 
+IDFileConverter took 3.94 s (wall), 3.93 s (CPU), 0.16 s (system), 3.77 s (user); Peak Memory Usage: 589 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.52 s (CPU), 3.53 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.18 s (CPU), 0.18 s (Wall)] -- 
+IDFileConverter took 3.72 s (wall), 3.71 s (CPU), 0.18 s (system), 3.53 s (user); Peak Memory Usage: 571 MB.
+Progress of 'Loading...':
+Converting from mzid: you might experience loss of information depending on the capabilities of the target format.
+No DatabaseName element found, use read in results at own risk.
+-- done [took 3.18 s (CPU), 3.19 s (Wall)] -- 
+Progress of 'Storing...':
+-- done [took 0.16 s (CPU), 0.16 s (Wall)] -- 
+IDFileConverter took 3.36 s (wall), 3.35 s (CPU), 0.11 s (system), 3.24 s (user); Peak Memory Usage: 523 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+IDMerger took 7.66 s (wall), 7.66 s (CPU), 0.21 s (system), 7.45 s (user); Peak Memory Usage: 336 MB.
+Progress of 'Loading idXML':
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+-- done [took 4.43 s (CPU), 4.43 s (Wall)] -- 
+Peptide identification engine: METAMORPHEUS
+Enzyme: Trypsin
+Warning: Enzyme specificity neither given nor present in the input file. Defaulting to 'full'!
+Progress of 'Load first DB chunk':
+-- done [took 0.17 s (CPU), 0.18 s (Wall)] -- 
+Building trie ... done (0s)
+Compressing trie to BFS format ...
+ done (0s)
+Mapping 176787 peptides to 176346 proteins.
+Searching with up to 3 ambiguous amino acid(s) and 0 mismatch(es)!
+Progress of 'Aho-Corasick':
+  60.52 %               -- done [took 4.04 s (CPU), 1.07 s (Wall)] -- 
+Merge took: 0.04 s (wall), 0.04 s (CPU), 0.00 s (system), 0.04 s (user)
+Memory usage (Aho-Corasick): 240 MB (working set delta), 240 MB (peak working set delta)
+
+
+Aho-Corasick done:
+  found 628753 hits for 170163 of 176787 peptides.
+Peptide hits passing enzyme filter: 628753
+     ... rejected by enzyme filter: 32832
+Unmatched peptide: HMLVDDDYTR
+Unmatched peptide: PSSSVRNEGQSDTNK
+Unmatched peptide: PSGEAFVELESEDEVK
+Unmatched peptide: PAADVGDIGMK
+Unmatched peptide: GGTPGSGAAAAAGSK
+<Unmatched peptide: PAADVGDIGMK> occurred 2 times
+Unmatched peptide: PNDLQTSRSPSSAR
+Unmatched peptide: QEEAEEQGAGSPGQPAHLAR
+Unmatched peptide: PDLITCLEQGKEPWNMERHEMVAK
+Unmatched peptide: PGETQEEETNSGEEPFIETPR
+Unmatched peptide: PDGEHGGSTGTGSGAGSGGALEEEVR
+Unmatched peptide: KENQAPREGEGK
+Unmatched peptide: GNQATLASTGNAK
+Unmatched peptide: PGETQEEETNSGEEPFIETPR
+Unmatched peptide: ...
+-----------------------------------
+Peptide statistics
+
+  unmatched                : 6624 (3 %)
+  target/decoy:
+    match to target DB only: 140527 (79 %)
+    match to decoy DB only : 29495 (16 %)
+    match to both          : 141 (0 %)
+
+  mapping to proteins:
+    no match (to 0 protein)         : 6624
+    unique match (to 1 protein)     : 46048
+    non-unique match (to >1 protein): 124115
+-----------------------------------
+Protein statistics
+
+  total proteins searched: 176346
+  matched proteins       : 82258 (82258 new)
+  matched target proteins: 47502 (57 %)
+  matched decoy proteins : 34756 (42 %)
+  orphaned proteins      : 4 (all removed)
+-----------------------------------
+PeptideIndexer found unmatched peptides, which could not be associated to a protein.
+Potential solutions:
+   - check your FASTA database is identical to the search DB (or use 'auto')
+   - set 'enzyme:specificity' and 'enzyme:name' to 'auto' to match the parameters of the search engine
+   - increase 'aaa_max' to allow more ambiguous amino acids
+   - as a last resort: use the 'unmatched_action' option to accept or even remove unmatched peptides
+     (note that unmatched peptides cannot be used for FDR calculation or quantification)
+Result files will be written, but PeptideIndexer will exit with an error code.
+Progress of 'Storing idXML':
+  6.29 %                 70.31 %               -- done [took 1.66 s (CPU), 1.65 s (Wall)] -- 
+PeptideIndexer took 8.61 s (wall), 11.59 s (CPU), 0.26 s (system), 11.33 s (user); Peak Memory Usage: 593 MB.
+Loading input file: ./OnlyTrypsin/merge_index.idXML
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Merging peptide ids.
+Merging protein ids.
+PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+170163 suitable PeptideHits of 99542 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 33.05 s (wall), 10.23 s (CPU), 0.22 s (system), 10.01 s (user); Peak Memory Usage: 421 MB.
+<PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.> occurred 6624 times
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+FDR control: Filtering PSMs...
+Before filtering:
+1 protein identification(s) with 82258 protein hit(s),
+99542 peptide identification(s) with 176787 pep_ids hit(s).
+After filtering:
+1 protein identification(s) with 25700 protein hit(s),
+89720 peptide identification(s) with 89720 pep_ids hit(s).
+Writing filtered output...
+FalseDiscoveryRate took 7.56 s (wall), 7.53 s (CPU), 0.16 s (system), 7.37 s (user); Peak Memory Usage: 283 MB.
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Successfully switched 89720 PSM scores.
+IDScoreSwitcher took 4.66 s (wall), 4.65 s (CPU), 0.09 s (system), 4.56 s (user); Peak Memory Usage: 171 MB.

@@ -1,0 +1,56 @@
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Error in `geom_line()`:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 1st layer.
+Caused by error:
+! object 'model' not found
+Backtrace:
+     ▆
+  1. ├─global main(...)
+  2. │ └─ggplot2::ggsave(...)
+  3. │   ├─grid::grid.draw(plot)
+  4. │   └─ggplot2:::grid.draw.ggplot(plot)
+  5. │     ├─base::print(x)
+  6. │     └─ggplot2:::print.ggplot(x)
+  7. │       ├─ggplot2::ggplot_build(x)
+  8. │       └─ggplot2:::ggplot_build.ggplot(x)
+  9. │         └─ggplot2:::by_layer(...)
+ 10. │           ├─rlang::try_fetch(...)
+ 11. │           │ ├─base::tryCatch(...)
+ 12. │           │ │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+ 13. │           │ │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 14. │           │ │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+ 15. │           │ └─base::withCallingHandlers(...)
+ 16. │           └─ggplot2 (local) f(l = layers[[i]], d = data[[i]])
+ 17. │             └─l$compute_aesthetics(d, plot)
+ 18. │               └─ggplot2 (local) compute_aesthetics(..., self = self)
+ 19. │                 └─ggplot2:::scales_add_defaults(...)
+ 20. │                   └─base::lapply(aesthetics[new_aesthetics], eval_tidy, data = data)
+ 21. │                     └─rlang (local) FUN(X[[i]], ...)
+ 22. └─base::.handleSimpleError(...)
+ 23.   └─rlang (local) h(simpleError(msg, call))
+ 24.     └─handlers[[1L]](cnd)
+ 25.       └─cli::cli_abort(...)
+ 26.         └─rlang::abort(...)
+Execution halted

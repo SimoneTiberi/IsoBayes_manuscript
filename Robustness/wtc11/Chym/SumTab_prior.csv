@@ -1,0 +1,11 @@
+"Model","AUC"
+"IsoBayes_mRNA_prior_0",0.759
+"IsoBayes_mRNA_prior_0.01",0.873
+"IsoBayes_mRNA_prior_0.02",0.881
+"IsoBayes_mRNA_prior_0.04",0.883
+"IsoBayes_mRNA_prior_0.08",0.882
+"IsoBayes_mRNA_prior_0.1",0.88
+"IsoBayes_mRNA_prior_0.2",0.874
+"IsoBayes_mRNA_prior_0.4",0.866
+"IsoBayes_mRNA_prior_0.8",0.856
+"IsoBayes_mRNA_prior_1",0.853
