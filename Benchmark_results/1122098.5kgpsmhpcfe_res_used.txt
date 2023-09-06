@@ -1,0 +1,30 @@
+
+Job: 1122098.5kgpsmhpcfe
+
+08/31/2023 17:24:46  S    enqueuing into fatnodes, state 1 hop 1
+08/31/2023 17:24:46  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_IsoBayes_pep_TRUE_2000_Trypsin, queue = fatnodes
+08/31/2023 17:24:46  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+08/31/2023 17:30:33  L    Insufficient amount of resource: ncpus 
+08/31/2023 17:32:14  L    Insufficient amount of resource: ncpus (R: 10 A: 2 T: 64)
+08/31/2023 17:32:14  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+08/31/2023 17:32:42  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:32:42  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+08/31/2023 17:32:56  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:33:18  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:33:22  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:33:27  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:33:40  L    Insufficient amount of resource: ncpus (R: 10 A: 3 T: 64)
+08/31/2023 17:33:43  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:33:43  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+08/31/2023 17:33:55  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:34:14  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:34:19  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:34:33  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:34:49  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:35:11  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:35:43  L    Insufficient amount of resource: ncpus (R: 10 A: 4 T: 64)
+08/31/2023 17:35:45  L    Considering job to run
+08/31/2023 17:35:45  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc09:ncpus=10:mem=31457280kb)
+08/31/2023 17:35:45  L    Job run
+08/31/2023 17:37:44  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+08/31/2023 17:37:44  S    Exit_status=0 resources_used.cpupercent=143 resources_used.cput=00:03:11 resources_used.mem=1923308kb resources_used.ncpus=10 resources_used.vmem=15473828kb resources_used.walltime=00:01:59

@@ -1,0 +1,14 @@
+Bootstrap: docker 
+From: continuumio/miniconda3
+
+%post
+apt-get -y update
+apt-get -y upgrade
+apt-get install -y make
+apt-get install -y git
+apt-get install -y g++
+
+git clone https://github.com/scaidermern/audria.git
+cd audria
+
+make

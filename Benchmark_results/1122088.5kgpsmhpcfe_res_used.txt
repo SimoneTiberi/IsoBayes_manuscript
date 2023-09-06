@@ -1,0 +1,12 @@
+
+Job: 1122088.5kgpsmhpcfe
+
+08/31/2023 17:24:46  S    enqueuing into fatnodes, state 1 hop 1
+08/31/2023 17:24:46  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_IsoBayes_pep_TRUE_2000_GluC, queue = fatnodes
+08/31/2023 17:24:46  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+08/31/2023 17:27:53  L    Insufficient amount of resource: ncpus 
+08/31/2023 17:28:26  L    Considering job to run
+08/31/2023 17:28:26  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc10:ncpus=10:mem=31457280kb)
+08/31/2023 17:28:26  L    Job run
+08/31/2023 17:29:43  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+08/31/2023 17:29:43  S    Exit_status=0 resources_used.cpupercent=110 resources_used.cput=00:01:05 resources_used.mem=428480kb resources_used.ncpus=10 resources_used.vmem=3524192kb resources_used.walltime=00:01:17

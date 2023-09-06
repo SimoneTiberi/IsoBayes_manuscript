@@ -1,0 +1,10 @@
+
+Job: 1122071.5kgpsmhpcfe
+
+08/31/2023 17:24:45  S    enqueuing into fatnodes, state 1 hop 1
+08/31/2023 17:24:45  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_PiaTot_ArgC, queue = fatnodes
+08/31/2023 17:24:46  L    Considering job to run
+08/31/2023 17:24:46  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc09:ncpus=10:mem=31457280kb)
+08/31/2023 17:24:46  L    Job run
+08/31/2023 17:25:05  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+08/31/2023 17:25:05  S    Exit_status=0 resources_used.cpupercent=112 resources_used.cput=00:00:57 resources_used.mem=656808kb resources_used.ncpus=10 resources_used.vmem=38548076kb resources_used.walltime=00:00:19

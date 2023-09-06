@@ -1,0 +1,35 @@
+{
+"considerModifications": true,
+"createPSMsets": false,
+"errorOnNoDecoys": true,
+"psmLevelFileID": 1,
+"calculateAllFDR": true,
+"calculateCombinedFDRScore": true,
+"decoyPattern": "DECOY_.*",
+"topIdentifications": 1,
+"preferredFDRScores": ["openms_posterior_error_probability"],
+"psmFilters": [
+    "psm_score_filter_psm_fdr_score <= 1"
+],
+"inferePeptides": false,
+"peptideLevelFileID": 1,
+"peptideFilters": [
+    "psm_score_filter_psm_fdr_score <= 1"
+],
+"peptideExportWithPSMs": false,
+"infereProteins": true,
+"inferenceMethod": "inference_report_all",
+"inferenceFilters": [
+    "psm_score_filter_psm_fdr_score <= 1"
+],
+"scoringMethod": "scoring_multiplicative",
+"scoringBaseScore": "psm_fdr_score",
+"scoringPSMs": "best",
+"proteinFilters": [
+    "protein_q_value_filter <= 1"
+],
+"proteinExportFile": "./piaExport-proteins.mzTab",
+"proteinExportWithPSMs": false,
+"proteinExportWithPeptides": false,
+"proteinExportWithProteinSequences": false
+}

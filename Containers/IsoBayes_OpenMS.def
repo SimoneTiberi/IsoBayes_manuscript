@@ -1,0 +1,31 @@
+Bootstrap: docker 
+From: continuumio/miniconda3
+
+%files
+packages.R /
+
+%post
+apt-get -y update
+apt-get -y upgrade
+apt-get install -y libcurl4-openssl-dev
+apt-get install -y libssl-dev
+apt-get install -y libxml2-dev
+apt-get install -y git
+
+conda update conda 
+conda update  --all
+
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+
+conda install openms
+conda install -c bioconda percolator
+
+conda install -c conda-forge r-base=4.3.1
+
+git clone https://github.com/SimoneTiberi/IsoBayes.git
+
+Rscript packages.R
+R CMD build IsoBayes --no-build-vignettes
+R CMD INSTALL IsoBayes_0.99.2.tar.gz
