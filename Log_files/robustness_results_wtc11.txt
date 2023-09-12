@@ -1,25 +1,1953 @@
+Called from: main(models = list(IsoBayes = c("_PEP", ""), IsoBayes_fast = c("", 
+    ""), IsoBayes_mRNA = c("_PEP", "_mRNA"), IsoBayes_fast_mRNA = c("", 
+    "_mRNA")), proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), 
+    recursive = FALSE, full.names = FALSE))
+debug: PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}/")
+debug: selected_models = c("IsoBayes", "IsoBayes_fast", "IsoBayes_mRNA", 
+    "IsoBayes_fast_mRNA")
+debug: for (input in c("OpenMS", "MM_psm", "MM_intensities")) {
+    benchmark_df_all = list()
+    for (protease in proteases) {
+        benchmark_df = list()
+        for (model in selected_models) {
+            attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+            load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+            benchmark_df = append(benchmark_df, list(validation_dat[, 
+                c("Isoform", "Prob_present", "Present")]))
+        }
+        for (i in seq_len(length(benchmark_df))) {
+            colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+                "_", selected_models[i])
+        }
+        for (i in seq_len(length(benchmark_df) - 1)) {
+            benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+                by.x = paste0("Isoform_", selected_models[1]), 
+                by.y = paste0("Isoform_", selected_models[i + 
+                  1]))
+            benchmark_df[[2]] = NULL
+        }
+        benchmark_df = benchmark_df[[1]]
+        colnames(benchmark_df) = gsub(".*Prob_present_", "", 
+            colnames(benchmark_df))
+        colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+        plot_tab = get_roc(benchmark_df, selected_models)
+        ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+            plot = plot_tab$gplot)
+        write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+            row.names = FALSE)
+        benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+    }
+    plot_tab = get_roc(benchmark_df_all, selected_models)
+    ggsave(glue("{PATH_RES_roc}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+        row.names = FALSE)
+}
+debug: benchmark_df_all = list()
+debug: for (protease in proteases) {
+    benchmark_df = list()
+    for (model in selected_models) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        benchmark_df = append(benchmark_df, list(validation_dat[, 
+            c("Isoform", "Prob_present", "Present")]))
+    }
+    for (i in seq_len(length(benchmark_df))) {
+        colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+            "_", selected_models[i])
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+                selected_models[i + 1]))
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+    colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+    plot_tab = get_roc(benchmark_df, selected_models)
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = list()
+debug: for (protease in proteases) {
+    benchmark_df = list()
+    for (model in selected_models) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        benchmark_df = append(benchmark_df, list(validation_dat[, 
+            c("Isoform", "Prob_present", "Present")]))
+    }
+    for (i in seq_len(length(benchmark_df))) {
+        colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+            "_", selected_models[i])
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+                selected_models[i + 1]))
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+    colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+    plot_tab = get_roc(benchmark_df, selected_models)
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = list()
+debug: for (protease in proteases) {
+    benchmark_df = list()
+    for (model in selected_models) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        benchmark_df = append(benchmark_df, list(validation_dat[, 
+            c("Isoform", "Prob_present", "Present")]))
+    }
+    for (i in seq_len(length(benchmark_df))) {
+        colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+            "_", selected_models[i])
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+                selected_models[i + 1]))
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+    colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+    plot_tab = get_roc(benchmark_df, selected_models)
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: benchmark_df = list()
+debug: for (model in selected_models) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+    benchmark_df = append(benchmark_df, list(validation_dat[, 
+        c("Isoform", "Prob_present", "Present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+debug: benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", 
+    "Prob_present", "Present")]))
+debug: for (i in seq_len(length(benchmark_df))) {
+    colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+        "_", selected_models[i])
+}
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), 
+    "_", selected_models[i])
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+            selected_models[i + 1]))
+    benchmark_df[[2]] = NULL
+}
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = paste0("Isoform_", selected_models[1]), by.y = paste0("Isoform_", 
+        selected_models[i + 1]))
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
+debug: colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
+debug: plot_tab = get_roc(benchmark_df, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, selected_models)
+debug: ggsave(glue("{PATH_RES_roc}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), 
+    row.names = FALSE)
+debug: PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}/")
+debug: selected_models = c("IsoBayes_mRNA", "IsoBayes_mRNA")
+debug: benchmark_df_all = list()
+debug: inputs = c("OpenMS", "MM_psm")
+debug: for (protease in proteases) {
+    load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+    benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+    model = selected_models[1]
+    for (input in inputs) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+        benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+            c("Isoform", "Prob_present")]))
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+            "_", selected_models[i])
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+            all = T)
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    benchmark_df = na.omit(benchmark_df)
+    colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+        "_", inputs)
+    plot_tab = get_roc(benchmark_df, paste0(selected_models, 
+        "_", inputs))
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, paste0(selected_models, 
+    "_", inputs))
+debug: ggsave(glue("{PATH_RES_roc}/ROC_MM_vs_OpenMS.png"), plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_MM_vs_OpenMS.csv"), 
+    row.names = FALSE)
+debug: PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}/")
+debug: selected_models = c("IsoBayes_mRNA", "IsoBayes_mRNA")
+debug: benchmark_df_all = list()
+debug: inputs = c("MM_psm", "MM_intensities")
+debug: for (protease in proteases) {
+    load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+    benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+    model = selected_models[1]
+    for (input in inputs) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+        benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+            c("Isoform", "Prob_present")]))
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+            "_", selected_models[i])
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+            all = T)
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    benchmark_df = na.omit(benchmark_df)
+    colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+        "_", inputs)
+    plot_tab = get_roc(benchmark_df, paste0(selected_models, 
+        "_", inputs))
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), 
+        plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (input in inputs) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+    load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+debug: load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+        all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), 
+    all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_", inputs)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_", 
+    inputs))
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), 
+    plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, paste0(selected_models, 
+    "_", inputs))
+debug: ggsave(glue("{PATH_RES_roc}/ROC_psm_vs_intensities.png"), plot = plot_tab$gplot)
 Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_psm_vs_intensities.csv"), 
+    row.names = FALSE)
+debug: load(glue("{PATH_WD}/Model_results/prior_grid"))
+debug: PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}/")
+debug: selected_models = rep("IsoBayes_mRNA", length(prior_grid))
+debug: benchmark_df_all = list()
+debug: for (protease in proteases) {
+    load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+    benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+    model = selected_models[1]
+    for (prior in prior_grid) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+        load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+        benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+            c("Isoform", "Prob_present")]))
+    }
+    for (i in seq_len(length(benchmark_df) - 1)) {
+        colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+            "_", selected_models[i], "_prior_", prior_grid[i])
+        benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+            by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+                "_prior_", prior_grid[i]), all = T)
+        benchmark_df[[2]] = NULL
+    }
+    benchmark_df = benchmark_df[[1]]
+    benchmark_df = na.omit(benchmark_df)
+    colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+        "_prior_", prior_grid)
+    plot_tab = get_roc(benchmark_df, paste0(selected_models, 
+        "_prior_", prior_grid))
+    data_to_plot = plot_tab$sum_stat
+    data_to_plot$grid = as.character(prior_grid)
+    data_to_plot$model = selected_models[1]
+    pp = prior_plot(data_to_plot)
+    ggsave(glue("{PATH_RES_roc}/{protease}/prior_plot.png"), 
+        plot = pp)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_prior.csv"), 
+        row.names = FALSE)
+    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+}
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (prior in prior_grid) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+    load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i], "_prior_", prior_grid[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+            "_prior_", prior_grid[i]), all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_prior_", prior_grid)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_prior_", 
+    prior_grid))
+debug: data_to_plot = plot_tab$sum_stat
+debug: data_to_plot$grid = as.character(prior_grid)
+debug: data_to_plot$model = selected_models[1]
+debug: pp = prior_plot(data_to_plot)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/prior_plot.png"), plot = pp)
+Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_prior.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (prior in prior_grid) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+    load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i], "_prior_", prior_grid[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+            "_prior_", prior_grid[i]), all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_prior_", prior_grid)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_prior_", 
+    prior_grid))
+debug: data_to_plot = plot_tab$sum_stat
+debug: data_to_plot$grid = as.character(prior_grid)
+debug: data_to_plot$model = selected_models[1]
+debug: pp = prior_plot(data_to_plot)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/prior_plot.png"), plot = pp)
+Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_prior.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (prior in prior_grid) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+    load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i], "_prior_", prior_grid[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+            "_prior_", prior_grid[i]), all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_prior_", prior_grid)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_prior_", 
+    prior_grid))
+debug: data_to_plot = plot_tab$sum_stat
+debug: data_to_plot$grid = as.character(prior_grid)
+debug: data_to_plot$model = selected_models[1]
+debug: pp = prior_plot(data_to_plot)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/prior_plot.png"), plot = pp)
+Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_prior.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
+debug: benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+debug: model = selected_models[1]
+debug: for (prior in prior_grid) {
+    attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+    load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+    benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+        c("Isoform", "Prob_present")]))
+}
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: attribute_model = glue("{models[[model]][2]}{models[[model]][1]}_prior_{prior}")
+debug: load(glue("{PATH_RES}/OpenMS{attribute_model}/{protease}/OpenMS{attribute_model}_MCMC.RData"))
+debug: benchmark_df = append(benchmark_df, list(res$isoform_results[, 
+    c("Isoform", "Prob_present")]))
+debug: for (i in seq_len(length(benchmark_df) - 1)) {
+    colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+        "_", selected_models[i], "_prior_", prior_grid[i])
+    benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+        by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+            "_prior_", prior_grid[i]), all = T)
+    benchmark_df[[2]] = NULL
+}
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), 
+    "_", selected_models[i], "_prior_", prior_grid[i])
+debug: benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]], 
+    by.x = "proteins", by.y = paste0("Isoform_", selected_models[i], 
+        "_prior_", prior_grid[i]), all = T)
+debug: benchmark_df[[2]] = NULL
+debug: benchmark_df = benchmark_df[[1]]
+debug: benchmark_df = na.omit(benchmark_df)
+debug: colnames(benchmark_df)[grep(selected_models[1], colnames(benchmark_df))] = paste0(selected_models, 
+    "_prior_", prior_grid)
+debug: plot_tab = get_roc(benchmark_df, paste0(selected_models, "_prior_", 
+    prior_grid))
+debug: data_to_plot = plot_tab$sum_stat
+debug: data_to_plot$grid = as.character(prior_grid)
+debug: data_to_plot$model = selected_models[1]
+debug: pp = prior_plot(data_to_plot)
+debug: ggsave(glue("{PATH_RES_roc}/{protease}/prior_plot.png"), plot = pp)
+Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_prior.csv"), 
+    row.names = FALSE)
+debug: benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+debug: plot_tab = get_roc(benchmark_df_all, paste0(selected_models, 
+    "_prior_", prior_grid))
+debug: data_to_plot = plot_tab$sum_stat
+debug: data_to_plot$grid = as.character(prior_grid)
+debug: data_to_plot$model = selected_models[1]
+debug: pp = prior_plot(data_to_plot)
+debug: ggsave(glue("{PATH_RES_roc}/prior_plot.png"), plot = pp)
+Saving 7 x 7 in image
+debug: write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_prior.csv"))

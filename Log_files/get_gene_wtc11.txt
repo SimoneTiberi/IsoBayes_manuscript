@@ -1,4 +1,0 @@
-Warning message:
-In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
-  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/get_gene_wtc11.txt', reason 'No such file or directory'
-Number of genes: 150626

@@ -1,100 +1,507 @@
 ---------- OpenMS_mRNA_PEP_prior_0 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.01 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.02 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.04 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.08 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.1 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.2 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.4 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_0.8 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_mRNA_PEP_prior_1 ----------
 AspN
+We found:
+32394 protein isoforms.
+Found 24224 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 32394. For 8170 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+32394 protein isoforms.
+Percentage of unique peptides: 22.43%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
+We found:
+25899 protein isoforms.
+Found 19246 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 25899. For 6653 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+25899 protein isoforms.
+Percentage of unique peptides: 20.58%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
+We found:
+44950 protein isoforms.
+Found 29003 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 44950. For 15947 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+44950 protein isoforms.
+Percentage of unique peptides: 21.85%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
+We found:
+47150 protein isoforms.
+Found 30638 correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 47150. For 16512 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+	          check if the format name of the protein isoforms is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+47150 protein isoforms.
+Percentage of unique peptides: 21.51%
+'map_iso_gene' not specified. We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
+Warning messages:
+1: In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/run_models_wtc11_MM_intensities.txt', reason 'No such file or directory'
+2: In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/run_models_wtc11_MM_psm.txt', reason 'No such file or directory'
+3: In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/run_models_wtc11_MM_prior_grid.txt', reason 'No such file or directory'

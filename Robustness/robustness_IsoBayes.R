@@ -17,6 +17,7 @@ load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 log_output(glue("robustness_results_{DATA}"))
 
 main = function(models, proteases){
+  browser()
   ###################################################################
   # PEP/no PEP and mRNA vs prot (OpenMS and MM)  
   ###################################################################
@@ -24,46 +25,31 @@ main = function(models, proteases){
   PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}/")
   selected_models = c("IsoBayes", "IsoBayes_fast", "IsoBayes_mRNA", "IsoBayes_fast_mRNA")
   
-  for (input in c("OpenMS", "MM_psm")){
+  for (input in c("OpenMS", "MM_psm", "MM_intensities")){
     benchmark_df_all = list()
     for(protease in proteases){
-      # load validation DATA from metamorpheus
-      load(glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm"))
-      
-      benchmark_df = list(VALIDATION_DF_prot[, c("proteins", "Present")])
+      benchmark_df = list()
       for (model in selected_models) {
-        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
-        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))
-        benchmark_df = append(benchmark_df, list(res$isoform_results[, c("Isoform", "Prob_present")]))
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
+        # load res and validation merged together
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        benchmark_df = append(benchmark_df, list(validation_dat[, c("Isoform", "Prob_present", "Present")]))
+      }
+      
+      for (i in seq_len(length(benchmark_df))) {
+        colnames(benchmark_df[[i]]) = paste0(colnames(benchmark_df[[i]]), "_", selected_models[i])
       }
       
       for (i in seq_len(length(benchmark_df)-1)) {
-        colnames(benchmark_df[[2]]) = paste0(colnames(benchmark_df[[2]]), "_", selected_models[i])
         benchmark_df[[1]] = merge(benchmark_df[[1]], benchmark_df[[2]],
-                                  by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), all = T)
+                                  by.x = paste0("Isoform_", selected_models[1]),
+                                  by.y = paste0("Isoform_", selected_models[i+1]))
         benchmark_df[[2]] = NULL
       }
-      if(input == "OpenMS"){
-        # proteine presenti in input
-        iso_input = get_score_from_idXML(glue("{PATH_TO_DATA}/Only{protease}/merge_index_percolator_pep_switched.idXML"))
-        benchmark_df = merge(benchmark_df, iso_input, by.x = "proteins", by.y = "Isoform", all = T)
-        
-        # Eliminio isoforme non presenti nel validation set
-        benchmark_df = benchmark_df[!is.na(benchmark_df$Present), ]
-        
-        # Tengo quelle in input
-        benchmark_df = benchmark_df[!is.na(benchmark_df$score), ]
-        
-        # 0 se modello non trova l'isoforma
-        benchmark_df[is.na(benchmark_df)] = 0
-        benchmark_df$score = NULL
-      } else {
-        # Eliminio isoforme non presenti nel validation set e in input
-        benchmark_df = benchmark_df[[1]]
-        benchmark_df = na.omit(benchmark_df)
-      }
+      benchmark_df = benchmark_df[[1]]
+      
       colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
-      colnames(benchmark_df) = gsub(".*score_", "", colnames(benchmark_df))
+      colnames(benchmark_df)[grep("Present_", colnames(benchmark_df))] = "Present"
       
       plot_tab = get_roc(benchmark_df, selected_models)
       ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), plot = plot_tab$gplot)

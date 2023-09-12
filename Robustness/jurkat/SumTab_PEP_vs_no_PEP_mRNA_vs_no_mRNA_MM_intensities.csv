@@ -1,0 +1,5 @@
+"Model","AUC"
+"IsoBayes",0.819
+"IsoBayes_fast",0.81
+"IsoBayes_fast_mRNA",0.85
+"IsoBayes_mRNA",0.863

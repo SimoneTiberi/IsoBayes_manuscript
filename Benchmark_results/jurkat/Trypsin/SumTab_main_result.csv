@@ -1,6 +1,8 @@
 "Model","AUC"
 "Epifany",0.766
 "Fido",0.714
-"IsoBayes",0.851
-"IsoBayes_mRNA",0.877
+"IsoBayes",0.85
+"IsoBayes_mRNA",0.876
+"IsoBayes_mRNA_no_unique",0.81
+"IsoBayes_no_unique",0.762
 "PIA",0.691

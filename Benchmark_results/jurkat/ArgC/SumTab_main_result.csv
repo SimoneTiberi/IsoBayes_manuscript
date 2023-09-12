@@ -3,4 +3,6 @@
 "Fido",0.693
 "IsoBayes",0.809
 "IsoBayes_mRNA",0.856
+"IsoBayes_mRNA_no_unique",0.814
+"IsoBayes_no_unique",0.733
 "PIA",0.654

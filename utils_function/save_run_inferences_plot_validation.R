@@ -1,4 +1,4 @@
-save_run_inferences_plot_validation = function(data_loaded, path_to_res_mod, name, map_iso_gene = NULL, long_mcmc = TRUE){
+save_run_inferences_plot_validation = function(data_loaded, path_to_res_mod, name, map_iso_gene = NULL, long_mcmc = FALSE){
   save(data_loaded, file = glue("{path_to_res_mod}/{name}_data_loaded.RData"))
   
   res = inference(data_loaded, map_iso_gene = map_iso_gene, n_cores = 8, K = 2000, thin = 1)

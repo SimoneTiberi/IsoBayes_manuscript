@@ -79,7 +79,13 @@ main = function(models, proteases){
     colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
     colnames(benchmark_df) = gsub(".*score_", "", colnames(benchmark_df))
     
-    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
+    benchmark_df$IsoBayes_mRNA_no_unique = benchmark_df$IsoBayes_mRNA
+    benchmark_df$IsoBayes_mRNA_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
+    
+    benchmark_df$IsoBayes_no_unique = benchmark_df$IsoBayes
+    benchmark_df$IsoBayes_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
+    
+    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA", "IsoBayes_mRNA_no_unique", "IsoBayes_no_unique"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
     write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"), row.names = FALSE)
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
@@ -87,7 +93,12 @@ main = function(models, proteases){
     # Focus on validation without isoform with Unique Peptide (UP)
     plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ], c(selected_models, "Epifany", "Fido", "PIA"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
-    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
+    shared_vs_all_auc = plot_tab$sum_stat
+    
+    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
+    shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
+    colnames(shared_vs_all_auc) = c("Model", "AUC_only_shared", "AUC_all")
+    write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
   }
   plot_tab = get_roc(benchmark_df_all, c(selected_models, "Epifany", "Fido", "PIA"))
   ggsave(glue("{PATH_RES_COMPETITORS}/ROC_main_result.png"), plot = plot_tab$gplot)
@@ -204,7 +215,7 @@ main = function(models, proteases){
     geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
     labs(y = "Run-Time (Min)",
          x = "Tool",
-         title = glue("Run-Time - {protease} - {DATA}")) +
+         title = glue("Run-Time - {DATA}")) +
     theme_classic() +
     theme(plot.title = element_text(size = 12, face = "bold"),
           axis.title = element_text(size = 11, face = "bold"),
@@ -228,7 +239,7 @@ main = function(models, proteases){
     geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
     labs(y = "RAM (MB)",
          x = "Tool",
-         title = glue("RAM - {protease} - {DATA}")) +
+         title = glue("RAM - {DATA}")) +
     theme_classic() +
     theme(plot.title = element_text(size = 12, face = "bold"),
           axis.title = element_text(size = 11, face = "bold"),

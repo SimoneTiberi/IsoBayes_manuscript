@@ -9,118 +9,131 @@ source(glue("{PATH_WD}/utils_function/plot_prob_change.R"))
 source(glue("{PATH_WD}/utils_function/plot_prob_change_group.R"))
 source(glue("{PATH_WD}/utils_function/utils_benchmarking.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
+source(glue("{PATH_WD}/utils_function/scatterplot.R"))
+source(glue("{PATH_WD}/utils_function/utils_change_iso_mrna.R"))
 
 PATH_DATA = glue("{PATH_WD}/Data/{DATA}") 
 PATH_RES_MODEL = glue("{PATH_WD}/Model_results/{DATA}")
 PATH_RES_CHANGE = glue("{PATH_WD}/Change_protein_mRNA_isoform/{DATA}")
 log_output(glue("change_prot_mRNA_iso_{DATA}"))
 
-
-main = function(proteases){
-  ######################################################
-  # Changes in protein and mRNA isoform relative abundances (MM)
-  ######################################################
-  benchmark_df_all = list()
+main = function(proteases, no_unique = FALSE){
+  inputs = c("OpenMS", "MM_psm")
+  quantiles = c(0, 0.01, 0.05, 0.1, 0.5, 0.9, 0.95, 0.99, 1)
   
-  for (protease in proteases) {
-    # load validation dataset from metamorpheus
-    load(glue("{PATH_DATA}/No{protease}/Validation_prot_psm"))
-    # load model results
-    load(glue("{PATH_RES_MODEL}/MM_psm_mRNA_PEP/{protease}/MM_psm_mRNA_PEP_MCMC.RData"))
+  for (input in inputs) {
+    ######################################################
+    # Changes in protein and mRNA isoform relative abundances (MM)
+    ######################################################
+    benchmark_df_all = list()
     
-    benchmark_df = merge(VALIDATION_DF_prot, res$isoform_results,
-                         by.x = "proteins", by.y = "Isoform", all = T)
-    
-    # Eliminio isoforme non presenti nel validation set e in input
-    benchmark_df = na.omit(benchmark_df)
-    
-    ths_tpm = min(benchmark_df$TPM[benchmark_df$TPM>0])
-    benchmark_df$P_TPM = (benchmark_df$TPM+ths_tpm) / sum(benchmark_df$TPM+ths_tpm)
-    benchmark_df$Log2_FC =log2((benchmark_df$Pi / benchmark_df$P_TPM)+1)
-    benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
-    
-    #quantiles = quantile(benchmark_df$Prob_prot_inc, seq(0, 1, 0.2))
-    quantiles = seq(0, 1, 0.2)
-    quantiles[1] = -Inf
-    class_Prob_prot_inc = rep("0", nrow(benchmark_df))
-    
-    for (i in seq_len(length(quantiles)-1)) {
-      sel = which(benchmark_df$Prob_prot_inc > quantiles[i] & benchmark_df$Prob_prot_inc <= quantiles[i+1])
-      quantiles[1] = 0
-      class_Prob_prot_inc[sel] = glue("({round(quantiles[i], 2)} ; {round(quantiles[i+1], 2)}]")
+    for (protease in proteases) {
+      # load validation data with res
+      load(glue("{PATH_RES_MODEL}/{input}_mRNA_PEP/{protease}/Merged_validation_res_{input}_mRNA_PEP"))
+      colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
+      if(no_unique){
+        validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
+        no_unique_nm = "_no_unique"
+      }else{
+        no_unique_nm = ""
+      }
+      validation_dat = build_data_violin_plot(validation_dat)
+      benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+      validation_dat = convert_numeric_to_class(validation_dat, quantiles)
+      
+      sub_bench_no_inf = validation_dat[validation_dat$Log2_FC_validation < Inf & validation_dat$Log2_FC_validation > -Inf & !is.na(validation_dat$Log2_FC_validation), ]
+      plot_change = plot_prob_change(sub_bench_no_inf)
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
+      
+      sub_bench = validation_dat[validation_dat$Log2_FC_validation == Inf, ]
+      write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
+                file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+      sub_bench = validation_dat[validation_dat$Log2_FC_validation == -Inf, ]
+      write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
+                file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+      
+      ######################################################
+      # Log2FC correlation
+      ######################################################
+      plot_scatter = scatterplot(sub_bench_no_inf[, c("Log2_FC", "Log2_FC_validation")]) + 
+        labs(x = "Log2_FC", y = "Log2_FC_validation")
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
+      
+      plot_scatter = scatterplot(sub_bench_no_inf[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+        labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     }
-    benchmark_df$class_Prob_prot_inc = class_Prob_prot_inc
     
+    benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
     
-    plot_change = plot_prob_change(benchmark_df)
-    ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result.png"), plot = plot_change)
+    sub_bench_no_inf = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
+    plot_change = plot_prob_change(sub_bench_no_inf)
+    ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
+    
+    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == Inf, ]
+    write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == -Inf, ]
+    write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+    
+    ######################################################
+    # Log2FC correlation
+    ######################################################
+    plot_scatter = scatterplot(sub_bench_no_inf[, c("Log2_FC", "Log2_FC_validation")]) + 
+      labs(x = "Log2_FC", y = "Log2_FC_validation")
+    ggsave(glue("{PATH_RES_CHANGE}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
+    
+    plot_scatter = scatterplot(sub_bench_no_inf[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+      labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
+    ggsave(glue("{PATH_RES_CHANGE}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
   }
-  
-  #quantiles = quantile(benchmark_df_all$Prob_prot_inc, seq(0, 1, 0.2))
-  quantiles = seq(0, 1, 0.2)
-  quantiles[1] = -Inf
-  class_Prob_prot_inc = rep("0", nrow(benchmark_df_all))
-  
-  for (i in seq_len(length(quantiles)-1)) {
-    sel = which(benchmark_df_all$Prob_prot_inc > quantiles[i] & benchmark_df_all$Prob_prot_inc <= quantiles[i+1])
-    quantiles[1] = 0
-    class_Prob_prot_inc[sel] = glue("({round(quantiles[i], 2)} ; {round(quantiles[i+1], 2)}]")
-  }
-  benchmark_df_all$class_Prob_prot_inc = class_Prob_prot_inc
-  
-  plot_change = plot_prob_change(benchmark_df_all)
-  ggsave(glue("{PATH_RES_CHANGE}/main_result.png"), plot = plot_change)
   
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - PEP-noPEP
   ######################################################
-  benchmark_df_all = list()
-  
-  for (protease in proteases) {
-    benchmark_df_models = list()
-    for (model in c("_PEP", "")) {
-      # load validation dataset from metamorpheus
-      load(glue("{PATH_DATA}/No{protease}/Validation_prot_psm"))
-      # load model results
-      load(glue("{PATH_RES_MODEL}/MM_psm_mRNA{model}/{protease}/MM_psm_mRNA{model}_MCMC.RData"))
-      
-      benchmark_df = merge(VALIDATION_DF_prot, res$isoform_results[, c("Isoform", "Pi", "TPM", "Log2_FC", "Prob_prot_inc")],
-                           by.x = "proteins", by.y = "Isoform", all = T)
-      
-      # Eliminio isoforme non presenti nel validation set e in input
-      benchmark_df = na.omit(benchmark_df)
-      
-      ths_tpm = min(benchmark_df$TPM[benchmark_df$TPM>0])
-      benchmark_df$P_TPM = (benchmark_df$TPM+ths_tpm) / sum(benchmark_df$TPM+ths_tpm)
-      benchmark_df$Log2_FC = log2((benchmark_df$Pi / benchmark_df$P_TPM)+1)
-      if(model == "_PEP"){
-        label_model = "PEP"
-      }else{
-        label_model = "No PEP"
-      }
-      benchmark_df$Model = label_model
-      
-      #quantiles = quantile(benchmark_df$Prob_prot_inc, seq(0, 1, 0.2))
-      quantiles = seq(0, 1, 0.2)
-      quantiles[1] = -Inf
-      class_Prob_prot_inc = rep("0", nrow(benchmark_df))
-      
-      for (i in seq_len(length(quantiles)-1)) {
-        sel = which(benchmark_df$Prob_prot_inc > quantiles[i] & benchmark_df$Prob_prot_inc <= quantiles[i+1])
-        quantiles[1] = 0
-        class_Prob_prot_inc[sel] = glue("({round(quantiles[i], 2)} ; {round(quantiles[i+1], 2)}]")
-      }
-      benchmark_df$class_Prob_prot_inc = class_Prob_prot_inc
-      
-      benchmark_df_models = rbind(benchmark_df_models, benchmark_df)
-    }
-    plot_change = plot_prob_change_group(benchmark_df_models)
-    ggsave(glue("{PATH_RES_CHANGE}/{protease}/PEP_no_PEP.png"), plot = plot_change)
+  for (input in inputs) {
     
-    benchmark_df_all = rbind(benchmark_df_all, benchmark_df_models)
+    benchmark_df_all = list()
+    
+    for (protease in proteases) {
+      benchmark_df_models = list()
+      for (model in c("_PEP", "")) {
+        # load validation data with res
+        load(glue("{PATH_RES_MODEL}/{input}_mRNA{model}/{protease}/Merged_validation_res_{input}_mRNA{model}"))
+        colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
+        
+        if(no_unique){
+          validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
+          no_unique_nm = "_no_unique"
+        }else{
+          no_unique_nm = ""
+        }
+        
+        validation_dat = build_data_violin_plot(validation_dat)
+        validation_dat$Gene = NULL
+        
+        if(model == "_PEP"){
+          label_model = "PEP"
+        }else{
+          label_model = "No PEP"
+        }
+        validation_dat$Model = label_model
+        
+        benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+        
+        validation_dat = convert_numeric_to_class(validation_dat, quantiles)
+        benchmark_df_models = rbind(benchmark_df_models, validation_dat)
+      }
+      
+      sub_bench = benchmark_df_models[benchmark_df_models$Log2_FC_validation < Inf & benchmark_df_models$Log2_FC_validation > -Inf & !is.na(benchmark_df_models$Log2_FC_validation), ]
+      
+      plot_change = plot_prob_change_group(sub_bench)
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
+    }
+    benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
+    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
+    plot_change = plot_prob_change_group(sub_bench)
+    ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
   }
-  plot_change = plot_prob_change_group(benchmark_df_all)
-  ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP.png"), plot = plot_change)
   
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - MM vs OpenMS
@@ -129,60 +142,32 @@ main = function(proteases){
   
   for (protease in proteases) {
     benchmark_df_models = list()
-    for (model in c("MM_psm", "OpenMS")) {
-      # load validation dataset from metamorpheus
-      load(glue("{PATH_DATA}/No{protease}/Validation_prot_psm"))
-      # load model results
-      load(glue("{PATH_RES_MODEL}/{model}_mRNA_PEP/{protease}/{model}_mRNA_PEP_MCMC.RData"))
+    for (input in c("MM_psm", "OpenMS")) {
+      # load validation data with res
+      load(glue("{PATH_RES_MODEL}/{input}_mRNA_PEP/{protease}/Merged_validation_res_{input}_mRNA_PEP"))
+      colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
       
-      benchmark_df = merge(VALIDATION_DF_prot, res$isoform_results[, c("Isoform", "Pi", "TPM", "Log2_FC", "Prob_prot_inc")],
-                           by.x = "proteins", by.y = "Isoform", all = T)
-      
-      if(model == "OpenMS"){
-        # proteine presenti in input
-        iso_input = get_score_from_idXML(glue("{PATH_DATA}/Only{protease}/merge_index_percolator_pep_switched.idXML"))
-        benchmark_df = merge(benchmark_df, iso_input, by.x = "proteins", by.y = "Isoform", all = T)
-        
-        # Eliminio isoforme non presenti nel validation set
-        benchmark_df = benchmark_df[!is.na(benchmark_df$Present), ]
-        
-        # Tengo quelle in input
-        benchmark_df = benchmark_df[!is.na(benchmark_df$score), ]
-        
-        # 0 se modello non trova l'isoforma
-        benchmark_df[is.na(benchmark_df)] = 0
-        benchmark_df$score = NULL
-      } else {
-        # Eliminio isoforme non presenti nel validation set e in input
-        benchmark_df = na.omit(benchmark_df)
+      if(no_unique){
+        validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
+        no_unique_nm = "_no_unique"
+      }else{
+        no_unique_nm = ""
       }
+      validation_dat = build_data_violin_plot(validation_dat)
+      validation_dat$Model = input
+      benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+      validation_dat = convert_numeric_to_class(validation_dat, quantiles)
       
-      ths_tpm = min(benchmark_df$TPM[benchmark_df$TPM>0])
-      benchmark_df$P_TPM = (benchmark_df$TPM+ths_tpm) / sum(benchmark_df$TPM+ths_tpm)
-      benchmark_df$Log2_FC = log2((benchmark_df$Pi / benchmark_df$P_TPM)+1)
-      benchmark_df$Model = model
-      
-      #quantiles = quantile(benchmark_df$Prob_prot_inc, seq(0, 1, 0.2))
-      quantiles = seq(0, 1, 0.2)
-      quantiles[1] = -Inf
-      class_Prob_prot_inc = rep("0", nrow(benchmark_df))
-      
-      for (i in seq_len(length(quantiles)-1)) {
-        sel = which(benchmark_df$Prob_prot_inc > quantiles[i] & benchmark_df$Prob_prot_inc <= quantiles[i+1])
-        quantiles[1] = 0
-        class_Prob_prot_inc[sel] = glue("({round(quantiles[i], 2)} ; {round(quantiles[i+1], 2)}]")
-      }
-      benchmark_df$class_Prob_prot_inc = class_Prob_prot_inc
-      
-      benchmark_df_models = rbind(benchmark_df_models, benchmark_df)
+      benchmark_df_models = rbind(benchmark_df_models, validation_dat)
     }
     plot_change = plot_prob_change_group(benchmark_df_models)
-    ggsave(glue("{PATH_RES_CHANGE}/{protease}/OpenMS_vs_MM.png"), plot = plot_change)
-    
-    benchmark_df_all = rbind(benchmark_df_all, benchmark_df_models)
+    ggsave(glue("{PATH_RES_CHANGE}/{protease}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
   }
+  benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
   plot_change = plot_prob_change_group(benchmark_df_all)
-  ggsave(glue("{PATH_RES_CHANGE}/OpenMS_vs_MM.png"), plot = plot_change)
+  ggsave(glue("{PATH_RES_CHANGE}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
 }
 
 main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE))
+main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE),
+     no_unique = TRUE)

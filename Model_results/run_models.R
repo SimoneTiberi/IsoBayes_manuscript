@@ -42,14 +42,15 @@ main = function(proteases, run_model = TRUE){
                               PEP = TRUE,
                               FDR_thd = 0.01
       )
-      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+      map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
+      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  
+
   ###############################
   name = glue("OpenMS_mRNA")
   message(glue("---------- {name} ----------"))
@@ -380,4 +381,4 @@ PROTEASES = list.dirs(PATH_TO_DATA, recursive = FALSE, full.names = FALSE)
 PROTEASES = PROTEASES[grepl(pattern = "Only", PROTEASES)]
 PROTEASES = gsub("Only", "", PROTEASES)
 
-main(PROTEASES, run_model = FALSE)
+main(PROTEASES, run_model = TRUE)

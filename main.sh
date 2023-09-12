@@ -6,7 +6,7 @@ MAIN_PATH=$(pwd)
 #cd ..
 #ADD CHECK TO PRESENCE OF BENCHMARK RESULTS
 
-for data in 'wtc11' #'jurkat' 'wtc11'
+for data in 'jurkat' 'wtc11'
 do
 	#echo '--- Converting mzID files to idXML with OpenMS toolkit ('$data' dataset) ---'
 	#cd Data/$data
@@ -29,18 +29,18 @@ do
 	#echo '--- Building validation set ('$data') ---'
 	#singularity exec Containers/IsoBayes.img Rscript utils_function/build_validation_set.R $MAIN_PATH $data 
 
-	echo '--- Run IsoBayes models ('$data') ---'
-	singularity exec Containers/IsoBayes.img Rscript Model_results/run_models.R $MAIN_PATH $data
+	#echo '--- Run IsoBayes models ('$data') ---'
+	#singularity exec Containers/IsoBayes.img Rscript Model_results/run_models.R $MAIN_PATH $data
 
-	echo '--- Get benchmark results ---'
+	#echo '--- Get benchmark results ---'
         #singularity exec Containers/IsoBayes.img Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $data
 
-	echo '--- Get robustness results ---'
+	#echo '--- Get robustness results ---'
 	#singularity exec Containers/IsoBayes.img Rscript Robustness/robustness_IsoBayes.R $MAIN_PATH $data
 
-	echo '--- Get Abundance results ---'
+	#echo '--- Get Abundance results ---'
         #singularity exec Containers/IsoBayes.img Rscript Abundance_correlation/abundance_correlation.R $MAIN_PATH $data
 
 	echo '--- Get Change protein mRNA isoform abundance results ---'
-        #singularity exec Containers/IsoBayes.img Rscript Change_protein_mRNA_isoform/Change_protein_mRNA_isoform.R $MAIN_PATH $data
+        singularity exec Containers/IsoBayes.img Rscript Change_protein_mRNA_isoform/Change_protein_mRNA_isoform.R $MAIN_PATH $data
 done

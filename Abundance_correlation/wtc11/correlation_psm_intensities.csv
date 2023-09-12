@@ -1,6 +1,6 @@
 "Protease","Log10_correlation_MM_psm","Protease","Log10_correlation_MM_intensities"
 "AspN",0.62,"AspN",0.57
-"Chym",0.61,"Chym",0.57
+"Chym",0.6,"Chym",0.56
 "LysC",0.64,"LysC",0.6
 "Trypsin",0.65,"Trypsin",0.61
 "All",0.56,"All",0.58

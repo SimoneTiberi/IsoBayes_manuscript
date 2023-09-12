@@ -2,5 +2,7 @@
 "Epifany",0.785
 "Fido",0.734
 "IsoBayes",0.858
-"IsoBayes_mRNA",0.877
+"IsoBayes_mRNA",0.878
+"IsoBayes_mRNA_no_unique",0.824
+"IsoBayes_no_unique",0.785
 "PIA",0.713
