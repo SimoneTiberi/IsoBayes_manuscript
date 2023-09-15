@@ -1,3 +1,27 @@
+Warning message:
+In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/abundance_correlation_jurkat.txt', reason 'No such file or directory'
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image

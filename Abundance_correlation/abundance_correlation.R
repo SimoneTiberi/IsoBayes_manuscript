@@ -32,12 +32,6 @@ main = function(proteases){
       load(glue("{PATH_WD}/Model_results/{DATA}/{input}_mRNA/{protease}/Merged_validation_res_{input}_mRNA"))
       benchmark_df = validation_dat ; rm(validation_dat)
 
-      if(input == "OpenMS"){
-        benchmark_df = build_OpenMS_validation(benchmark_df, protease)
-      } else {
-        # Eliminio isoforme non presenti nel validation set e in input
-        benchmark_df = na.omit(benchmark_df)
-      }
       benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
       abundances = data.frame(log10_abundance = log10(benchmark_df$Abundance + 1),
                               log10_abundance_validated = log10(benchmark_df$Y_validation + 1)
@@ -203,7 +197,7 @@ main = function(proteases){
     }
     SumTab_corr = rbind(SumTab_corr, c("All", cor(log10(benchmark_df_all$Abundance + 1),
                                                   log10(benchmark_df_all$Y_validation + 1)))
-    )
+                        )
     SumTab_corr = as.data.frame(SumTab_corr)
     colnames(SumTab_corr) = c("Protease", glue("Log10_correlation_prior_{prior}"))
     SumTab_corr[, 2] = round(as.numeric(SumTab_corr$Log10_correlation), 3)

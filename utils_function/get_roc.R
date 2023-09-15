@@ -5,19 +5,14 @@ get_roc = function(benchmark, name_models){
   for (name_model in name_models) {
     id_na = !is.na(benchmark[, name_model])
     scores = append(scores, list(benchmark[id_na, name_model]))
-    labels = append(labels, list(benchmark$Present[id_na]))
+    labels = append(labels, list(benchmark[id_na, glue("Present_{name_model}")]))
   }
   roc_pr_curves = precrec::mmdata(scores, labels, name_models, dsids = 1:length(name_models))
   roc_pr_curves = precrec::evalmod(roc_pr_curves)
   
   auc_roc = round(precrec::auc(roc_pr_curves)[precrec::auc(roc_pr_curves)[, "curvetypes"] == "ROC", "aucs"], 3)
-  #auc_pr = round(precrec::auc(roc_pr_curves)[precrec::auc(roc_pr_curves)[, "curvetypes"] == "PRC", "aucs"], 3)
-  
   sum_stat = data.frame(Model = name_models, AUC = auc_roc)
-  
   labs_roc = paste0(name_models, "\nAUC: ", auc_roc)
-  #labs_pr = paste0(name_models, "\nAUC: ", auc_pr)
-  
   palette_models = PALETTE_MODELS[name_models]
   
   pp = autoplot(roc_pr_curves, "ROC")
@@ -46,6 +41,4 @@ get_roc = function(benchmark, name_models){
   }
   
   list(gplot = pp, sum_stat = sum_stat)
-  #autoplot(roc_pr_curves, "PR") + scale_colour_discrete(name="Models", breaks = name_models, labels=labs_pr) +
-  #ggtitle(paste0("PR curve ", protease))
 }

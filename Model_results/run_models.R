@@ -6,10 +6,10 @@ DATA = commandArgs(trailingOnly = TRUE)[2]
 library(glue)
 library(IsoBayes)
 library(ggplot2)
-#source(glue("{PATH_WD}/utils_function/plot_results.R"))
+
 source(glue("{PATH_WD}/utils_function/merge_validation.R"))
 source(glue("{PATH_WD}/utils_function/validate_all_protease.R"))
-source(glue("{PATH_WD}/utils_function/save_run_inferences_plot_validation.R"))
+source(glue("{PATH_WD}/utils_function/save_run_inferences.R"))
 source(glue("{PATH_WD}/utils_function/get_roc.R"))
 source(glue("{PATH_WD}/utils_function/plot_roc_model.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
@@ -18,6 +18,7 @@ PATH_TO_DATA = glue("{PATH_WD}/Data/{DATA}")
 PATH_TO_RES = glue("{PATH_WD}/Model_results/{DATA}")
 load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 set.seed(0)
+
 log_output(glue("run_models_{DATA}"))
 ###########################################################################################
 
@@ -43,7 +44,7 @@ main = function(proteases, run_model = TRUE){
                               FDR_thd = 0.01
       )
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
-      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+      save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -69,7 +70,7 @@ main = function(proteases, run_model = TRUE){
                               PEP = FALSE,
                               FDR_thd = 0.01
       )
-      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+      save_run_inferences(data_loaded, path_to_res_mod, name)
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -95,7 +96,7 @@ main = function(proteases, run_model = TRUE){
                               PEP = TRUE,
                               FDR_thd = 0.01
       )
-      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+      save_run_inferences(data_loaded, path_to_res_mod, name)
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -121,7 +122,7 @@ main = function(proteases, run_model = TRUE){
                               PEP = FALSE,
                               FDR_thd = 0.01
       )
-      save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+      save_run_inferences(data_loaded, path_to_res_mod, name)
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -157,7 +158,7 @@ main = function(proteases, run_model = TRUE){
                                 FDR_thd = 0.01
                                 )
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
-        save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -184,7 +185,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name, long_mcmc = FALSE)
+        save_run_inferences(data_loaded, path_to_res_mod, name, long_mcmc = FALSE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -211,7 +212,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = TRUE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -238,7 +239,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences_plot_validation(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))

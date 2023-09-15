@@ -1,6 +1,6 @@
-"Model","AUC_only_shared","AUC_all"
-"Epifany",0.657,0.728
-"Fido",0.629,0.667
-"IsoBayes",0.703,0.79
-"IsoBayes_mRNA",0.803,0.853
-"PIA",0.533,0.628
+"Model","AUC_all","AUC_only_shared"
+"Epifany",0.728,0.657
+"Fido",0.667,0.629
+"IsoBayes",0.79,0.703
+"IsoBayes_mRNA",0.853,0.803
+"PIA",0.628,0.533

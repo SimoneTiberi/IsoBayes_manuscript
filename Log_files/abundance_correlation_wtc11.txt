@@ -1,20 +1,6 @@
-[1] "AspN"    "Chym"    "LysC"    "Trypsin"
 Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-|--------------------------------------------------|
-|==================================================|
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-|--------------------------------------------------|
-|==================================================|
+In file.remove(glue("{PATH_WD}/Log_files/{name}.txt")) :
+  cannot remove file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Log_files/abundance_correlation_wtc11.txt', reason 'No such file or directory'
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
@@ -39,63 +25,6 @@ Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
-|--------------------------------------------------|
-|==================================================|
-|--------------------------------------------------|
-|==================================================|
-|--------------------------------------------------|
-|=========================================
-Error: no more error handlers available (recursive errors?); invoking 'abort' restart
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error: object 'plot_scatter' not found
-Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Warning message:
-In sink() : no sink to remove
-Error: object 'plot_scatter' not found
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in `$<-.data.frame`(`*tmp*`, P_TPM, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `$<-.data.frame`(`*tmp*`, Log2_FC_validation, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `geom_violin()` at IsoBayes_paper/utils_function/plot_prob_change.R:2:2:
-! Problem while computing aesthetics.
-ℹ Error occurred in the 1st layer.
-Caused by error:
-! object 'Log2_FC_validation' not found
-Run `rlang::last_trace()` to see where the error occurred.
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in `$<-.data.frame`(`*tmp*`, P_TPM, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `$<-.data.frame`(`*tmp*`, Log2_FC_validation, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in `$<-.data.frame`(`*tmp*`, P_TPM, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `$<-.data.frame`(`*tmp*`, Log2_FC_validation, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `$<-.data.frame`(`*tmp*`, Log2_FC_validation, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in `$<-.data.frame`(`*tmp*`, P_TPM, value = numeric(0)) : 
-  replacement has 0 rows, data has 15078
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
-Error in names(x) <- value : 
-  'names' attribute [6] must be the same length as the vector [5]
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
@@ -103,44 +32,3 @@ Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Error in rbind(deparse.level, ...) : 
-  numbers of columns of arguments do not match
-Error in `geom_boxplot()` at IsoBayes_paper/utils_function/plot_prob_change_group.R:2:2:
-! Problem while computing aesthetics.
-ℹ Error occurred in the 1st layer.
-Caused by error:
-! object 'Model' not found
-Run `rlang::last_trace()` to see where the error occurred.
-Saving 7 x 7 in image
-Error in rbind(deparse.level, ...) : 
-  numbers of columns of arguments do not match
-Error: unexpected '/' in "/"
-Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
-In addition: Warning message:
-In readChar(con, 5L, useBytes = TRUE) :
-  cannot open compressed file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Model_results/wtc11/OpenMS_mRNA_PEP/AspN/Merged_mRNA_PEP_MCMC', probable reason 'No such file or directory'
-Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
-In addition: Warning message:
-In readChar(con, 5L, useBytes = TRUE) :
-  cannot open compressed file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Model_results/wtc11/OpenMS_mRNA_PEP/AspN/Merged_mRNA_PEP_MCMC', probable reason 'No such file or directory'
-Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
-In addition: Warning message:
-In readChar(con, 5L, useBytes = TRUE) :
-  cannot open compressed file '/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper/Model_results/wtc11/OpenMS_mRNA_PEP/AspN/Merged_mRNA_PEP_MCMC', probable reason 'No such file or directory'
-Error in rbind(deparse.level, ...) : 
-  numbers of columns of arguments do not match
-Error in build_data_violin_plot(benchmark_df) : object 'df_all' not found
-Error in build_data_violin_plot(benchmark_df) : object 'df_all' not found
-Error in build_data_violin_plot(benchmark_df) : object 'df_all' not found
-Error in build_data_violin_plot(benchmark_df) : object 'df_all' not found
-Error in rbind(deparse.level, ...) : 
-  numbers of columns of arguments do not match

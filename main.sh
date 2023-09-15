@@ -35,11 +35,11 @@ do
 	#echo '--- Get benchmark results ---'
         #singularity exec Containers/IsoBayes.img Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $data
 
-	#echo '--- Get robustness results ---'
-	#singularity exec Containers/IsoBayes.img Rscript Robustness/robustness_IsoBayes.R $MAIN_PATH $data
+	echo '--- Get robustness results ---'
+	singularity exec Containers/IsoBayes.img Rscript Robustness/robustness_IsoBayes.R $MAIN_PATH $data
 
-	#echo '--- Get Abundance results ---'
-        #singularity exec Containers/IsoBayes.img Rscript Abundance_correlation/abundance_correlation.R $MAIN_PATH $data
+	echo '--- Get Abundance results ---'
+        singularity exec Containers/IsoBayes.img Rscript Abundance_correlation/abundance_correlation.R $MAIN_PATH $data
 
 	echo '--- Get Change protein mRNA isoform abundance results ---'
         singularity exec Containers/IsoBayes.img Rscript Change_protein_mRNA_isoform/Change_protein_mRNA_isoform.R $MAIN_PATH $data

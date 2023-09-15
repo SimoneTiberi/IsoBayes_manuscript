@@ -9,6 +9,8 @@ library(glue)
 source(glue("{PATH_WD}/utils_function/utils_benchmarking.R"))
 source(glue("{PATH_WD}/utils_function/get_roc.R"))
 source(glue("{PATH_WD}/utils_function/prior_plot.R"))
+source(glue("{PATH_WD}/utils_function/memory_plot.R"))
+source(glue("{PATH_WD}/utils_function/run_time_plot.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
 
 PATH_RES_COMPETITORS = glue("{PATH_WD}/Benchmark_results/{DATA}")
@@ -79,35 +81,39 @@ main = function(models, proteases){
     colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
     colnames(benchmark_df) = gsub(".*score_", "", colnames(benchmark_df))
     
-    benchmark_df$IsoBayes_mRNA_no_unique = benchmark_df$IsoBayes_mRNA
-    benchmark_df$IsoBayes_mRNA_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
+    #benchmark_df$IsoBayes_mRNA_no_unique = benchmark_df$IsoBayes_mRNA
+    #benchmark_df$IsoBayes_mRNA_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
     
-    benchmark_df$IsoBayes_no_unique = benchmark_df$IsoBayes
-    benchmark_df$IsoBayes_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
+    #benchmark_df$IsoBayes_no_unique = benchmark_df$IsoBayes
+    #benchmark_df$IsoBayes_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
     
-    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA", "IsoBayes_mRNA_no_unique", "IsoBayes_no_unique"))
+    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
+    shared_vs_all_auc = plot_tab$sum_stat
+    
     write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"), row.names = FALSE)
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
     
     # Focus on validation without isoform with Unique Peptide (UP)
     plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ], c(selected_models, "Epifany", "Fido", "PIA"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
-    shared_vs_all_auc = plot_tab$sum_stat
-    
-    plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
     shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
-    colnames(shared_vs_all_auc) = c("Model", "AUC_only_shared", "AUC_all")
+    colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
+    
     write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
   }
   plot_tab = get_roc(benchmark_df_all, c(selected_models, "Epifany", "Fido", "PIA"))
   ggsave(glue("{PATH_RES_COMPETITORS}/ROC_main_result.png"), plot = plot_tab$gplot)
   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/SumTab_main_result.csv"), row.names = FALSE)
+  shared_vs_all_auc = plot_tab$sum_stat
   
   # Focus on validation without isoform with Unique Peptide (UP)
   plot_tab = get_roc(benchmark_df_all[benchmark_df_all$Y_unique_IsoBayes == 0, ], c(selected_models, "Epifany", "Fido", "PIA"))
   ggsave(glue("{PATH_RES_COMPETITORS}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
-  write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
+  shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
+  colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
+  
+  write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
   
   #################################################################################################
   # RUN_TIME and RAM
@@ -151,21 +157,8 @@ main = function(models, proteases){
     id_sort = sort(data_protease$RunTime, decreasing = TRUE, index.return = TRUE)$ix
     data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
     
-    ggplot(data_protease, aes(x = Model, y = RunTime, label = RunTime, fill = Model)) +
-      geom_bar(stat = "identity") +
-      scale_fill_manual("Model", values = PALETTE_MODELS) +
-      geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
-      labs(y = "Run-Time (Min)",
-           x = "Tool",
-           title = glue("Run-Time - {protease} - {DATA}")) +
-      theme_classic() +
-      theme(plot.title = element_text(size = 12, face = "bold"),
-            axis.title = element_text(size = 11, face = "bold"),
-            legend.title = element_text(size = 11, face = "bold"),
-            axis.text.x = element_text(size = 10, face = "bold", angle = 10, margin = margin(t = 10, r = 0, b = 0, l = 0, unit = "pt")),
-            axis.text.y = element_text(size = 10, face = "bold"),
-            legend.position = "none") 
-    ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Run-Time.png"))
+    pp = run_time_plot(data_protease, title = glue("Run-Time - {protease} - {DATA}"))
+    ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Run-Time.png"), plot = pp)
     
     if(is.null(data_protease_all)){
       data_protease_all = data_protease
@@ -177,22 +170,8 @@ main = function(models, proteases){
     id_sort = sort(data_protease$RAM, decreasing = TRUE, index.return = TRUE)$ix
     data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
     
-    ggplot(data_protease, aes(x = Model, y = RAM, label = RAM, fill = Model)) +
-      geom_bar(stat = "identity") +
-      scale_fill_manual("Model", values = PALETTE_MODELS) +
-      geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
-      labs(y = "RAM (MB)",
-           x = "Tool",
-           title = glue("RAM - {protease} - {DATA}")) +
-      theme_classic() +
-      theme(plot.title = element_text(size = 12, face = "bold"),
-            axis.title = element_text(size = 11, face = "bold"),
-            legend.title = element_text(size = 11, face = "bold"),
-            axis.text.x = element_text(size = 10, face = "bold", angle = 10, margin = margin(t = 10, r = 0, b = 0, l = 0, unit = "pt")),
-            axis.text.y = element_text(size = 10, face = "bold"),
-            legend.position = "none")
-
-    ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Memory_usage.png"))
+    pp = memory_plot(data_protease, title = glue("RAM - {protease} - {DATA}"))
+    ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Memory_usage.png"), plot = pp)
     
     if(is.null(data_protease_all_RAM)){
       data_protease_all_RAM = data_protease
@@ -200,54 +179,25 @@ main = function(models, proteases){
       data_protease_all_RAM$RAM = data_protease_all_RAM$RAM + data_protease$RAM
     }
   }
-  
   #############################################
   # average time
   #############################################
-  
   data_protease_all$RunTime = round(data_protease_all$RunTime / length(proteases), 1)
   id_sort = sort(data_protease_all$RunTime, decreasing = TRUE, index.return = TRUE)$ix
   data_protease_all$Model = factor(data_protease_all$Model, levels = data_protease_all$Model[id_sort])
   
-  ggplot(data_protease_all, aes(x = Model, y = RunTime, label = RunTime, fill = Model)) +
-    geom_bar(stat = "identity") +
-    scale_fill_manual("Model", values = PALETTE_MODELS) +
-    geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
-    labs(y = "Run-Time (Min)",
-         x = "Tool",
-         title = glue("Run-Time - {DATA}")) +
-    theme_classic() +
-    theme(plot.title = element_text(size = 12, face = "bold"),
-          axis.title = element_text(size = 11, face = "bold"),
-          legend.title = element_text(size = 11, face = "bold"),
-          axis.text.x = element_text(size = 10, face = "bold", angle = 10, margin = margin(t = 10, r = 0, b = 0, l = 0, unit = "pt")),
-          axis.text.y = element_text(size = 10, face = "bold"),
-          legend.position = "none") 
-  ggsave(glue("{PATH_RES_COMPETITORS}/Average_Run-Time.png"))
+  pp = run_time_plot(data_protease_all, title = glue("Run-Time - {DATA}"))
+  ggsave(glue("{PATH_RES_COMPETITORS}/Average_Run-Time.png"), plot = pp)
   
   #############################################
   # average RAM
   #############################################
-  
   data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM/length(proteases)/2)
   id_sort = sort(data_protease_all_RAM$RAM, decreasing = TRUE, index.return = TRUE)$ix
   data_protease_all_RAM$Model = factor(data_protease_all_RAM$Model, levels = data_protease_all_RAM$Model[id_sort])
   
-  ggplot(data_protease_all_RAM, aes(x = Model, y = RAM, label = RAM, fill = Model)) +
-    geom_bar(stat = "identity") +
-    scale_fill_manual("Model", values = PALETTE_MODELS) +
-    geom_text(size = 4.25, colour = "black",  vjust=-0.25) +
-    labs(y = "RAM (MB)",
-         x = "Tool",
-         title = glue("RAM - {DATA}")) +
-    theme_classic() +
-    theme(plot.title = element_text(size = 12, face = "bold"),
-          axis.title = element_text(size = 11, face = "bold"),
-          legend.title = element_text(size = 11, face = "bold"),
-          axis.text.x = element_text(size = 10, face = "bold", angle = 10, margin = margin(t = 10, r = 0, b = 0, l = 0, unit = "pt")),
-          axis.text.y = element_text(size = 10, face = "bold"),
-          legend.position = "none") 
-  ggsave(glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.png"))
+  pp = memory_plot(data_protease_all_RAM, title = glue("RAM - {DATA}"))
+  ggsave(glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.png"), plot = pp)
 }
 
 main(proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive = FALSE, full.names = FALSE),

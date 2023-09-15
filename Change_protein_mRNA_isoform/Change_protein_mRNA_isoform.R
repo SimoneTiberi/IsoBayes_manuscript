@@ -19,7 +19,7 @@ log_output(glue("change_prot_mRNA_iso_{DATA}"))
 
 main = function(proteases, no_unique = FALSE){
   inputs = c("OpenMS", "MM_psm")
-  quantiles = c(0, 0.01, 0.05, 0.1, 0.5, 0.9, 0.95, 0.99, 1)
+  quantiles = c(0, 0.2, 0.4, 0.6, 0.8, 1)
   
   for (input in inputs) {
     ######################################################
@@ -41,48 +41,48 @@ main = function(proteases, no_unique = FALSE){
       benchmark_df_all = rbind(benchmark_df_all, validation_dat)
       validation_dat = convert_numeric_to_class(validation_dat, quantiles)
       
-      sub_bench_no_inf = validation_dat[validation_dat$Log2_FC_validation < Inf & validation_dat$Log2_FC_validation > -Inf & !is.na(validation_dat$Log2_FC_validation), ]
-      plot_change = plot_prob_change(sub_bench_no_inf)
+      #sub_bench_no_inf = validation_dat[validation_dat$Log2_FC_validation < Inf & validation_dat$Log2_FC_validation > -Inf & !is.na(validation_dat$Log2_FC_validation), ]
+      plot_change = plot_prob_change(validation_dat)
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
       
-      sub_bench = validation_dat[validation_dat$Log2_FC_validation == Inf, ]
-      write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
-                file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
-      sub_bench = validation_dat[validation_dat$Log2_FC_validation == -Inf, ]
-      write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
-                file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+      #sub_bench = validation_dat[validation_dat$Log2_FC_validation == Inf, ]
+      #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
+      #          file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+      #sub_bench = validation_dat[validation_dat$Log2_FC_validation == -Inf, ]
+      #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
+      #          file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
       
       ######################################################
       # Log2FC correlation
       ######################################################
-      plot_scatter = scatterplot(sub_bench_no_inf[, c("Log2_FC", "Log2_FC_validation")]) + 
+      plot_scatter = scatterplot(validation_dat[, c("Log2_FC", "Log2_FC_validation")]) + 
         labs(x = "Log2_FC", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
       
-      plot_scatter = scatterplot(sub_bench_no_inf[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+      plot_scatter = scatterplot(validation_dat[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
         labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     }
     
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
     
-    sub_bench_no_inf = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
-    plot_change = plot_prob_change(sub_bench_no_inf)
+    #sub_bench_no_inf = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
+    plot_change = plot_prob_change(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
     
-    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == Inf, ]
-    write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
-    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == -Inf, ]
-    write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+    #sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == Inf, ]
+    #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+    #sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == -Inf, ]
+    #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
     
     ######################################################
     # Log2FC correlation
     ######################################################
-    plot_scatter = scatterplot(sub_bench_no_inf[, c("Log2_FC", "Log2_FC_validation")]) + 
+    plot_scatter = scatterplot(benchmark_df_all[, c("Log2_FC", "Log2_FC_validation")]) + 
       labs(x = "Log2_FC", y = "Log2_FC_validation")
     ggsave(glue("{PATH_RES_CHANGE}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     
-    plot_scatter = scatterplot(sub_bench_no_inf[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+    plot_scatter = scatterplot(benchmark_df_all[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
       labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
     ggsave(glue("{PATH_RES_CHANGE}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
   }
