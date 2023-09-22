@@ -41,18 +41,19 @@ main = function(proteases, no_unique = FALSE){
       benchmark_df_all = rbind(benchmark_df_all, validation_dat)
       validation_dat = convert_numeric_to_class(validation_dat, quantiles)
       validation_dat_extreme = convert_numeric_to_class(validation_dat, quantiles = c(0, 0.01, 0.99, 1))
-      validation_dat_extreme = validation_dat_extreme[validation_dat_extreme$class_Prob_prot_inc != "c(0.01 ; 0.99]", ]
-      
-      plot_change = plot_prob_change(validation_dat_extreme)
-      ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
+      validation_dat_extreme = validation_dat_extreme[validation_dat_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
       
       plot_change = plot_prob_change(validation_dat)
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
+      
+      plot_change = plot_prob_change(validation_dat_extreme)
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_extreme_{input}{no_unique_nm}.png"), plot = plot_change)
       
       ######################################################
       # Log2FC correlation
       ######################################################
-      plot_scatter = scatterplot(validation_dat[, c("Log2_FC", "Log2_FC_validation")]) + 
+      validation_dat = adjust_inf_log2FC(validation_dat)
+      plot_scatter = scatterplot(validation_dat[, c("Log2_FC_adj", "Log2_FC_validation")]) + 
         labs(x = "Log2_FC", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
       
@@ -62,7 +63,7 @@ main = function(proteases, no_unique = FALSE){
     }
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
     benchmark_df_all_extreme = convert_numeric_to_class(benchmark_df_all, quantiles = c(0, 0.01, 0.99, 1))
-    benchmark_df_all_extreme = benchmark_df_all_extreme[benchmark_df_all_extreme$class_Prob_prot_inc != "c(0.01 ; 0.99]", ]
+    benchmark_df_all_extreme = benchmark_df_all_extreme[benchmark_df_all_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
     
     plot_change = plot_prob_change(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
@@ -73,7 +74,8 @@ main = function(proteases, no_unique = FALSE){
     ######################################################
     # Log2FC correlation
     ######################################################
-    plot_scatter = scatterplot(benchmark_df_all[, c("Log2_FC", "Log2_FC_validation")]) + 
+    benchmark_df_all = adjust_inf_log2FC(benchmark_df_all)
+    plot_scatter = scatterplot(benchmark_df_all[, c("Log2_FC_adj", "Log2_FC_validation")]) + 
       labs(x = "Log2_FC", y = "Log2_FC_validation")
     ggsave(glue("{PATH_RES_CHANGE}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     
@@ -133,6 +135,51 @@ main = function(proteases, no_unique = FALSE){
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - mRNA-no_mRNA
   ######################################################
+  for (input in "OpenMS") {
+    
+    benchmark_df_all = list()
+    
+    for (protease in proteases) {
+      benchmark_df_models = list()
+      for (model in c("_mRNA", "")) {
+        # load validation data with res
+        load(glue("{PATH_RES_MODEL}/{input}{model}_PEP/{protease}/Merged_validation_res_{input}{model}_PEP"))
+        load(glue("{PATH_RES_MODEL}/{input}{model}_PEP/{protease}/{input}{model}_PEP_MCMC.RData"))
+        colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
+        
+        if(no_unique){
+          validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
+          no_unique_nm = "_no_unique"
+        }else{
+          no_unique_nm = ""
+        }
+        
+        validation_dat = build_data_violin_plot(validation_dat)
+        validation_dat$Gene = NULL
+        
+        if(model == "_PEP"){
+          label_model = "PEP"
+        }else{
+          label_model = "No PEP"
+        }
+        validation_dat$Model = label_model
+        
+        benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+        
+        validation_dat = convert_numeric_to_class(validation_dat, quantiles)
+        benchmark_df_models = rbind(benchmark_df_models, validation_dat)
+      }
+      
+      sub_bench = benchmark_df_models[benchmark_df_models$Log2_FC_validation < Inf & benchmark_df_models$Log2_FC_validation > -Inf & !is.na(benchmark_df_models$Log2_FC_validation), ]
+      
+      plot_change = plot_prob_change_group(sub_bench)
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
+    }
+    benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
+    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
+    plot_change = plot_prob_change_group(sub_bench)
+    ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
+  }
   
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - MM vs OpenMS

@@ -33,6 +33,7 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
+    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -60,6 +61,7 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
+    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -86,6 +88,7 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
+    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -115,6 +118,7 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
+    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -137,7 +141,7 @@ main = function(proteases, run_model = TRUE){
   ############################################################################################################
   # MetaMorpheus data (MM)
   ############################################################################################################
-  for (abundance_type in c("intensities", "psm")) {
+  for (abundance_type in c("psm", "intensities")) {
     
     log_output(glue("run_models_{DATA}_MM_{abundance_type}"))
     
@@ -159,7 +163,7 @@ main = function(proteases, run_model = TRUE){
                                 input_type = "metamorpheus",
                                 abundance_type = abundance_type,
                                 PEP = TRUE,
-                                FDR_thd = 0.01
+                                FDR_thd = 0.1
         )
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
         save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
@@ -214,7 +218,7 @@ main = function(proteases, run_model = TRUE){
                                 input_type = "metamorpheus",
                                 abundance_type = abundance_type,
                                 PEP = TRUE,
-                                FDR_thd = 0.01
+                                FDR_thd = 0.1
         )
         save_run_inferences(data_loaded, path_to_res_mod, name)
       }
@@ -250,9 +254,8 @@ main = function(proteases, run_model = TRUE){
     }
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-    
-    
   }
+  return(0)
   ############################################################################################################
   # Prior robustness
   ############################################################################################################

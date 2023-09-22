@@ -40,6 +40,10 @@ main = function(models, proteases){
       }
       benchmark_df = concat_models(benchmark_df)
       
+      for (nm in selected_models) {
+        benchmark_df[, paste0("Present_", nm)]
+      }
+      
       plot_tab = get_roc(benchmark_df, selected_models)
       ggsave(glue("{PATH_RES_roc}/{protease}/ROC_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.png"), plot = plot_tab$gplot)
       write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), row.names = FALSE)
