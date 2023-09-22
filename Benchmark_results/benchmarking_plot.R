@@ -87,6 +87,10 @@ main = function(models, proteases){
     #benchmark_df$IsoBayes_no_unique = benchmark_df$IsoBayes
     #benchmark_df$IsoBayes_no_unique[benchmark_df$Y_unique_IsoBayes != 0] = NA
     
+    for (nm in c(selected_models, "Epifany", "Fido", "PIA")) {
+      benchmark_df[, paste0("Present_", nm)] = benchmark_df$Present
+    }
+    
     plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
     shared_vs_all_auc = plot_tab$sum_stat
@@ -205,6 +209,7 @@ main(proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive
                    IsoBayes_fast = c("", ""),
                    IsoBayes_mRNA = c("_PEP", "_mRNA"),
                    IsoBayes_fast_mRNA = c("", "_mRNA")
-                   )
+     )
 )
+
 

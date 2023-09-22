@@ -67,9 +67,9 @@ for (enzyme in list.dirs(path_std, recursive = F, full.names = F)) {
           axis.text.x = element_text(size = 10, face = "bold"),
           axis.text.y = element_text(size = 10, face = "bold"),
           legend.text = element_text(size = 10)
-          )
+    )
   ggsave(glue("{path_std}/{enzyme}/Run-Time.png"))
-
+  
   if(is.null(data_plot_all)){
     data_plot_all = data_plot
   }else{
@@ -130,7 +130,7 @@ ggplot(data_plot_all, aes(x = Model, y = RunTime, label = RunTime, fill = Model)
         axis.text.x = element_text(size = 10, face = "bold"),
         axis.text.y = element_text(size = 10, face = "bold"),
         legend.text = element_text(size = 10)
-        )
+  )
 ggsave(glue("{path_std}/Average_Run-Time.png"))
 
 #############################################
@@ -154,6 +154,6 @@ ggplot(data_plot_all_RAM, aes(x = Model, y = RAM, label = RAM, fill = Model)) +
         axis.text.x = element_text(size = 10, face = "bold"),
         axis.text.y = element_text(size = 10, face = "bold"),
         legend.text = element_text(size = 10)
-        )
+  )
 ggsave(glue("{path_std}/Average_Memory_usage.png"))
 

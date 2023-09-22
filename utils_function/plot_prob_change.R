@@ -1,8 +1,7 @@
 plot_prob_change = function(benchmark_df){
-  iqr = IQR(benchmark_df$Log2_FC_validation)
-  
-  pp = ggplot(benchmark_df, aes(class_Prob_prot_inc, Log2_FC_validation)) + 
-    geom_boxplot(fill="plum", width = 0.1) +
+  pp = ggplot(benchmark_df, aes(class_Prob_prot_inc, Log2_FC)) + 
+    geom_boxplot(varwidth=T, fill="plum") +
+    #ylim(0, quantile(benchmark_df$Log2_FC, 0.9)) +
     labs(title = "Change in protein and mRNA isoform relative abundances", 
          x = "P(Protein > Transcript)",
          y = "Log2FC of isoform relative abundances") +
@@ -12,9 +11,7 @@ plot_prob_change = function(benchmark_df){
           axis.text.x = element_text(size = 10, face = "bold"),
           axis.text.y = element_text(size = 10, face = "bold"),
           legend.text = element_text(size = 10)) +
-    theme_bw() +
-      coord_cartesian(ylim = c(quantile(benchmark_df$Log2_FC_validation, 0.25) - 1 * iqr,
-                               quantile(benchmark_df$Log2_FC_validation, 0.75) + 1 * iqr)
-                      )
+    theme_bw()
+  
   pp
 }

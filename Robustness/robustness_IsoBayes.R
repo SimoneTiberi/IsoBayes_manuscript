@@ -157,4 +157,4 @@ main(models = list(IsoBayes = c("_PEP", ""),
                    IsoBayes_mRNA = c("_PEP", "_mRNA"),
                    IsoBayes_fast_mRNA = c("", "_mRNA")),
      proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive = FALSE, full.names = FALSE)
-     )
+)

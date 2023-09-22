@@ -14,8 +14,3 @@ memory_plot = function(df, title){
           axis.text.y = element_text(size = 10, face = "bold"),
           legend.position = "none")
 }
-
-
-  labs(y = "RAM (MB)",
-       x = "Tool",
-       title = glue("RAM - {DATA}")) +

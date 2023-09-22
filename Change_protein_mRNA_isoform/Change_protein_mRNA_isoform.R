@@ -40,17 +40,14 @@ main = function(proteases, no_unique = FALSE){
       validation_dat = build_data_violin_plot(validation_dat)
       benchmark_df_all = rbind(benchmark_df_all, validation_dat)
       validation_dat = convert_numeric_to_class(validation_dat, quantiles)
+      validation_dat_extreme = convert_numeric_to_class(validation_dat, quantiles = c(0, 0.01, 0.99, 1))
+      validation_dat_extreme = validation_dat_extreme[validation_dat_extreme$class_Prob_prot_inc != "c(0.01 ; 0.99]", ]
       
-      #sub_bench_no_inf = validation_dat[validation_dat$Log2_FC_validation < Inf & validation_dat$Log2_FC_validation > -Inf & !is.na(validation_dat$Log2_FC_validation), ]
-      plot_change = plot_prob_change(validation_dat)
+      plot_change = plot_prob_change(validation_dat_extreme)
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
       
-      #sub_bench = validation_dat[validation_dat$Log2_FC_validation == Inf, ]
-      #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
-      #          file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
-      #sub_bench = validation_dat[validation_dat$Log2_FC_validation == -Inf, ]
-      #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)),
-      #          file = glue("{PATH_RES_CHANGE}/{protease}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+      plot_change = plot_prob_change(validation_dat)
+      ggsave(glue("{PATH_RES_CHANGE}/{protease}/main_result_extreme_{input}{no_unique_nm}.png"), plot = plot_change)
       
       ######################################################
       # Log2FC correlation
@@ -63,17 +60,15 @@ main = function(proteases, no_unique = FALSE){
         labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     }
-    
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
+    benchmark_df_all_extreme = convert_numeric_to_class(benchmark_df_all, quantiles = c(0, 0.01, 0.99, 1))
+    benchmark_df_all_extreme = benchmark_df_all_extreme[benchmark_df_all_extreme$class_Prob_prot_inc != "c(0.01 ; 0.99]", ]
     
-    #sub_bench_no_inf = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
     plot_change = plot_prob_change(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
     
-    #sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == Inf, ]
-    #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
-    #sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation == -Inf, ]
-    #write.csv(as.data.frame(table(sub_bench$class_Prob_prot_inc)), file = glue("{PATH_RES_CHANGE}/log2FC_minus_inf_{input}{no_unique_nm}.csv"), row.names = FALSE)
+    plot_change = plot_prob_change(benchmark_df_all_extreme)
+    ggsave(glue("{PATH_RES_CHANGE}/main_result_extreme_{input}{no_unique_nm}.png"), plot = plot_change)
     
     ######################################################
     # Log2FC correlation
@@ -134,6 +129,10 @@ main = function(proteases, no_unique = FALSE){
     plot_change = plot_prob_change_group(sub_bench)
     ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
   }
+  
+  ######################################################
+  # Changes in protein and mRNA isoform relative abundances - mRNA-no_mRNA
+  ######################################################
   
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - MM vs OpenMS

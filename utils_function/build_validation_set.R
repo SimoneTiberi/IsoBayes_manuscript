@@ -46,7 +46,8 @@ main = function(no_proteases){
       
       tpm_df = data.table::fread(glue("{PATH_TO_DATA}/mrna_isoform.tsv"))
       VALIDATION_DF_prot = merge(VALIDATION_DF_prot, tpm_df, by.x = "proteins", by.y = "isoname", all.x = TRUE)
-      VALIDATION_DF_prot = na.omit(VALIDATION_DF_prot)
+      VALIDATION_DF_prot$tpm[is.na(VALIDATION_DF_prot$tpm)] = 0
+      #VALIDATION_DF_prot = na.omit(VALIDATION_DF_prot)
       
       save(VALIDATION_DF_prot, file = glue("{no_protease}/Validation_prot_{model}"))
     }

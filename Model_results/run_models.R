@@ -13,6 +13,7 @@ source(glue("{PATH_WD}/utils_function/save_run_inferences.R"))
 source(glue("{PATH_WD}/utils_function/get_roc.R"))
 source(glue("{PATH_WD}/utils_function/plot_roc_model.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
+source(glue("{PATH_WD}/utils_function/change_inference_f.R"))
 
 PATH_TO_DATA = glue("{PATH_WD}/Data/{DATA}")
 PATH_TO_RES = glue("{PATH_WD}/Model_results/{DATA}")
@@ -36,12 +37,12 @@ main = function(proteases, run_model = TRUE){
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched.idXML"),
+      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
                               path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
                               input_type = "openMS",
                               abundance_type = "psm",
                               PEP = TRUE,
-                              FDR_thd = 0.01
+                              FDR_thd = 1
       )
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
@@ -51,7 +52,7 @@ main = function(proteases, run_model = TRUE){
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-
+  
   ###############################
   name = glue("OpenMS_mRNA")
   message(glue("---------- {name} ----------"))
@@ -63,7 +64,7 @@ main = function(proteases, run_model = TRUE){
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched.idXML"),
+      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
                               path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
                               input_type = "openMS",
                               abundance_type = "psm",
@@ -90,13 +91,16 @@ main = function(proteases, run_model = TRUE){
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
       
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched.idXML"),
+      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
                               input_type = "openMS",
                               abundance_type = "psm",
                               PEP = TRUE,
-                              FDR_thd = 0.01
+                              FDR_thd = 1
       )
+      original_f = inference
+      inference = change_inference_f()
       save_run_inferences(data_loaded, path_to_res_mod, name)
+      inference = original_f
     }
     pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
     ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -116,7 +120,7 @@ main = function(proteases, run_model = TRUE){
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
       
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched.idXML"),
+      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
                               input_type = "openMS",
                               abundance_type = "psm",
                               PEP = FALSE,
@@ -156,7 +160,7 @@ main = function(proteases, run_model = TRUE){
                                 abundance_type = abundance_type,
                                 PEP = TRUE,
                                 FDR_thd = 0.01
-                                )
+        )
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
         save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
       }
@@ -358,12 +362,12 @@ main = function(proteases, run_model = TRUE){
       path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
       if (run_model) {
         if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched.idXML"),
+        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
                                 path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
                                 input_type = "openMS",
                                 abundance_type = "psm",
                                 PEP = TRUE,
-                                FDR_thd = 0.01
+                                FDR_thd = 1
         )
         save(data_loaded, file = glue("{path_to_res_mod}/{name}_data_loaded.RData"))
         
