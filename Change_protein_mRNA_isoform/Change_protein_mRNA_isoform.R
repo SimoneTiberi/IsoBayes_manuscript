@@ -147,6 +147,18 @@ main = function(proteases, no_unique = FALSE){
         load(glue("{PATH_RES_MODEL}/{input}{model}_PEP/{protease}/{input}{model}_PEP_MCMC.RData"))
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         
+        if(model == ""){
+          mrna_data = data.table::fread(glue("{PATH_DATA}/mrna_isoform.tsv"))
+          res$isoform_results = merge(res$isoform_results, mrna_data[, c("isoname", "tpm")], by.x = "Isoform",
+                                      by.y = "isoname", all.x = TRUE)
+          res$isoform_results = res$isoform_results[!duplicated(res$isoform_results$Isoform), ]
+          P_TPM = res$isoform_results$tpm/sum(res$isoform_results$tpm)
+          res$isoform_results$Log2_FC = log2(res$isoform_results$Pi/P_TPM)
+          
+          res$isoform_results$Prob_prot_inc = vapply(seq_len(nrow(res$isoform_results)), function(i){
+            mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
+        }
+        
         if(no_unique){
           validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
           no_unique_nm = "_no_unique"

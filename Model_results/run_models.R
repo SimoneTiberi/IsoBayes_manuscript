@@ -33,7 +33,6 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
-    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -43,7 +42,7 @@ main = function(proteases, run_model = TRUE){
                               input_type = "openMS",
                               abundance_type = "psm",
                               PEP = TRUE,
-                              FDR_thd = 1
+                              FDR_thd = 0.1
       )
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
@@ -61,7 +60,6 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
-    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -88,7 +86,6 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
-    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -98,7 +95,7 @@ main = function(proteases, run_model = TRUE){
                               input_type = "openMS",
                               abundance_type = "psm",
                               PEP = TRUE,
-                              FDR_thd = 1
+                              FDR_thd = 0.1
       )
       original_f = inference
       inference = change_inference_f()
@@ -118,7 +115,6 @@ main = function(proteases, run_model = TRUE){
   ###############################
   
   for (protease in proteases) {
-    break
     message(protease)
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
@@ -137,7 +133,7 @@ main = function(proteases, run_model = TRUE){
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  
+  return(0)
   ############################################################################################################
   # MetaMorpheus data (MM)
   ############################################################################################################
