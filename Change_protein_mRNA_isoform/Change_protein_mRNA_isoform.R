@@ -68,6 +68,9 @@ main = function(proteases, no_unique = FALSE){
     plot_change = plot_prob_change(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
     
+    plot_change = plot_prob_change(benchmark_df_all, violin = TRUE)
+    ggsave(glue("{PATH_RES_CHANGE}/main_result_violin_{input}{no_unique_nm}.png"), plot = plot_change)
+    
     plot_change = plot_prob_change(benchmark_df_all_extreme)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_extreme_{input}{no_unique_nm}.png"), plot = plot_change)
     
@@ -120,16 +123,15 @@ main = function(proteases, no_unique = FALSE){
         validation_dat = convert_numeric_to_class(validation_dat, quantiles)
         benchmark_df_models = rbind(benchmark_df_models, validation_dat)
       }
-      
-      sub_bench = benchmark_df_models[benchmark_df_models$Log2_FC_validation < Inf & benchmark_df_models$Log2_FC_validation > -Inf & !is.na(benchmark_df_models$Log2_FC_validation), ]
-      
-      plot_change = plot_prob_change_group(sub_bench)
+      plot_change = plot_prob_change_group(benchmark_df_models)
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
     }
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
-    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
-    plot_change = plot_prob_change_group(sub_bench)
+    plot_change = plot_prob_change_group(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
+    
+    plot_change = plot_prob_change_group(benchmark_df_all, violin = TRUE)
+    ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_violin_{input}{no_unique_nm}.png"), plot = plot_change)
   }
   
   ######################################################
@@ -157,6 +159,8 @@ main = function(proteases, no_unique = FALSE){
           
           res$isoform_results$Prob_prot_inc = vapply(seq_len(nrow(res$isoform_results)), function(i){
             mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
+          
+          validation_dat = merge(validation_dat, res$isoform_results[, c("Isoform", "Prob_prot_inc")], by = "Isoform")
         }
         
         if(no_unique){
@@ -169,27 +173,24 @@ main = function(proteases, no_unique = FALSE){
         validation_dat = build_data_violin_plot(validation_dat)
         validation_dat$Gene = NULL
         
-        if(model == "_PEP"){
-          label_model = "PEP"
+        if(model == "_mRNA"){
+          label_model = "mRNA"
         }else{
-          label_model = "No PEP"
+          label_model = "No mRNA"
         }
         validation_dat$Model = label_model
         
-        benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+        benchmark_df_all = rbind(benchmark_df_all, validation_dat[, c("Log2_FC_validation", "Model", "Prob_prot_inc")])
         
         validation_dat = convert_numeric_to_class(validation_dat, quantiles)
-        benchmark_df_models = rbind(benchmark_df_models, validation_dat)
+        benchmark_df_models = rbind(benchmark_df_models, validation_dat[, c("Log2_FC_validation", "Model", "Prob_prot_inc")])
       }
-      
-      sub_bench = benchmark_df_models[benchmark_df_models$Log2_FC_validation < Inf & benchmark_df_models$Log2_FC_validation > -Inf & !is.na(benchmark_df_models$Log2_FC_validation), ]
-      
-      plot_change = plot_prob_change_group(sub_bench)
+      benchmark_df_models = convert_numeric_to_class(benchmark_df_models, quantiles)
+      plot_change = plot_prob_change_group(benchmark_df_models)
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
     }
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
-    sub_bench = benchmark_df_all[benchmark_df_all$Log2_FC_validation < Inf & benchmark_df_all$Log2_FC_validation > -Inf & !is.na(benchmark_df_all$Log2_FC_validation), ]
-    plot_change = plot_prob_change_group(sub_bench)
+    plot_change = plot_prob_change_group(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
   }
   
@@ -227,5 +228,5 @@ main = function(proteases, no_unique = FALSE){
 }
 
 main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE))
-main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE),
-     no_unique = TRUE)
+#main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE),
+ #    no_unique = TRUE)
