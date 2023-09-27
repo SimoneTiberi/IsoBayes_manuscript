@@ -37,7 +37,7 @@ main = function(proteases, no_unique = FALSE){
       }else{
         no_unique_nm = ""
       }
-      validation_dat = build_data_violin_plot(validation_dat)
+      validation_dat = build_data_violin_plot(validation_dat, 1.5e-06)
       benchmark_df_all = rbind(benchmark_df_all, validation_dat)
       validation_dat = convert_numeric_to_class(validation_dat, quantiles)
       validation_dat_extreme = convert_numeric_to_class(validation_dat, quantiles = c(0, 0.01, 0.99, 1))
@@ -52,12 +52,13 @@ main = function(proteases, no_unique = FALSE){
       ######################################################
       # Log2FC correlation
       ######################################################
-      validation_dat = adjust_inf_log2FC(validation_dat)
-      plot_scatter = scatterplot(validation_dat[, c("Log2_FC_adj", "Log2_FC_validation")]) + 
+      sel = validation_dat$TPM != 0 & validation_dat$tpm_validation != 0 & validation_dat$Y_validation != 0 & validation_dat$Pi != 0
+      plot_scatter = scatterplot(validation_dat[sel, c("Log2_FC", "Log2_FC_validation")]) + 
         labs(x = "Log2_FC", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
       
-      plot_scatter = scatterplot(validation_dat[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+      sel = validation_dat$tpm_validation != 0 & validation_dat$Y_validation != 0
+      plot_scatter = scatterplot(validation_dat[sel, c("Prob_prot_inc", "Log2_FC_validation")]) + 
         labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
       ggsave(glue("{PATH_RES_CHANGE}/{protease}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     }
@@ -68,21 +69,19 @@ main = function(proteases, no_unique = FALSE){
     plot_change = plot_prob_change(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_{input}{no_unique_nm}.png"), plot = plot_change)
     
-    plot_change = plot_prob_change(benchmark_df_all, violin = TRUE)
-    ggsave(glue("{PATH_RES_CHANGE}/main_result_violin_{input}{no_unique_nm}.png"), plot = plot_change)
-    
     plot_change = plot_prob_change(benchmark_df_all_extreme)
     ggsave(glue("{PATH_RES_CHANGE}/main_result_extreme_{input}{no_unique_nm}.png"), plot = plot_change)
     
     ######################################################
     # Log2FC correlation
     ######################################################
-    benchmark_df_all = adjust_inf_log2FC(benchmark_df_all)
-    plot_scatter = scatterplot(benchmark_df_all[, c("Log2_FC_adj", "Log2_FC_validation")]) + 
+    sel = benchmark_df_all$TPM != 0 & benchmark_df_all$tpm_validation != 0 & benchmark_df_all$Y_validation != 0 & benchmark_df_all$Pi != 0
+    plot_scatter = scatterplot(benchmark_df_all[sel, c("Log2_FC", "Log2_FC_validation")]) + 
       labs(x = "Log2_FC", y = "Log2_FC_validation")
     ggsave(glue("{PATH_RES_CHANGE}/scatterplot_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
     
-    plot_scatter = scatterplot(benchmark_df_all[, c("Prob_prot_inc", "Log2_FC_validation")]) + 
+    sel = benchmark_df_all$tpm_validation != 0 & benchmark_df_all$Y_validation != 0
+    plot_scatter = scatterplot(benchmark_df_all[sel, c("Prob_prot_inc", "Log2_FC_validation")]) + 
       labs(x = "Prob_prot_inc", y = "Log2_FC_validation")
     ggsave(glue("{PATH_RES_CHANGE}/scatterplot_probInc_log2FC_{input}{no_unique_nm}.png"), plot = plot_scatter)
   }
@@ -108,7 +107,7 @@ main = function(proteases, no_unique = FALSE){
           no_unique_nm = ""
         }
         
-        validation_dat = build_data_violin_plot(validation_dat)
+        validation_dat = build_data_violin_plot(validation_dat, 1.5e-06)
         validation_dat$Gene = NULL
         
         if(model == "_PEP"){
@@ -129,10 +128,39 @@ main = function(proteases, no_unique = FALSE){
     benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
     plot_change = plot_prob_change_group(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
-    
-    plot_change = plot_prob_change_group(benchmark_df_all, violin = TRUE)
-    ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_violin_{input}{no_unique_nm}.png"), plot = plot_change)
   }
+  
+  ######################################################
+  # Changes in protein and mRNA isoform relative abundances - MM vs OpenMS
+  ######################################################
+  benchmark_df_all = list()
+  
+  for (protease in proteases) {
+    benchmark_df_models = list()
+    for (input in c("MM_psm", "OpenMS")) {
+      # load validation data with res
+      load(glue("{PATH_RES_MODEL}/{input}_mRNA_PEP/{protease}/Merged_validation_res_{input}_mRNA_PEP"))
+      colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
+      
+      if(no_unique){
+        validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
+        no_unique_nm = "_no_unique"
+      }else{
+        no_unique_nm = ""
+      }
+      validation_dat = build_data_violin_plot(validation_dat, 1.5e-06)
+      validation_dat$Model = input
+      benchmark_df_all = rbind(benchmark_df_all, validation_dat)
+      validation_dat = convert_numeric_to_class(validation_dat, quantiles)
+      
+      benchmark_df_models = rbind(benchmark_df_models, validation_dat)
+    }
+    plot_change = plot_prob_change_group(benchmark_df_models)
+    ggsave(glue("{PATH_RES_CHANGE}/{protease}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
+  }
+  benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
+  plot_change = plot_prob_change_group(benchmark_df_all)
+  ggsave(glue("{PATH_RES_CHANGE}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
   
   ######################################################
   # Changes in protein and mRNA isoform relative abundances - mRNA-no_mRNA
@@ -170,7 +198,7 @@ main = function(proteases, no_unique = FALSE){
           no_unique_nm = ""
         }
         
-        validation_dat = build_data_violin_plot(validation_dat)
+        validation_dat = build_data_violin_plot(validation_dat, 1.5e-06)
         validation_dat$Gene = NULL
         
         if(model == "_mRNA"){
@@ -193,38 +221,6 @@ main = function(proteases, no_unique = FALSE){
     plot_change = plot_prob_change_group(benchmark_df_all)
     ggsave(glue("{PATH_RES_CHANGE}/PEP_no_PEP_{input}{no_unique_nm}.png"), plot = plot_change)
   }
-  
-  ######################################################
-  # Changes in protein and mRNA isoform relative abundances - MM vs OpenMS
-  ######################################################
-  benchmark_df_all = list()
-  
-  for (protease in proteases) {
-    benchmark_df_models = list()
-    for (input in c("MM_psm", "OpenMS")) {
-      # load validation data with res
-      load(glue("{PATH_RES_MODEL}/{input}_mRNA_PEP/{protease}/Merged_validation_res_{input}_mRNA_PEP"))
-      colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
-      
-      if(no_unique){
-        validation_dat = validation_dat[validation_dat$Y_unique == 0, ]
-        no_unique_nm = "_no_unique"
-      }else{
-        no_unique_nm = ""
-      }
-      validation_dat = build_data_violin_plot(validation_dat)
-      validation_dat$Model = input
-      benchmark_df_all = rbind(benchmark_df_all, validation_dat)
-      validation_dat = convert_numeric_to_class(validation_dat, quantiles)
-      
-      benchmark_df_models = rbind(benchmark_df_models, validation_dat)
-    }
-    plot_change = plot_prob_change_group(benchmark_df_models)
-    ggsave(glue("{PATH_RES_CHANGE}/{protease}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
-  }
-  benchmark_df_all = convert_numeric_to_class(benchmark_df_all, quantiles)
-  plot_change = plot_prob_change_group(benchmark_df_all)
-  ggsave(glue("{PATH_RES_CHANGE}/OpenMS_vs_MM{no_unique_nm}.png"), plot = plot_change)
 }
 
 main(proteases = list.dirs(PATH_RES_CHANGE, recursive = FALSE, full.names = FALSE))

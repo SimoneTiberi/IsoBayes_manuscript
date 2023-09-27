@@ -4,7 +4,7 @@ PEP = as.logical(commandArgs(trailingOnly = TRUE)[6])
 FDR_thd = as.numeric(commandArgs(trailingOnly = TRUE)[7])
 
 if(PEP){
-  FDR_thd = 1
+  FDR_thd = 0.1
 }else{
   FDR_thd = 0.01
 }

@@ -21,7 +21,7 @@ plot_prob_change = function(benchmark_df, violin = FALSE){
           legend.text = element_text(size = 10)) +
     theme_bw() +
     coord_cartesian(ylim = c(quantile(vec_down, 0.25) - 1.5 * iqr_down,
-                             quantile(vec_up, 0.75) + 1.5 * iqr_up)
+                             quantile(vec_up, 0.75) + 1 * iqr_up)
     )
   pp
 }

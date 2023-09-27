@@ -19,7 +19,6 @@ load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 log_output(glue("robustness_results_{DATA}"))
 
 main = function(models, proteases){
-  browser()
   ###################################################################
   # PEP/no PEP and mRNA vs prot (OpenMS and MM)  
   ###################################################################
@@ -34,25 +33,15 @@ main = function(models, proteases){
         # load res and validation merged together
         load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
         
-        validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present", "Y_unique")]
-        if(!grepl("fast", model)){
-          #validation_dat$Prob_present[validation_dat$Y_unique > 0] = validation_dat$Prob_present[validation_dat$Y_unique > 0] + 0.01
-          #validation_dat$Prob_present = validation_dat$Prob_present + validation_dat$Y_unique * 0.01
-        }
-        validation_dat$Y_unique = NULL
-        
+        validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
         colnames(validation_dat)[2] = model
         colnames(validation_dat)[3] = glue("{colnames(validation_dat)[3]}_{model}")
+        
         validation_dat = validation_dat[!duplicated(validation_dat$Isoform), ]
         benchmark_df = append(benchmark_df, list(validation_dat))
       }
       benchmark_df = concat_models(benchmark_df, union = TRUE)
-      
-      #################################################################################
-      benchmark_df$IsoBayes[benchmark_df$IsoBayes_fast == 1.01] = benchmark_df$IsoBayes[benchmark_df$IsoBayes_fast == 1.01] + 0.01#1.01
-      benchmark_df$IsoBayes_mRNA[benchmark_df$IsoBayes_fast_mRNA == 1.01] = benchmark_df$IsoBayes_mRNA[benchmark_df$IsoBayes_fast_mRNA == 1.01] + 0.01#1.01
-      #################################################################################
-      
+    
       for (nm in selected_models) {
         benchmark_df[, paste0("Present_", nm)]
       }

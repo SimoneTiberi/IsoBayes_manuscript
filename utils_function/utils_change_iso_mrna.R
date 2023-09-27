@@ -1,13 +1,10 @@
-build_data_violin_plot = function(df){
-  ths_tpm = 10^-6
-  ths_p = 10^-6
-  
+build_data_violin_plot = function(df, ths){
   #remove 0/0
   sel = df$tpm_validation == 0 & df$P_Y_validation == 0
   df = df[!sel, ]
   
-  df$P_TPM = (df$tpm_validation+ths_tpm) / sum(df$tpm_validation+ths_tpm)
-  df$P_Y_validation = (df$P_Y_validation+ths_p) / sum(df$P_Y_validation+ths_p)
+  df$P_TPM = (df$tpm_validation+ths) / sum(df$tpm_validation+ths)
+  df$P_Y_validation = (df$P_Y_validation+ths) / sum(df$P_Y_validation+ths)
   df$Log2_FC_validation = log2((df$P_Y_validation / df$P_TPM))
   
   df
@@ -27,9 +24,9 @@ convert_numeric_to_class = function(df, quantiles){
   df
 }
 
-adjust_inf_log2FC = function(df){
-  p_tpm_adj = (df$TPM+10^-6)/sum(df$TPM+10^-6)
-  pi = (df$Pi+10^-6)/sum(df$Pi+10^-6)
+adjust_inf_log2FC = function(df, ths){
+  p_tpm_adj = (df$TPM+ths)/sum(df$TPM+ths)
+  pi = (df$Pi+ths)/sum(df$Pi+ths)
   df$Log2_FC_adj = log2(pi/p_tpm_adj)
   
   df

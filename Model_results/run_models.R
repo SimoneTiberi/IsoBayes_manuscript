@@ -31,109 +31,109 @@ main = function(proteases, run_model = TRUE){
   message(glue("---------- {name} ----------"))
   name_models = c("IsoBayes_mRNA", "TPM", "Baseline")
   ###############################
-  
-  for (protease in proteases) {
-    message(protease)
-    path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
-    if (run_model) {
-      if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
-                              path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = TRUE,
-                              FDR_thd = 0.1
-      )
-      map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
-      save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+  if(TRUE){
+    for (protease in proteases) {
+      message(protease)
+      path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
+      if (run_model) {
+        if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
+        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
+                                path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
+                                input_type = "openMS",
+                                abundance_type = "psm",
+                                PEP = TRUE,
+                                FDR_thd = 0.1
+        )
+        map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
+        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+      }
+      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
+      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
-  }
-  pp = validate_all_protease(proteases, name, name_models)
-  ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  
-  ###############################
-  name = glue("OpenMS_mRNA")
-  message(glue("---------- {name} ----------"))
-  name_models = c("IsoBayes_fast_mRNA", "TPM", "Baseline")
-  ###############################
-  
-  for (protease in proteases) {
-    message(protease)
-    path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
-    if (run_model) {
-      if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
-                              path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = FALSE,
-                              FDR_thd = 0.01
-      )
-      save_run_inferences(data_loaded, path_to_res_mod, name)
+    pp = validate_all_protease(proteases, name, name_models)
+    ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
+    
+    ###############################
+    name = glue("OpenMS_mRNA")
+    message(glue("---------- {name} ----------"))
+    name_models = c("IsoBayes_fast_mRNA", "TPM", "Baseline")
+    ###############################
+    
+    for (protease in proteases) {
+      message(protease)
+      path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
+      if (run_model) {
+        if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
+        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
+                                path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
+                                input_type = "openMS",
+                                abundance_type = "psm",
+                                PEP = FALSE,
+                                FDR_thd = 0.01
+        )
+        save_run_inferences(data_loaded, path_to_res_mod, name)
+      }
+      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
+      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
-  }
-  pp = validate_all_protease(proteases, name, name_models)
-  ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  
-  ###############################
-  name = glue("OpenMS_PEP")
-  message(glue("---------- {name} ----------"))
-  name_models = c("IsoBayes", "Baseline")
-  ###############################
-  
-  for (protease in proteases) {
-    message(protease)
-    path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
-    if (run_model) {
-      if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = TRUE,
-                              FDR_thd = 0.1
-      )
-      original_f = inference
-      inference = change_inference_f()
-      save_run_inferences(data_loaded, path_to_res_mod, name)
-      inference = original_f
+    pp = validate_all_protease(proteases, name, name_models)
+    ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
+    
+    ###############################
+    name = glue("OpenMS_PEP")
+    message(glue("---------- {name} ----------"))
+    name_models = c("IsoBayes", "Baseline")
+    ###############################
+    
+    for (protease in proteases) {
+      message(protease)
+      path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
+      if (run_model) {
+        if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
+        
+        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_1.idXML"),
+                                input_type = "openMS",
+                                abundance_type = "psm",
+                                PEP = TRUE,
+                                FDR_thd = 0.1
+        )
+        original_f = inference
+        inference = change_inference_f()
+        save_run_inferences(data_loaded, path_to_res_mod, name, inference_function = inference)
+        inference = original_f
+      }
+      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
+      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
-  }
-  pp = validate_all_protease(proteases, name, name_models)
-  ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  
-  ###############################
-  name = glue("OpenMS")
-  message(glue("---------- {name} ----------"))
-  name_models = c("IsoBayes_fast", "Baseline")
-  ###############################
-  
-  for (protease in proteases) {
-    message(protease)
-    path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
-    if (run_model) {
-      if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = FALSE,
-                              FDR_thd = 0.01
-      )
-      save_run_inferences(data_loaded, path_to_res_mod, name)
+    pp = validate_all_protease(proteases, name, name_models)
+    ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
+    
+    ###############################
+    name = glue("OpenMS")
+    message(glue("---------- {name} ----------"))
+    name_models = c("IsoBayes_fast", "Baseline")
+    ###############################
+    
+    for (protease in proteases) {
+      message(protease)
+      path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
+      if (run_model) {
+        if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
+        
+        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
+                                input_type = "openMS",
+                                abundance_type = "psm",
+                                PEP = FALSE,
+                                FDR_thd = 0.01
+        )
+        save_run_inferences(data_loaded, path_to_res_mod, name)
+      }
+      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
+      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
+    pp = validate_all_protease(proteases, name, name_models)
+    ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
   }
-  pp = validate_all_protease(proteases, name, name_models)
-  ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
-  return(0)
   ############################################################################################################
   # MetaMorpheus data (MM)
   ############################################################################################################
