@@ -7,7 +7,7 @@ ipak <- function(pkg){
 
 # usage
 packages <- c("Rcpp", "doParallel", "foreach", "ggplot2", "parallel", "config", "data.table", "gdata", "pROC", "RcppArmadillo",
-	      "methods", "glue", "doParallel", "doRNG", "iterators", "HDInterval")
+	      "methods", "glue", "doParallel", "doRNG", "iterators", "HDInterval", "readr")
 ipak(packages)
 
 
