@@ -97,10 +97,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = TRUE,
                                 FDR_thd = 0.1
         )
-        original_f = inference
-        inference = change_inference_f()
-        save_run_inferences(data_loaded, path_to_res_mod, name, inference_function = inference)
-        inference = original_f
+        save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -126,7 +123,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = T)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -134,11 +131,12 @@ main = function(proteases, run_model = TRUE){
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
   }
+
   ############################################################################################################
   # MetaMorpheus data (MM)
   ############################################################################################################
   for (abundance_type in c("psm", "intensities")) {
-    
+  
     log_output(glue("run_models_{DATA}_MM_{abundance_type}"))
     
     ###############################
@@ -216,7 +214,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = TRUE,
                                 FDR_thd = 0.1
         )
-        save_run_inferences(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -243,7 +241,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))

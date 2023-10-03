@@ -22,7 +22,7 @@ main = function(models, proteases){
   ###################################################################
   # PEP/no PEP and mRNA vs prot (OpenMS and MM)  
   ###################################################################
-  selected_models = c("IsoBayes", "IsoBayes_fast", "IsoBayes_mRNA", "IsoBayes_fast_mRNA")
+  selected_models = c("IsoBayes", "IsoBayes_PEP", "IsoBayes_mRNA", "IsoBayes_mRNA_PEP")
   
   for (input in c("OpenMS", "MM_psm", "MM_intensities")){
     benchmark_df_all = list()
@@ -58,30 +58,32 @@ main = function(models, proteases){
   ###################################################################
   # OpenMS vs MM
   ###################################################################
-  model = selected_models[1]
+  sub_selected_models = selected_models[c(1, 3)]
   benchmark_df_all = list()
   inputs = c("OpenMS", "MM_psm")
   
   for(protease in proteases){
     benchmark_df = list()
-    for (input in inputs) {
-      attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
-      # load res and validation merged together
-      load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
-      validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
-      colnames(validation_dat)[2] = glue("{model}_{input}")
-      colnames(validation_dat)[3] = glue("{colnames(validation_dat)[3]}_{model}_{input}")
-      validation_dat = validation_dat[!duplicated(validation_dat$Isoform), ]
-      benchmark_df = append(benchmark_df, list(validation_dat))
+    for (model in sub_selected_models) {
+      for (input in inputs) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
+        # load res and validation merged together
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
+        colnames(validation_dat)[2] = glue("{model}_{input}")
+        colnames(validation_dat)[3] = glue("{colnames(validation_dat)[3]}_{model}_{input}")
+        validation_dat = validation_dat[!duplicated(validation_dat$Isoform), ]
+        benchmark_df = append(benchmark_df, list(validation_dat))
+      }
     }
     benchmark_df = concat_models(benchmark_df)
     
-    plot_tab = get_roc(benchmark_df, paste0(model, "_", inputs))
+    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, "_", rep(inputs, each=2)))
     ggsave(glue("{PATH_RES_roc}/{protease}/ROC_MM_vs_OpenMS.png"), plot = plot_tab$gplot)
     write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_MM_vs_OpenMS.csv"), row.names = FALSE)
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
   }
-  plot_tab = get_roc(benchmark_df_all, paste0(model, "_", inputs))
+  plot_tab = get_roc(benchmark_df_all, paste0(sub_selected_models, "_", rep(inputs, each=2)))
   ggsave(glue("{PATH_RES_roc}/ROC_MM_vs_OpenMS.png"), plot = plot_tab$gplot)
   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_MM_vs_OpenMS.csv"), row.names = FALSE)
   
@@ -158,9 +160,9 @@ main = function(models, proteases){
   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_prior.csv"))
 }
 
-main(models = list(IsoBayes = c("_PEP", ""),
-                   IsoBayes_fast = c("", ""),
-                   IsoBayes_mRNA = c("_PEP", "_mRNA"),
-                   IsoBayes_fast_mRNA = c("", "_mRNA")),
+main(models = list(IsoBayes = c("", ""),
+                   IsoBayes_PEP = c("_PEP", ""),
+                   IsoBayes_mRNA = c("", "_mRNA"),
+                   IsoBayes_mRNA_PEP = c("_PEP", "_mRNA")),
      proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive = FALSE, full.names = FALSE)
      )

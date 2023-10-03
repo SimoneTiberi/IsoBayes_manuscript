@@ -65,7 +65,7 @@ main = function(models, proteases){
     benchmark_df = merge(benchmark_df, res, by.x = "proteins", by.y = "Isoform_PIA", all = T)
     
     # proteine presenti in input
-    iso_input = get_score_from_idXML(glue("{PATH_TO_DATA}/Only{protease}/merge_index_percolator_pep_switched.idXML"))
+    iso_input = get_score_from_idXML(glue("{PATH_TO_DATA}/Only{protease}/merge_index_percolator_pep_switched_0.01.idXML"))
     benchmark_df = merge(benchmark_df, iso_input, by.x = "proteins", by.y = "Isoform", all = T)
     
     # Eliminio isoforme non presenti nel validation set
@@ -140,15 +140,22 @@ main = function(models, proteases){
     wallTime = round(wallTime$min + wallTime$sec / 60, 2)
     
     info_model = strsplit(job_name, "_")[[1]]
-    if(info_model[3] == "IsoBayes" & info_model[5] == "FALSE"){
-      info_model[3] = glue("{info_model[3]}_fast")
+    
+    if(info_model[3] == "IsoBayes" & info_model[[length(info_model)]] == "mRNA"){
+      info_model[3] = glue("{info_model[3]}_mRNA")
     }
-    df = data.frame(Model = info_model[3], data = info_model[2], protease = rev(info_model)[1], RunTime = wallTime, RAM = ramMB)
+    if(substr(info_model[3], 1, 8) == "IsoBayes" & info_model[5] == "TRUE"){
+      info_model[3] = glue("{info_model[3]}_PEP")
+    }
+    if(substr(info_model[3], 1, 8) == "IsoBayes"){
+      df = data.frame(Model = info_model[3], data = info_model[2], protease = info_model[7], RunTime = wallTime, RAM = ramMB)
+    }else{
+      df = data.frame(Model = info_model[3], data = info_model[2], protease = info_model[4], RunTime = wallTime, RAM = ramMB)
+    }
+    
     Data = rbind(Data, df)
   }
   Data$Model[grep("PiaTot", Data$Model)] = "PIA"
-  Data$Model[Data$Model == "IsoBayes"] = "IsoBayes_mRNA"
-  Data$Model[Data$Model == "IsoBayes_fast"] = "IsoBayes_fast_mRNA"
   
   data_protease_all = NULL
   data_protease_all_RAM = NULL
@@ -156,6 +163,7 @@ main = function(models, proteases){
   for (protease in proteases) {
     # select model to plot
     data_protease = Data[Data$data == DATA & Data$protease == protease, ]
+    #data_protease = data_protease[!grepl("PEP", data_protease$Model), ]
     
     # RUN TIME
     id_sort = sort(data_protease$RunTime, decreasing = TRUE, index.return = TRUE)$ix
@@ -205,10 +213,10 @@ main = function(models, proteases){
 }
 
 main(proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive = FALSE, full.names = FALSE),
-     models = list(IsoBayes = c("_PEP", ""),
-                   IsoBayes_fast = c("", ""),
-                   IsoBayes_mRNA = c("_PEP", "_mRNA"),
-                   IsoBayes_fast_mRNA = c("", "_mRNA")
+     models = list(IsoBayes = c("", ""),
+                   IsoBayes_PEP = c("_PEP", ""),
+                   IsoBayes_mRNA = c("", "_mRNA"),
+                   IsoBayes_mRNA_PEP = c("_PEP", "_mRNA")
      )
 )
 
