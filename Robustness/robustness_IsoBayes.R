@@ -90,32 +90,34 @@ main = function(models, proteases){
   ###################################################################
   # MM psm vs intensities
   ###################################################################
-  model = selected_models[1]
+  sub_selected_models = selected_models[c(1, 3)]
   benchmark_df_all = list()
   inputs = c("MM_psm", "MM_intensities")
   
   for(protease in proteases){
     benchmark_df = list()
-    for (input in inputs) {
-      attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
-      # load res and validation merged together
-      load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
-      validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
-      colnames(validation_dat)[2] = glue("{model}_{input}")
-      colnames(validation_dat)[3] = glue("{colnames(validation_dat)[3]}_{model}_{input}")
-      validation_dat = validation_dat[!duplicated(validation_dat$Isoform), ]
-      benchmark_df = append(benchmark_df, list(validation_dat))
+    for (model in sub_selected_models) {
+      for (input in inputs) {
+        attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
+        # load res and validation merged together
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
+        colnames(validation_dat)[2] = glue("{model}_{input}")
+        colnames(validation_dat)[3] = glue("{colnames(validation_dat)[3]}_{model}_{input}")
+        validation_dat = validation_dat[!duplicated(validation_dat$Isoform), ]
+        benchmark_df = append(benchmark_df, list(validation_dat))
+      }
     }
-    benchmark_df = concat_models(benchmark_df, union = TRUE)
+    benchmark_df = concat_models(benchmark_df)
     
-    plot_tab = get_roc(benchmark_df, paste0(model, "_", inputs))
-    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_psm_vs_intensities.png"), plot = plot_tab$gplot)
-    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_psm_vs_intensities.csv"), row.names = FALSE)
+    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, "_", rep(inputs, each=2)))
+    ggsave(glue("{PATH_RES_roc}/{protease}/ROC_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_tab$gplot)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_{inputs[1]}_vs_{inputs[2]}.csv"), row.names = FALSE)
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
   }
-  plot_tab = get_roc(benchmark_df_all, paste0(model, "_", inputs))
-  ggsave(glue("{PATH_RES_roc}/ROC_psm_vs_intensities.png"), plot = plot_tab$gplot)
-  write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_psm_vs_intensities.csv"), row.names = FALSE)
+  plot_tab = get_roc(benchmark_df_all, paste0(sub_selected_models, "_", rep(inputs, each=2)))
+  ggsave(glue("{PATH_RES_roc}/ROC_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_tab$gplot)
+  write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_{inputs[1]}_vs_{inputs[2]}.csv"), row.names = FALSE)
   
   ###################################################################
   # OpenMS - prior robustness

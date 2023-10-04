@@ -45,7 +45,7 @@ main = function(proteases, run_model = TRUE){
                                 FDR_thd = 0.1
         )
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
-        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -71,7 +71,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences(data_loaded, path_to_res_mod, name)
+        save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -160,7 +160,7 @@ main = function(proteases, run_model = TRUE){
                                 FDR_thd = 0.1
         )
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
-        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene)
+        save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))
@@ -187,7 +187,7 @@ main = function(proteases, run_model = TRUE){
                                 PEP = FALSE,
                                 FDR_thd = 0.01
         )
-        save_run_inferences(data_loaded, path_to_res_mod, name, long_mcmc = FALSE)
+        save_run_inferences(data_loaded, path_to_res_mod, name, long_mcmc = FALSE, save_chain = TRUE)
       }
       pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
       ggsave(glue("{path_to_res_mod}/{name}.png"))

@@ -24,56 +24,58 @@ main = function(proteases){
   inputs = c("OpenMS", "MM_psm", "MM_intensities")
   
   for (input in inputs) {
-    for (mrna in c("", "_mRNA")) {
-      benchmark_df_all = list()
-      SumTab_corr = rbind() 
-      SumTab_corr_no_unique = rbind()
-      for (protease in proteases) {
-        # load validation dataset merged with model results
-        load(glue("{PATH_WD}/Model_results/{DATA}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}"))
-        benchmark_df = validation_dat ; rm(validation_dat)
-        
-        benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
-        abundances = data.frame(log10_abundance = log10(benchmark_df$Abundance + 1),
-                                log10_abundance_validated = log10(benchmark_df$Y_validation + 1)
+    for (pep in c("", "_PEP")){
+      for (mrna in c("", "_mRNA")) {
+        benchmark_df_all = list()
+        SumTab_corr = rbind() 
+        SumTab_corr_no_unique = rbind()
+        for (protease in proteases) {
+          # load validation dataset merged with model results
+          load(glue("{PATH_WD}/Model_results/{DATA}/{input}{mrna}{pep}/{protease}/Merged_validation_res_{input}{mrna}{pep}"))
+          benchmark_df = validation_dat ; rm(validation_dat)
+          
+          benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
+          abundances = data.frame(log10_abundance = log10(benchmark_df$Abundance + 1),
+                                  log10_abundance_validated = log10(benchmark_df$Y_validation + 1)
+          )
+          plot_corr = scatterplot(abundances) + 
+            labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
+          ggsave(glue("{PATH_RES_ABUNDANCE}/{protease}/scatterplot_{input}{mrna}.png"), plot = plot_corr)
+          SumTab_corr = rbind(SumTab_corr, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
+          
+          abundances = abundances[benchmark_df$Y_unique == 0, ]
+          plot_corr = scatterplot(abundances)+ 
+            labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
+          ggsave(glue("{PATH_RES_ABUNDANCE}/{protease}/scatterplot_no_unique_{input}{mrna}{pep}.png"), plot = plot_corr)
+          SumTab_corr_no_unique = rbind(SumTab_corr_no_unique, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
+        }
+        abundances = data.frame(log10_abundance = log10(benchmark_df_all$Abundance + 1),
+                                log10_abundance_validated = log10(benchmark_df_all$Y_validation + 1)
         )
-        plot_corr = scatterplot(abundances) + 
-          labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
-        ggsave(glue("{PATH_RES_ABUNDANCE}/{protease}/scatterplot_{input}{mrna}.png"), plot = plot_corr)
-        SumTab_corr = rbind(SumTab_corr, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
-        
-        abundances = abundances[benchmark_df$Y_unique == 0, ]
         plot_corr = scatterplot(abundances)+ 
           labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
-        ggsave(glue("{PATH_RES_ABUNDANCE}/{protease}/scatterplot_no_unique_{input}{mrna}.png"), plot = plot_corr)
-        SumTab_corr_no_unique = rbind(SumTab_corr_no_unique, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
-      }
-      abundances = data.frame(log10_abundance = log10(benchmark_df_all$Abundance + 1),
-                              log10_abundance_validated = log10(benchmark_df_all$Y_validation + 1)
-      )
-      plot_corr = scatterplot(abundances)+ 
-        labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
-      ggsave(glue("{PATH_RES_ABUNDANCE}/scatterplot_{input}{mrna}.png"), plot = plot_corr)
-      
-      SumTab_corr = rbind(SumTab_corr, c("All", cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
-      SumTab_corr = as.data.frame(SumTab_corr)
-      colnames(SumTab_corr) = c("Protease", "Log10_correlation")
-      SumTab_corr$Log10_correlation = round(as.numeric(SumTab_corr$Log10_correlation), 2)
-      
-      write.csv(SumTab_corr, file = glue("{PATH_RES_ABUNDANCE}/correlation_{input}{mrna}.csv"), row.names = FALSE)
-      
-      # focus on shared 
-      abundances = abundances[benchmark_df_all$Y_unique == 0, ]
-      plot_corr = scatterplot(abundances)+ 
-        labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
-      ggsave(glue("{PATH_RES_ABUNDANCE}/scatterplot_no_unique_{input}{mrna}.png"), plot = plot_corr)
-      
-      SumTab_corr_no_unique = rbind(SumTab_corr_no_unique, c("All", cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
-      SumTab_corr_no_unique = as.data.frame(SumTab_corr_no_unique)
-      colnames(SumTab_corr_no_unique) = c("Protease", "Log10_correlation")
-      SumTab_corr_no_unique$Log10_correlation = round(as.numeric(SumTab_corr_no_unique$Log10_correlation), 2)
-      
-      write.csv(SumTab_corr_no_unique, file = glue("{PATH_RES_ABUNDANCE}/correlation_no_unique_{input}{mrna}.csv"), row.names = FALSE)
+        ggsave(glue("{PATH_RES_ABUNDANCE}/scatterplot_{input}{mrna}{pep}.png"), plot = plot_corr)
+        
+        SumTab_corr = rbind(SumTab_corr, c("All", cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
+        SumTab_corr = as.data.frame(SumTab_corr)
+        colnames(SumTab_corr) = c("Protease", "Log10_correlation")
+        SumTab_corr$Log10_correlation = round(as.numeric(SumTab_corr$Log10_correlation), 2)
+        
+        write.csv(SumTab_corr, file = glue("{PATH_RES_ABUNDANCE}/correlation_{input}{mrna}{pep}.csv"), row.names = FALSE)
+        
+        # focus on shared 
+        abundances = abundances[benchmark_df_all$Y_unique == 0, ]
+        plot_corr = scatterplot(abundances)+ 
+          labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
+        ggsave(glue("{PATH_RES_ABUNDANCE}/scatterplot_no_unique_{input}{mrna}{pep}.png"), plot = plot_corr)
+        
+        SumTab_corr_no_unique = rbind(SumTab_corr_no_unique, c("All", cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
+        SumTab_corr_no_unique = as.data.frame(SumTab_corr_no_unique)
+        colnames(SumTab_corr_no_unique) = c("Protease", "Log10_correlation")
+        SumTab_corr_no_unique$Log10_correlation = round(as.numeric(SumTab_corr_no_unique$Log10_correlation), 2)
+        
+        write.csv(SumTab_corr_no_unique, file = glue("{PATH_RES_ABUNDANCE}/correlation_no_unique_{input}{mrna}{pep}.csv"), row.names = FALSE)
+      } 
     }
   }
   
