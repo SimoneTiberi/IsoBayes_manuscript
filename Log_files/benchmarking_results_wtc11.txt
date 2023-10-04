@@ -1,0 +1,66 @@
+Rows: 842174 Columns: 20
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (12): PRH, accession, description, taxid, species, database, database_ve...
+dbl  (8): best_search_engine_score[1], reliability, num_psms_ms_run[1], num_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Rows: 786510 Columns: 20
+── Column specification ─────
+Delimiter: "\t"
+chr (12): PRH, accession, description, taxid, species, database, database_ve...
+dbl  (8): best_search_engine_score[1], reliability, num_psms_ms_run[1], num_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Rows: 5056167 Columns: 20
+── Column specification ─────
+Delimiter: "\t"
+chr (12): PRH, accession, description, taxid, species, database, database_ve...
+dbl  (8): best_search_engine_score[1], reliability, num_psms_ms_run[1], num_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Rows: 5178173 Columns: 20
+── Column specification ─────
+Delimiter: "\t"
+chr (12): PRH, accession, description, taxid, species, database, database_ve...
+dbl  (8): best_search_engine_score[1], reliability, num_psms_ms_run[1], num_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Error in `levels<-`(`*tmp*`, value = as.character(levels)) : 
+  factor level [2] is duplicated
+Calls: main -> factor
+In addition: Warning messages:
+1: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+2: One or more parsing issues, call `problems()` on your data
+frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+3: One or more parsing issues,
+call `problems()` on your
+data frame for details,
+e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+4: One or more parsing issues,
+call `problems()` on your
+data frame for details,
+e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+Execution halted

@@ -1,0 +1,37 @@
+
+Job: 1138041.5kgpsmhpcfe
+
+10/03/2023 10:00:20  S    enqueuing into cpunodes, state 1 hop 1
+10/03/2023 10:00:20  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_IsoBayes_pep_TRUE_2000_Chym_mRNA, queue = cpunodes
+10/03/2023 10:00:21  L    Considering job to run
+10/03/2023 10:00:21  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:00:21  L    Considering job to run
+10/03/2023 10:00:21  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:00:21  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/03/2023 10:00:40  L    Considering job to run
+10/03/2023 10:00:40  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:00:40  L    Considering job to run
+10/03/2023 10:00:40  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:00:55  L    Considering job to run
+10/03/2023 10:00:55  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:00:57  L    Considering job to run
+10/03/2023 10:00:57  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:03  L    Considering job to run
+10/03/2023 10:01:03  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:03  L    Considering job to run
+10/03/2023 10:01:03  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:03  L    Considering job to run
+10/03/2023 10:01:03  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:04  L    Considering job to run
+10/03/2023 10:01:04  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:14  L    Considering job to run
+10/03/2023 10:01:14  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:17  L    Considering job to run
+10/03/2023 10:01:17  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:18  L    Considering job to run
+10/03/2023 10:01:18  L    Insufficient amount of resource: ncpus 
+10/03/2023 10:01:25  L    Considering job to run
+10/03/2023 10:01:25  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc08:ncpus=10:mem=31457280kb)
+10/03/2023 10:01:25  L    Job run
+10/03/2023 10:01:27  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/03/2023 10:01:27  S    Exit_status=0 resources_used.cpupercent=100 resources_used.cput=00:00:02 resources_used.mem=0kb resources_used.ncpus=10 resources_used.vmem=0kb resources_used.walltime=00:00:02

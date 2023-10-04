@@ -1,0 +1,321 @@
+---------- MM_intensities_mRNA_PEP ----------
+ArgC
+Peptides with intensity equal to 0:
+1.801%
+NA's intensity: 78.617%
+We found:
+39165 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12238 protein isoforms.
+Percentage of unique peptides:
+46.6%
+Saving 7 x 7 in image
+AspN
+Peptides with intensity equal to 0:
+2.543%
+NA's intensity: 37.574%
+We found:
+20187 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11702 protein isoforms.
+Percentage of unique peptides:
+52.65%
+Saving 7 x 7 in image
+Chym
+Peptides with intensity equal to 0:
+0.568%
+NA's intensity: 61.64%
+We found:
+18805 protein isoforms.
+After FDR filtering (if used), we will analyze:
+7492 protein isoforms.
+Percentage of unique peptides:
+46.29%
+Saving 7 x 7 in image
+GluC
+Peptides with intensity equal to 0:
+2.378%
+NA's intensity: 80.924%
+We found:
+42107 protein isoforms.
+After FDR filtering (if used), we will analyze:
+10763 protein isoforms.
+Percentage of unique peptides:
+52.87%
+Saving 7 x 7 in image
+LysC
+Peptides with intensity equal to 0:
+2.521%
+NA's intensity: 57.679%
+We found:
+31565 protein isoforms.
+After FDR filtering (if used), we will analyze:
+13168 protein isoforms.
+Percentage of unique peptides:
+56.19%
+Saving 7 x 7 in image
+Trypsin
+Peptides with intensity equal to 0:
+1.666%
+NA's intensity: 59.837%
+We found:
+35472 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12464 protein isoforms.
+Percentage of unique peptides:
+55.08%
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities_mRNA ----------
+ArgC
+Peptides with intensity equal to 0:
+1.801%
+NA's intensity: 78.617%
+We found:
+39165 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11728 protein isoforms.
+Percentage of unique peptides:
+39.93%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+AspN
+Peptides with intensity equal to 0:
+2.543%
+NA's intensity: 37.574%
+We found:
+20187 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11137 protein isoforms.
+Percentage of unique peptides:
+41.74%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+Chym
+Peptides with intensity equal to 0:
+0.568%
+NA's intensity: 61.64%
+We found:
+18805 protein isoforms.
+After FDR filtering (if used), we will analyze:
+7106 protein isoforms.
+Percentage of unique peptides:
+36.28%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+GluC
+Peptides with intensity equal to 0:
+2.378%
+NA's intensity: 80.924%
+We found:
+42107 protein isoforms.
+After FDR filtering (if used), we will analyze:
+10397 protein isoforms.
+Percentage of unique peptides:
+41.36%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+LysC
+Peptides with intensity equal to 0:
+2.521%
+NA's intensity: 57.679%
+We found:
+31565 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12794 protein isoforms.
+Percentage of unique peptides:
+44.78%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+Trypsin
+Peptides with intensity equal to 0:
+1.666%
+NA's intensity: 59.837%
+We found:
+35472 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12073 protein isoforms.
+Percentage of unique peptides:
+43.64%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities_PEP ----------
+ArgC
+Peptides with intensity equal to 0:
+1.801%
+NA's intensity: 78.617%
+We found:
+39165 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12238 protein isoforms.
+Percentage of unique peptides:
+46.6%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+AspN
+Peptides with intensity equal to 0:
+2.543%
+NA's intensity: 37.574%
+We found:
+20187 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11702 protein isoforms.
+Percentage of unique peptides:
+52.65%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Chym
+Peptides with intensity equal to 0:
+0.568%
+NA's intensity: 61.64%
+We found:
+18805 protein isoforms.
+After FDR filtering (if used), we will analyze:
+7492 protein isoforms.
+Percentage of unique peptides:
+46.29%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+GluC
+Peptides with intensity equal to 0:
+2.378%
+NA's intensity: 80.924%
+We found:
+42107 protein isoforms.
+After FDR filtering (if used), we will analyze:
+10763 protein isoforms.
+Percentage of unique peptides:
+52.87%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+LysC
+Peptides with intensity equal to 0:
+2.521%
+NA's intensity: 57.679%
+We found:
+31565 protein isoforms.
+After FDR filtering (if used), we will analyze:
+13168 protein isoforms.
+Percentage of unique peptides:
+56.19%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Trypsin
+Peptides with intensity equal to 0:
+1.666%
+NA's intensity: 59.837%
+We found:
+35472 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12464 protein isoforms.
+Percentage of unique peptides:
+55.08%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+---------- MM_intensities ----------
+ArgC
+Peptides with intensity equal to 0:
+1.801%
+NA's intensity: 78.617%
+We found:
+39165 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11728 protein isoforms.
+Percentage of unique peptides:
+39.93%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+AspN
+Peptides with intensity equal to 0:
+2.543%
+NA's intensity: 37.574%
+We found:
+20187 protein isoforms.
+After FDR filtering (if used), we will analyze:
+11137 protein isoforms.
+Percentage of unique peptides:
+41.74%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Chym
+Peptides with intensity equal to 0:
+0.568%
+NA's intensity: 61.64%
+We found:
+18805 protein isoforms.
+After FDR filtering (if used), we will analyze:
+7106 protein isoforms.
+Percentage of unique peptides:
+36.28%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+GluC
+Peptides with intensity equal to 0:
+2.378%
+NA's intensity: 80.924%
+We found:
+42107 protein isoforms.
+After FDR filtering (if used), we will analyze:
+10397 protein isoforms.
+Percentage of unique peptides:
+41.36%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+LysC
+Peptides with intensity equal to 0:
+2.521%
+NA's intensity: 57.679%
+We found:
+31565 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12794 protein isoforms.
+Percentage of unique peptides:
+44.78%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Trypsin
+Peptides with intensity equal to 0:
+1.666%
+NA's intensity: 59.837%
+We found:
+35472 protein isoforms.
+After FDR filtering (if used), we will analyze:
+12073 protein isoforms.
+Percentage of unique peptides:
+43.64%
+'map_iso_gene' not specified.
+            We return results without gene normalization.
+Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+[1] 0

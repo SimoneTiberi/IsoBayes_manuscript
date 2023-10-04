@@ -1,0 +1,35 @@
+
+Job: 1137161.5kgpsmhpcfe
+
+09/28/2023 23:22:17  L    Considering job to run
+09/28/2023 23:22:17  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:17  L    Considering job to run
+09/28/2023 23:22:17  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:17  S    enqueuing into cpunodes, state 1 hop 1
+09/28/2023 23:22:17  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_PiaTot_AspN, queue = cpunodes
+09/28/2023 23:22:17  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+09/28/2023 23:22:18  L    Considering job to run
+09/28/2023 23:22:18  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:18  L    Considering job to run
+09/28/2023 23:22:18  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:33  L    Considering job to run
+09/28/2023 23:22:33  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:37  L    Considering job to run
+09/28/2023 23:22:37  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:38  L    Considering job to run
+09/28/2023 23:22:38  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:41  L    Considering job to run
+09/28/2023 23:22:41  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:48  L    Considering job to run
+09/28/2023 23:22:48  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:49  L    Considering job to run
+09/28/2023 23:22:49  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:49  L    Considering job to run
+09/28/2023 23:22:49  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:50  L    Considering job to run
+09/28/2023 23:22:50  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:59  L    Considering job to run
+09/28/2023 23:22:59  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc07:ncpus=10:mem=31457280kb)
+09/28/2023 23:22:59  L    Job run
+09/28/2023 23:24:47  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+09/28/2023 23:24:47  S    Exit_status=0 resources_used.cpupercent=151 resources_used.cput=00:03:10 resources_used.mem=7056620kb resources_used.ncpus=10 resources_used.vmem=39757016kb resources_used.walltime=00:01:48

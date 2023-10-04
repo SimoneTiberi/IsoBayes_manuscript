@@ -1,8 +1,8 @@
 "Protease","Log10_correlation_MM_psm","Protease","Log10_correlation_OpenMS"
-"ArgC",0.64,"ArgC",0.68
-"AspN",0.69,"AspN",0.74
-"Chym",0.62,"Chym",0.68
-"GluC",0.65,"GluC",0.71
-"LysC",0.74,"LysC",0.78
-"Trypsin",0.73,"Trypsin",0.77
-"All",0.65,"All",0.71
+"ArgC",0.58,"ArgC",0.61
+"AspN",0.62,"AspN",0.67
+"Chym",0.53,"Chym",0.58
+"GluC",0.6,"GluC",0.65
+"LysC",0.7,"LysC",0.74
+"Trypsin",0.69,"Trypsin",0.72
+"All",0.6,"All",0.64

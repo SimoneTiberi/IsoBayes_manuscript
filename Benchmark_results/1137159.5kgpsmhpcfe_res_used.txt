@@ -1,0 +1,31 @@
+
+Job: 1137159.5kgpsmhpcfe
+
+09/28/2023 23:22:17  L    Considering job to run
+09/28/2023 23:22:17  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:17  L    Considering job to run
+09/28/2023 23:22:17  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:17  S    enqueuing into cpunodes, state 1 hop 1
+09/28/2023 23:22:17  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_Epifany_Trypsin, queue = cpunodes
+09/28/2023 23:22:17  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+09/28/2023 23:22:18  L    Considering job to run
+09/28/2023 23:22:18  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:18  L    Considering job to run
+09/28/2023 23:22:18  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:33  L    Considering job to run
+09/28/2023 23:22:33  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:37  L    Considering job to run
+09/28/2023 23:22:37  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:38  L    Considering job to run
+09/28/2023 23:22:38  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:41  L    Considering job to run
+09/28/2023 23:22:41  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:48  L    Considering job to run
+09/28/2023 23:22:48  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:49  L    Considering job to run
+09/28/2023 23:22:49  L    Insufficient amount of resource: ncpus 
+09/28/2023 23:22:49  L    Considering job to run
+09/28/2023 23:22:49  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc06:ncpus=10:mem=31457280kb)
+09/28/2023 23:22:49  L    Job run
+09/28/2023 23:24:04  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+09/28/2023 23:24:04  S    Exit_status=0 resources_used.cpupercent=430 resources_used.cput=00:09:08 resources_used.mem=243232kb resources_used.ncpus=10 resources_used.vmem=2052040kb resources_used.walltime=00:01:15

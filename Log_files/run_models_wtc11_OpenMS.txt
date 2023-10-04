@@ -1,0 +1,45 @@
+---------- OpenMS_mRNA_PEP ----------
+AspN
+We found:
+48382 protein isoforms.
+Found 28779
+correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 48382.
+For 19603 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+                check if the format name of the protein isoforms
+                is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+48382 protein isoforms.
+Percentage of unique peptides:
+28.35%
+Saving 7 x 7 in image
+Chym
+We found:
+40155 protein isoforms.
+Found 24431
+correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 40155.
+For 15724 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+                check if the format name of the protein isoforms
+                is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+40155 protein isoforms.
+Percentage of unique peptides:
+23.48%
+Saving 7 x 7 in image
+LysC
+We found:
+58944 protein isoforms.
+Found 31528
+correspondances between transcripts and protein isoforms.
+The total number of protein isoforms is 58944.
+For 27416 trascript(s) we set the tpm equal to 0.
+If the number of correspondances is relatively high,
+                check if the format name of the protein isoforms
+                is consistent with those of the transcripts.
+After FDR filtering (if used), we will analyze:
+58944 protein isoforms.
+Percentage of unique peptides:
+25.53%

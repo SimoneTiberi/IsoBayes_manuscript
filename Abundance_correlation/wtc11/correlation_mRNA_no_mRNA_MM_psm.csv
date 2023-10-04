@@ -1,6 +1,6 @@
 "Protease","Log10_correlation","Protease","Log10_correlation_mRNA"
-"AspN",0.437,"AspN",0.624
-"Chym",0.361,"Chym",0.603
-"LysC",0.521,"LysC",0.643
-"Trypsin",0.578,"Trypsin",0.645
-"All",0.425,"All",0.559
+"AspN",0.5,"AspN",0.65
+"Chym",0.408,"Chym",0.607
+"LysC",0.601,"LysC",0.69
+"Trypsin",0.673,"Trypsin",0.719
+"All",0.541,"All",0.652

@@ -1,3 +1,5 @@
 "Model","AUC"
-"IsoBayes_MM_psm",0.845
-"IsoBayes_OpenMS",0.846
+"IsoBayes_MM_psm",0.834
+"IsoBayes_mRNA_MM_psm",0.867
+"IsoBayes_mRNA_OpenMS",0.867
+"IsoBayes_OpenMS",0.832

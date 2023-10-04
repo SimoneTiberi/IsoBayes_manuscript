@@ -5,7 +5,12 @@ From: r-base
 %files
 packages.R /
 
+%environment
+export R_LIB_USER='/usr/local/lib/R/site-library'
+
 %post
+export R_LIB_USER='/usr/local/lib/R/site-library'
+
 apt-get -y update
 apt-get -y upgrade
 apt-get install -y libcurl4-openssl-dev
