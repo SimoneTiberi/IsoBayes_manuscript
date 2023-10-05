@@ -1,6 +1,4 @@
-Saving 7 x 7 in image
-Saving 7 x 7 in image
-Error in `[.data.frame`(validation_dat, sel, c("Log2_FC", "Log2_FC_validation")) : 
-  undefined columns selected
-Calls: main -> scatterplot -> [ -> [.data.frame
+Error in quantile.default(as.numeric(x), c(0.25, 0.75), na.rm = na.rm,  : 
+  missing values and NaN's not allowed if 'na.rm' is FALSE
+Calls: main ... plot_prob_change -> IQR -> diff -> quantile -> quantile.default
 Execution halted

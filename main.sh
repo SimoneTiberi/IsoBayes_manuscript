@@ -29,8 +29,8 @@ do
 	#echo '--- Building validation set ('$data') ---'
 	#singularity exec Containers/IsoBayes.img Rscript utils_function/build_validation_set.R $MAIN_PATH $data 
 
-	echo '--- Run IsoBayes models ('$data') ---'
-	singularity exec Containers/IsoBayes.img Rscript Model_results/run_models.R $MAIN_PATH $data
+	#echo '--- Run IsoBayes models ('$data') ---'
+	#singularity exec Containers/IsoBayes.img Rscript Model_results/run_models.R $MAIN_PATH $data
 
 	#echo '--- Get benchmark results ---'
         #singularity exec Containers/IsoBayes.img Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $data
@@ -41,6 +41,6 @@ do
 	#echo '--- Get Abundance results ---'
         #singularity exec Containers/IsoBayes.img Rscript Abundance_correlation/abundance_correlation.R $MAIN_PATH $data
 
-	#echo '--- Get Change protein mRNA isoform abundance results ---'
-       # singularity exec Containers/IsoBayes.img Rscript Change_protein_mRNA_isoform/Change_protein_mRNA_isoform.R $MAIN_PATH $data
+	echo '--- Get Change protein mRNA isoform abundance results ---'
+        singularity exec Containers/IsoBayes.img Rscript Change_protein_mRNA_isoform/Change_protein_mRNA_isoform.R $MAIN_PATH $data
 done

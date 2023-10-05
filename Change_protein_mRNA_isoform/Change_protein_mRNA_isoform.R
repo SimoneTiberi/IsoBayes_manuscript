@@ -107,7 +107,7 @@ main = function(proteases, no_unique = FALSE){
           # load validation data with res
           load(glue("{PATH_RES_MODEL}/{input}{mrna}{model}/{protease}/Merged_validation_res_{input}{mrna}{model}"))
           if(mrna == ""){
-            validation_dat = add_mrna(input, protease, validation_dat)
+            validation_dat = add_mrna(input, protease, model, validation_dat)
           }
           colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
           
@@ -153,7 +153,7 @@ main = function(proteases, no_unique = FALSE){
         # load validation data with res
         load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}"))
         if(mrna == ""){
-          validation_dat = add_mrna(input, protease, validation_dat)
+          validation_dat = add_mrna(input, protease, "", validation_dat)
         }
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         
@@ -189,7 +189,7 @@ main = function(proteases, no_unique = FALSE){
         # load validation data with res
         load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}"))
         if(mrna == ""){
-          validation_dat = add_mrna(input, protease, validation_dat)
+          validation_dat = add_mrna(input, protease, "", validation_dat)
         }
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         
@@ -229,18 +229,7 @@ main = function(proteases, no_unique = FALSE){
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         
         if(model == ""){
-          load(glue("{PATH_RES_MODEL}/{input}{model}/{protease}/{input}{model}_MCMC.RData"))
-          mrna_data = data.table::fread(glue("{PATH_DATA}/mrna_isoform.tsv"))
-          res$isoform_results = merge(res$isoform_results, mrna_data[, c("isoname", "tpm")], by.x = "Isoform",
-                                      by.y = "isoname", all.x = TRUE)
-          res$isoform_results = res$isoform_results[!duplicated(res$isoform_results$Isoform), ]
-          P_TPM = res$isoform_results$tpm/sum(res$isoform_results$tpm)
-          res$isoform_results$Log2_FC = log2(res$isoform_results$Pi/P_TPM)
-          
-          res$isoform_results$Prob_prot_inc = vapply(seq_len(nrow(res$isoform_results)), function(i){
-            mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
-          
-          validation_dat = merge(validation_dat, res$isoform_results[, c("Isoform", "Prob_prot_inc")], by = "Isoform")
+          validation_dat = add_mrna(input, protease, "", validation_dat)
         }
         
         if(no_unique){

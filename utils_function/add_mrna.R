@@ -4,6 +4,7 @@ add_mrna = function(input, protease, pep, validation_dat){
   colnames(mrna_data)[grep("tpm", colnames(mrna_data))] = "TPM"
   res$isoform_results = merge(res$isoform_results, mrna_data[, c("isoname", "TPM")], by.x = "Isoform",
                               by.y = "isoname", all.x = TRUE)
+  res$isoform_results[is.na(res$isoform_results)] = 0
   res$isoform_results = res$isoform_results[!duplicated(res$isoform_results$Isoform), ]
   P_TPM = res$isoform_results$TPM/sum(res$isoform_results$TPM)
   res$isoform_results$Log2_FC = log2(res$isoform_results$Pi/P_TPM)
