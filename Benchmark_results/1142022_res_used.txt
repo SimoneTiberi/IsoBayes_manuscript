@@ -1,0 +1,25 @@
+
+Job: 1142022.5kgpsmhpcfe
+
+10/06/2023 13:41:18  S    enqueuing into cpunodes, state 1 hop 1
+10/06/2023 13:41:18  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_IsoBayes_pep_TRUE_2000_AspN_mRNA, queue = cpunodes
+10/06/2023 13:41:19  L    Load is above max limit
+10/06/2023 13:41:19  L    Load is above max limit
+10/06/2023 13:41:19  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/06/2023 13:41:19  L    Load is above max limit
+10/06/2023 13:41:20  L    Load is above max limit
+10/06/2023 13:41:20  L    Load is above max limit
+10/06/2023 13:41:38  L    Load is above max limit
+10/06/2023 13:42:07  L    Load is above max limit
+10/06/2023 13:43:04  L    Load is above max limit
+10/06/2023 13:43:12  L    Load is above max limit
+10/06/2023 13:43:34  L    Load is above max limit
+10/06/2023 13:44:01  L    Load is above max limit
+10/06/2023 13:44:02  L    Load is above max limit
+10/06/2023 13:44:18  L    Load is above max limit
+10/06/2023 13:44:25  L    Load is above max limit
+10/06/2023 13:44:47  L    Considering job to run
+10/06/2023 13:44:47  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc06:ncpus=8:mem=20971520kb)
+10/06/2023 13:44:47  L    Job run
+10/06/2023 13:46:51  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/06/2023 13:46:51  S    Exit_status=0 resources_used.cpupercent=100 resources_used.cput=00:01:47 resources_used.mem=1210940kb resources_used.ncpus=8 resources_used.vmem=3965872kb resources_used.walltime=00:02:04

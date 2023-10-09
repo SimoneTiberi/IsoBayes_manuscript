@@ -42,13 +42,24 @@ main = function(models, proteases){
           res$isoform_results = merge(res$isoform_results, data_loaded$PROTEIN_DF[, c("protein_name", "Y_unique")],
                                       by.x = "Isoform", by.y = "protein_name")
           if(grepl("_mRNA", model)){
-            benchmark_df = append(benchmark_df, list(res$isoform_results[, c("Isoform", "Prob_present", "Y_unique",
-                                                                             "Abundance", "Prob_prot_inc", "Log2_FC", "TPM")]))
+            benchmark_df = append(benchmark_df,
+                                  list(res$isoform_results[, c("Isoform",
+                                                               "Prob_present",
+                                                               "Y_unique",
+                                                               "Abundance",
+                                                               "Prob_prot_inc",
+                                                               "Log2_FC", "TPM",
+                                                               "Pi")]))
           }else{
             mrna_data = data.table::fread(glue("{PATH_TO_DATA}/mrna_isoform.tsv"))
             colnames(mrna_data)[grep("tpm", colnames(mrna_data))] = "TPM"
-            res$isoform_results = merge(res$isoform_results, mrna_data[, c("isoname", "TPM")], by.x = "Isoform",
-                                        by.y = "isoname", all.x = TRUE)
+            
+            res$isoform_results = merge(res$isoform_results,
+                                        mrna_data[, c("isoname", "TPM")],
+                                        by.x = "Isoform",
+                                        by.y = "isoname",
+                                        all.x = TRUE)
+            
             res$isoform_results[is.na(res$isoform_results)] = 0
             res$isoform_results = res$isoform_results[!duplicated(res$isoform_results$Isoform), ]
             P_TPM = res$isoform_results$TPM/sum(res$isoform_results$TPM)
@@ -58,7 +69,7 @@ main = function(models, proteases){
               mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
             
             benchmark_df = append(benchmark_df, list(res$isoform_results[, c("Isoform", "Prob_present", "Y_unique", "Abundance",
-                                                                             "Prob_prot_inc", "Log2_FC", "TPM")]))
+                                                                             "Prob_prot_inc", "Log2_FC", "TPM", "Pi")]))
           }
         }
       
@@ -132,7 +143,9 @@ main = function(models, proteases){
     ## abundance of main model (we consider the validation set used to benchmark all models)
     for (mrna in c("", "_mRNA")) {
       scat_bench = scatterplot(log10(benchmark_df_all[, c(glue("Abundance_IsoBayes{mrna}"), "Y_validation")] + 1))  + 
-        labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
+        labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)") +
+        scale_y_continuous(n.breaks = 4, limits = c(0, 4)) +
+        scale_x_continuous(n.breaks = 4, limits = c(0, 4))
       ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_benchmark{mrna}.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_benchmark{mrna}"))
     }
@@ -141,17 +154,19 @@ main = function(models, proteases){
     for (mrna in c("", "_mRNA")) {
       sub_data = benchmark_df_all[, c(glue("Prob_prot_inc_IsoBayes{mrna}"),
                                       glue("TPM_IsoBayes{mrna}"),
-                                      "tpm_validation", "P_Y_validation")]
+                                      "tpm_validation", "P_Y_validation",
+                                      glue("Log2_FC_IsoBayes{mrna}"),
+                                      "Y_validation", glue("Pi_IsoBayes{mrna}"))]
       
       sub_data = build_data_violin_plot(sub_data, 1.5e-06)
       sub_data = convert_numeric_to_class(sub_data, seq(0, 1, 0.2))
-      sub_data_extreme = convert_numeric_to_class(sub_data, quantiles = c(0, 0.05, 0.95, 1))
-      sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.05 ; 0.95]", ]
+      sub_data_extreme = convert_numeric_to_class(sub_data, quantiles = c(0, 0.01, 0.99, 1))
+      sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
       
       if(mrna == ""){
-        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 8, limits = c(-10, 10))
+        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 8, limits = c(-8, 7.5))
       }else{
-        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 16, limits = c(-10, 32))
+        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 8, limits = c(-10, 30))
       }
       ggsave(glue("{PATH_RES_COMPETITORS}/change_mrna_prot{mrna}.png"), plot = plot_change)
       save(plot_change, file = glue("{PATH_RES_COMPETITORS}/change_mrna_prot{mrna}"))
@@ -163,9 +178,22 @@ main = function(models, proteases){
         plot_change = plot_prob_change(sub_data_extreme) +
           scale_y_continuous(n.breaks = 8, limits = c(-4, 3))
       }
-      plot_change = plot_prob_change(sub_data_extreme)
       ggsave(glue("{PATH_RES_COMPETITORS}/change_mrna_prot_extreme{mrna}.png"), plot = plot_change)
       save(plot_change, file = glue("{PATH_RES_COMPETITORS}/change_mrna_prot_extreme{mrna}"))
+      
+      sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
+      scat_bench = scatterplot(sub_data[sel, c(glue("Log2_FC_IsoBayes{mrna}"), "Log2_FC_validation")])  + 
+        labs(x = "Correlation Log10(Log2_FC)", y = "Correlation Log10(Validated Log2_FC)")
+      if(mrna==""){
+        scat_bench = scat_bench + scale_y_continuous(n.breaks = 8, limits = c(-12, 15)) +
+          scale_x_continuous(n.breaks = 8, limits = c(-12, 15))
+      }else{
+        scat_bench = scat_bench + scale_y_continuous(n.breaks = 8, limits = c(-5, 15)) +
+          scale_x_continuous(n.breaks = 8, limits = c(-5, 15))
+      }
+        
+      ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}.png"), plot = scat_bench)
+      save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}"))
     }
     
     # Focus on validation without isoform with Unique Peptide (UP)

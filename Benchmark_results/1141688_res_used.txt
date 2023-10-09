@@ -1,0 +1,10 @@
+
+Job: 1141688.5kgpsmhpcfe
+
+10/06/2023 11:35:14  L    Considering job to run
+10/06/2023 11:35:14  S    enqueuing into cpunodes, state 1 hop 1
+10/06/2023 11:35:14  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_PiaTot_AspN, queue = cpunodes
+10/06/2023 11:35:14  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc06:ncpus=8:mem=31457280kb)
+10/06/2023 11:35:14  L    Job run
+10/06/2023 11:35:39  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/06/2023 11:35:39  S    Exit_status=0 resources_used.cpupercent=300 resources_used.cput=00:01:15 resources_used.mem=2610620kb resources_used.ncpus=8 resources_used.vmem=40742880kb resources_used.walltime=00:00:25

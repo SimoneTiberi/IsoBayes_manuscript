@@ -1,0 +1,12 @@
+
+Job: 1142067.5kgpsmhpcfe
+
+10/06/2023 13:41:19  S    enqueuing into cpunodes, state 1 hop 1
+10/06/2023 13:41:19  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_Epifany_Chym, queue = cpunodes
+10/06/2023 13:41:20  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/06/2023 14:02:38  L    Load is above max limit
+10/06/2023 14:02:59  L    Considering job to run
+10/06/2023 14:02:59  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc08:ncpus=8:mem=31457280kb)
+10/06/2023 14:02:59  L    Job run
+10/06/2023 14:03:49  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/06/2023 14:03:49  S    Exit_status=0 resources_used.cpupercent=174 resources_used.cput=00:05:11 resources_used.mem=448348kb resources_used.ncpus=8 resources_used.vmem=2260240kb resources_used.walltime=00:00:50

@@ -23,8 +23,11 @@ for (dat in c("jurkat", "wtc11")) {
     load(glue("{PATH_WD}/Benchmark_results/{dat}/change_mrna_prot{mrna}"))
     list_plot_bench_change = append(list_plot_bench_change, list(plot_change))
     
-    load(glue("{PATH_WD}/change_mrna_prot_extreme{mrna}"))
+    load(glue("{PATH_WD}/Benchmark_results/{dat}/change_mrna_prot_extreme{mrna}"))
     list_plot_bench_change = append(list_plot_bench_change, list(plot_change))
+    
+    load(glue("{PATH_WD}/Benchmark_results/{dat}/scatterplot_log2fc{mrna}"))
+    list_plot_bench_change = append(list_plot_bench_change, list(scat_bench))
   }
   load(glue("{PATH_WD}/Benchmark_results/{dat}/Average_Run-Time"))
   list_plot_bench_time = append(list_plot_bench_time, list(pp))
@@ -46,25 +49,33 @@ ggsave(glue("{PATH_WD}/Benchmark_results/Average_Memory_usage.png"), plot = a,
        height = size * scale, width = size)
 
 a = grid.arrange(list_plot_bench_abundance[[1]], list_plot_bench_abundance[[3]], nrow =1)
-ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_benchmark.png"), plot = a,
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_benchmark.png"), plot = a,
        height = size * scale, width = size)
 
 a = grid.arrange(list_plot_bench_abundance[[2]], list_plot_bench_abundance[[4]], nrow =1)
-ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_benchmark_mRNA.png"), plot = a,
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_benchmark_mRNA.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[5]], nrow =1) 
+a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[7]], nrow =1) 
 ggsave(glue("{PATH_WD}/Benchmark_results/change_mrna_prot.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_change[[2]], list_plot_bench_change[[6]], nrow =1)
+a = grid.arrange(list_plot_bench_change[[2]], list_plot_bench_change[[8]], nrow =1)
 ggsave(glue("{PATH_WD}/Benchmark_results/change_mrna_prot_extreme.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_change[[3]], list_plot_bench_change[[7]], nrow =1)
+a = grid.arrange(list_plot_bench_change[[3]], list_plot_bench_change[[9]], nrow =1)
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_log2fc.png"), plot = a,
+       height = size * scale, width = size)
+
+a = grid.arrange(list_plot_bench_change[[4]], list_plot_bench_change[[10]], nrow =1)
 ggsave(glue("{PATH_WD}/Benchmark_results/change_mrna_prot_mRNA.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_change[[4]], list_plot_bench_change[[8]], nrow =1)
+a = grid.arrange(list_plot_bench_change[[5]], list_plot_bench_change[[11]], nrow =1)
 ggsave(glue("{PATH_WD}/Benchmark_results/change_mrna_prot_extreme_mRNA.png"), plot = a,
+       height = size * scale, width = size)
+
+a = grid.arrange(list_plot_bench_change[[6]], list_plot_bench_change[[12]], nrow =1)
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_log2fc_mRNA.png"), plot = a,
        height = size * scale, width = size)

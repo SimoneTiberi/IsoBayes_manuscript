@@ -1,0 +1,37 @@
+
+Job: 1141550.5kgpsmhpcfe
+
+10/06/2023 10:47:49  L    Considering job to run
+10/06/2023 10:47:49  L    Not enough free nodes available
+10/06/2023 10:47:49  L    Considering job to run
+10/06/2023 10:47:49  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_Fido_GluC, queue = cpunodes
+10/06/2023 10:47:49  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/06/2023 10:47:49  L    Not enough free nodes available
+10/06/2023 10:47:49  S    enqueuing into cpunodes, state 1 hop 1
+10/06/2023 10:47:50  L    Considering job to run
+10/06/2023 10:47:50  L    Not enough free nodes available
+10/06/2023 10:47:50  L    Considering job to run
+10/06/2023 10:47:50  L    Not enough free nodes available
+10/06/2023 10:48:09  L    Considering job to run
+10/06/2023 10:48:09  L    Not enough free nodes available
+10/06/2023 10:48:17  L    Considering job to run
+10/06/2023 10:48:17  L    Not enough free nodes available
+10/06/2023 10:48:17  L    Considering job to run
+10/06/2023 10:48:17  L    Not enough free nodes available
+10/06/2023 10:48:19  L    Considering job to run
+10/06/2023 10:48:19  L    Not enough free nodes available
+10/06/2023 10:48:20  L    Considering job to run
+10/06/2023 10:48:20  L    Not enough free nodes available
+10/06/2023 10:48:27  L    Considering job to run
+10/06/2023 10:48:27  L    Not enough free nodes available
+10/06/2023 10:48:27  L    Considering job to run
+10/06/2023 10:48:27  L    Not enough free nodes available
+10/06/2023 10:48:32  L    Considering job to run
+10/06/2023 10:48:32  L    Not enough free nodes available
+10/06/2023 10:48:36  L    Considering job to run
+10/06/2023 10:48:36  L    Not enough free nodes available
+10/06/2023 10:48:44  L    Considering job to run
+10/06/2023 10:48:44  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc07:ncpus=8:mem=31457280kb)
+10/06/2023 10:48:44  L    Job run
+10/06/2023 11:06:19  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/06/2023 11:06:19  S    Exit_status=0 resources_used.cpupercent=96 resources_used.cput=00:17:34 resources_used.mem=200696kb resources_used.ncpus=8 resources_used.vmem=1555944kb resources_used.walltime=00:17:35

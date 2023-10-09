@@ -1,0 +1,12 @@
+
+Job: 1141494.5kgpsmhpcfe
+
+10/06/2023 10:21:08  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_Fido_Trypsin, queue = cpunodes
+10/06/2023 10:21:08  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/06/2023 10:21:08  S    enqueuing into cpunodes, state 1 hop 1
+10/06/2023 10:23:04  L    Not enough free nodes available
+10/06/2023 10:23:06  L    Considering job to run
+10/06/2023 10:23:06  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc06:ncpus=8:mem=31457280kb)
+10/06/2023 10:23:06  L    Job run
+10/06/2023 11:04:18  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/06/2023 11:04:18  S    Exit_status=0 resources_used.cpupercent=99 resources_used.cput=00:41:09 resources_used.mem=248344kb resources_used.ncpus=8 resources_used.vmem=1612588kb resources_used.walltime=00:41:12

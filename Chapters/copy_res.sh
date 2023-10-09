@@ -1,19 +1,24 @@
 #!/bin/bash
 PATH_WD=/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper
 
+# Chapter 1
+cp $PATH_WD/Benchmark_results/ROC_main_result.png 1/
+cp $PATH_WD/Benchmark_results/scatterplot_abundance_benchmark*.png 1/
+cp $PATH_WD/Benchmark_results/change_mrna_prot*.png 1/
+cp $PATH_WD/Benchmark_results/scatterplot_log2fc*.png 1/
+
 for data in 'jurkat' 'wtc11'
 do
 	# Chapter 1
-	cp $PATH_WD/Benchmark_results/$data/ROC_main_result.png 1/$data
+	#cp $PATH_WD/Benchmark_results/$data/ROC_main_result.png 1/$data
 	cp $PATH_WD/Benchmark_results/$data/SumTab_main_result.csv 1/$data
 
-	cp $PATH_WD/Abundance_correlation/$data/scatterplot_OpenMS*.png 1/$data
-	cp $PATH_WD/Abundance_correlation/$data/correlation_OpenMS*.csv 1/$data
+	#cp $PATH_WD/Abundance_correlation/$data/scatterplot_OpenMS*.png 1/$data
 
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS.png 1/$data
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS_mRNA.png 1/$data
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS.png 1/$data
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS_mRNA.png 1/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS.png 1/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS_mRNA.png 1/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS.png 1/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS_mRNA.png 1/$data
 
 	# Chapter 2
 	cp $PATH_WD/Benchmark_results/$data/ROC_main_result_no*.png 2/$data
