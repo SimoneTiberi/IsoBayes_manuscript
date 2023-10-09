@@ -3,6 +3,8 @@ PATH_WD=/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper
 
 # Chapter 1
 cp $PATH_WD/Benchmark_results/ROC_main_result.png 1/
+cp $PATH_WD/Benchmark_results/Average_Memory_usage.png 1/
+cp $PATH_WD/Benchmark_results/Average_Run-Time.png 1/
 cp $PATH_WD/Benchmark_results/scatterplot_abundance_benchmark*.png 1/
 cp $PATH_WD/Benchmark_results/change_mrna_prot*.png 1/
 cp $PATH_WD/Benchmark_results/scatterplot_log2fc*.png 1/
