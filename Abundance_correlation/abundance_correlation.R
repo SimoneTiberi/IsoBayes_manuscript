@@ -44,10 +44,12 @@ main = function(proteases){
           SumTab_corr = rbind(SumTab_corr, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
           
           abundances = abundances[benchmark_df$Y_unique == 0, ]
-          plot_corr = scatterplot(abundances)+ 
+          plot_corr = scatterplot(abundances) + 
             labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)")
           ggsave(glue("{PATH_RES_ABUNDANCE}/{protease}/scatterplot_no_unique_{input}{mrna}{pep}.png"), plot = plot_corr)
-          SumTab_corr_no_unique = rbind(SumTab_corr_no_unique, c(protease, cor(abundances$log10_abundance, abundances$log10_abundance_validated)))
+          SumTab_corr_no_unique = rbind(SumTab_corr_no_unique,
+                                        c(protease, cor(abundances$log10_abundance,
+                                                        abundances$log10_abundance_validated)))
         }
         abundances = data.frame(log10_abundance = log10(benchmark_df_all$Abundance + 1),
                                 log10_abundance_validated = log10(benchmark_df_all$Y_validation + 1)

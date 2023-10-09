@@ -12,7 +12,7 @@ get_roc = function(benchmark, name_models){
   
   auc_roc = round(precrec::auc(roc_pr_curves)[precrec::auc(roc_pr_curves)[, "curvetypes"] == "ROC", "aucs"], 3)
   sum_stat = data.frame(Model = name_models, AUC = auc_roc)
-  labs_roc = paste0(name_models, "\nAUC: ", auc_roc)
+  labs_roc = name_models#paste0(name_models, "\nAUC: ", auc_roc)
   palette_models = PALETTE_MODELS[name_models]
   
   pp = autoplot(roc_pr_curves, "ROC")
@@ -30,8 +30,8 @@ get_roc = function(benchmark, name_models){
   if(any(check)){
     pp = pp + scale_linetype_manual("Model", values = linetype_models, labels = labs_roc)
   }else{
-    pp = pp +geom_line(linewidth=0.8) + labs(title = "ROC curves") +
-      theme(plot.title = element_text(size = 12, face = "bold"),
+    pp = pp +geom_line(linewidth=0.8) + labs(title = DATA) +
+      theme(plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
             axis.title = element_text(size = 11, face = "bold"),
             legend.title = element_text(size = 11, face = "bold"),
             axis.text.x = element_text(size = 10, face = "bold"),
@@ -39,6 +39,8 @@ get_roc = function(benchmark, name_models){
             legend.text = element_text(size = 10)
       )
   }
+  
+  pp = pp + xlab("FPR") + ylab("TPR")
   
   list(gplot = pp, sum_stat = sum_stat)
 }
