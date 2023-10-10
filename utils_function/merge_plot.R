@@ -20,6 +20,9 @@ for (dat in c("jurkat", "wtc11")) {
     load(glue("{PATH_WD}/Benchmark_results/{dat}/scatterplot_benchmark{mrna}"))
     list_plot_bench_abundance = append(list_plot_bench_abundance, list(scat_bench))
     
+    load(glue("{PATH_WD}/Benchmark_results/{dat}/scatterplot_gene{mrna}"))
+    list_plot_bench_abundance = append(list_plot_bench_abundance, list(scat_bench))
+    
     load(glue("{PATH_WD}/Benchmark_results/{dat}/change_mrna_prot{mrna}"))
     list_plot_bench_change = append(list_plot_bench_change, list(plot_change))
     
@@ -48,12 +51,20 @@ a = grid.arrange(list_plot_bench_memory[[1]], list_plot_bench_memory[[2]], nrow 
 ggsave(glue("{PATH_WD}/Benchmark_results/Average_Memory_usage.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_abundance[[1]], list_plot_bench_abundance[[3]], nrow =1)
+a = grid.arrange(list_plot_bench_abundance[[1]], list_plot_bench_abundance[[5]], nrow =1)
 ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_benchmark.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid.arrange(list_plot_bench_abundance[[2]], list_plot_bench_abundance[[4]], nrow =1)
+a = grid.arrange(list_plot_bench_abundance[[2]], list_plot_bench_abundance[[6]], nrow =1)
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_gene_benchmark.png"), plot = a,
+       height = size * scale, width = size)
+
+a = grid.arrange(list_plot_bench_abundance[[3]], list_plot_bench_abundance[[7]], nrow =1)
 ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_benchmark_mRNA.png"), plot = a,
+       height = size * scale, width = size)
+
+a = grid.arrange(list_plot_bench_abundance[[4]], list_plot_bench_abundance[[8]], nrow =1)
+ggsave(glue("{PATH_WD}/Benchmark_results/scatterplot_abundance_gene_benchmark_mRNA.png"), plot = a,
        height = size * scale, width = size)
 
 a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[7]], nrow =1) 

@@ -42,14 +42,7 @@ main = function(models, proteases){
           res$isoform_results = merge(res$isoform_results, data_loaded$PROTEIN_DF[, c("protein_name", "Y_unique")],
                                       by.x = "Isoform", by.y = "protein_name")
           if(grepl("_mRNA", model)){
-            benchmark_df = append(benchmark_df,
-                                  list(res$isoform_results[, c("Isoform",
-                                                               "Prob_present",
-                                                               "Y_unique",
-                                                               "Abundance",
-                                                               "Prob_prot_inc",
-                                                               "Log2_FC", "TPM",
-                                                               "Pi")]))
+            benchmark_df = append(benchmark_df, list(res$isoform_results))
           }else{
             mrna_data = data.table::fread(glue("{PATH_TO_DATA}/mrna_isoform.tsv"))
             colnames(mrna_data)[grep("tpm", colnames(mrna_data))] = "TPM"
@@ -68,8 +61,7 @@ main = function(models, proteases){
             res$isoform_results$Prob_prot_inc = vapply(seq_len(nrow(res$isoform_results)), function(i){
               mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
             
-            benchmark_df = append(benchmark_df, list(res$isoform_results[, c("Isoform", "Prob_present", "Y_unique", "Abundance",
-                                                                             "Prob_prot_inc", "Log2_FC", "TPM", "Pi")]))
+            benchmark_df = append(benchmark_df, list(res$isoform_results))
           }
         }
       
@@ -194,6 +186,27 @@ main = function(models, proteases){
         
       ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}"))
+    }
+    
+    ### GENE CORRELATION
+    # load validation dataset from metamorpheus
+    load(glue("{PATH_TO_DATA}/No{protease}/Validation_gene_psm"))
+    
+    for (mrna in c("", "_mRNA")) {
+      bench_gene = aggregate(benchmark_df_all[, glue("Abundance_IsoBayes{mrna}")],
+                             by = list(benchmark_df_all[, glue("Gene_IsoBayes{mrna}")]),
+                             FUN = sum)
+      
+      bench_gene = merge(VALIDATION_DF_prot, bench_gene,
+                         by.x= "Gene", by.y = "Group.1", all = T)
+      bench_gene = na.omit(bench_gene)
+      
+      scat_bench = scatterplot(log10(bench_gene[, c("x", "Y_validation")] + 1))  + 
+        labs(x = "Correlation Log10(Gene Abundance)", y = "Correlation Log10(Validated Gene Abundance)") +
+        scale_y_continuous(n.breaks = 6, limits = c(0, 4.5)) +
+        scale_x_continuous(n.breaks = 6, limits = c(0, 4.5))
+      ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_gene{mrna}.png"), plot = scat_bench)
+      save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_gene{mrna}"))
     }
     
     # Focus on validation without isoform with Unique Peptide (UP)

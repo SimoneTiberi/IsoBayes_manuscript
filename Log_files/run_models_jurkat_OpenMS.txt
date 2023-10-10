@@ -56,8 +56,6 @@ After FDR filtering (if used), we will analyze:
 19107 protein isoforms.
 Percentage of unique peptides:
 19.71%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 AspN
 We found:
@@ -66,8 +64,6 @@ After FDR filtering (if used), we will analyze:
 20651 protein isoforms.
 Percentage of unique peptides:
 18.35%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 Chym
 We found:
@@ -76,8 +72,6 @@ After FDR filtering (if used), we will analyze:
 12449 protein isoforms.
 Percentage of unique peptides:
 18.66%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 GluC
 We found:
@@ -86,8 +80,6 @@ After FDR filtering (if used), we will analyze:
 19540 protein isoforms.
 Percentage of unique peptides:
 17.62%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 LysC
 We found:
@@ -96,8 +88,6 @@ After FDR filtering (if used), we will analyze:
 26164 protein isoforms.
 Percentage of unique peptides:
 16.85%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 Trypsin
 We found:
@@ -106,8 +96,6 @@ After FDR filtering (if used), we will analyze:
 23992 protein isoforms.
 Percentage of unique peptides:
 15.89%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS_PEP ----------
@@ -186,8 +174,6 @@ After FDR filtering (if used), we will analyze:
 19107 protein isoforms.
 Percentage of unique peptides:
 19.71%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 AspN
@@ -197,8 +183,6 @@ After FDR filtering (if used), we will analyze:
 20651 protein isoforms.
 Percentage of unique peptides:
 18.35%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
@@ -208,8 +192,6 @@ After FDR filtering (if used), we will analyze:
 12449 protein isoforms.
 Percentage of unique peptides:
 18.66%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 GluC
@@ -219,8 +201,6 @@ After FDR filtering (if used), we will analyze:
 19540 protein isoforms.
 Percentage of unique peptides:
 17.62%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
@@ -230,8 +210,6 @@ After FDR filtering (if used), we will analyze:
 26164 protein isoforms.
 Percentage of unique peptides:
 16.85%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
@@ -241,8 +219,7 @@ After FDR filtering (if used), we will analyze:
 23992 protein isoforms.
 Percentage of unique peptides:
 15.89%
-'map_iso_gene' not specified.
-            We return results without gene normalization.
 Transcriptomics data not loaded. Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
+[1] 0
