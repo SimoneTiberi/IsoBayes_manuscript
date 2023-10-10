@@ -16,7 +16,7 @@ memory_plot = function(df, title){
                                                                  b = 0, l = 0,
                                                                  unit = "pt")),
           axis.text.y = element_text(size = 10, face = "bold"),
-          legend.position = "none") +
-    geom_errorbar(aes(ymin=RAM-RAM_sd, ymax=RAM+RAM_sd), width=.1, size = 0.5,
-                  position=position_dodge(.9))
+          legend.position = "none") #+
+    #geom_errorbar(aes(ymin=RAM-RAM_sd, ymax=RAM+RAM_sd), width=.1, size = 0.5,
+     #             position=position_dodge(.9))
 }

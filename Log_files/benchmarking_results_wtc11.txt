@@ -60,4 +60,4 @@ Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 Saving 7 x 7 in image
-There were 15 warnings (use warnings() to see them)
+There were 14 warnings (use warnings() to see them)
