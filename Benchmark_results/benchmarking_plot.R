@@ -18,7 +18,7 @@ source(glue("{PATH_WD}/utils_function/plot_prob_change.R"))
 
 PATH_RES_COMPETITORS = glue("{PATH_WD}/Benchmark_results/{DATA}")
 PATH_TO_DATA = glue("{PATH_WD}/Data/{DATA}")
-PATH_TO_RES = glue("{PATH_WD}/Model_results/{DATA}/")
+PATH_TO_RES = glue("{PATH_WD}/Model_results/{DATA}")
 load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 
 log_output(glue("benchmarking_results_{DATA}"))
@@ -59,7 +59,7 @@ main = function(models, proteases){
             res$isoform_results$Log2_FC = log2(res$isoform_results$Pi/P_TPM)
             
             res$isoform_results$Prob_prot_inc = vapply(seq_len(nrow(res$isoform_results)), function(i){
-              mean(res$chain_Y[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
+              mean(res$chains$PI[, i] > P_TPM[i])}, FUN.VALUE = numeric(1) )
             
             benchmark_df = append(benchmark_df, list(res$isoform_results))
           }
@@ -71,10 +71,10 @@ main = function(models, proteases){
                                   by.x = "proteins", by.y = paste0("Isoform_", selected_models[i]), all = T)
         benchmark_df[[2]] = NULL
       }
-      # EPIFANY
+      # EPIFANY Epifany
       res = get_score_from_idXML(paste0(PATH_RES_COMPETITORS, "/",  protease, "/epifany.idXML"))
-      colnames(res) = paste0(colnames(res), "_Epifany")
-      benchmark_df = merge(benchmark_df, res, by.x = "proteins", by.y = "Isoform_Epifany", all = T)
+      colnames(res) = paste0(colnames(res), "_EPIFANY")
+      benchmark_df = merge(benchmark_df, res, by.x = "proteins", by.y = "Isoform_EPIFANY", all = T)
       
       # FIDO
       res = get_score_from_idXML(paste0(PATH_RES_COMPETITORS, "/", protease, "/fido.idXML"))
@@ -107,116 +107,117 @@ main = function(models, proteases){
       colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
       colnames(benchmark_df) = gsub(".*score_", "", colnames(benchmark_df))
       
-      for (nm in c(selected_models, "Epifany", "Fido", "PIA")) {
+      for (nm in c(selected_models, "EPIFANY", "Fido", "PIA")) {
         benchmark_df[, paste0("Present_", nm)] = benchmark_df$Present
       }
       
-      plot_tab = get_roc(benchmark_df, c(selected_models, "Epifany", "Fido", "PIA"))
+      plot_tab = get_roc(benchmark_df, c(selected_models, "EPIFANY", "Fido", "PIA"),
+                         protease = glue("_{protease}"))
       ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result"))
       shared_vs_all_auc = plot_tab$sum_stat
       
       write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"), row.names = FALSE)
       benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
       
       # Focus on validation without isoform with Unique Peptide (UP)
-      plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ], c(selected_models, "Epifany", "Fido", "PIA"))
+      plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ],
+                         c(selected_models, "EPIFANY", "Fido", "PIA"),
+                         protease = glue("_{protease}")
+                         )
       ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/no_UP_ROC_main_result"))
       shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
       colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
       
       write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
     }
-    plot_tab = get_roc(benchmark_df_all, c(selected_models, "Epifany", "Fido", "PIA"))
-    ggsave(glue("{PATH_RES_COMPETITORS}/ROC_main_result.png"), plot = plot_tab$gplot)
-    save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/ROC_main_result"))
-    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/SumTab_main_result.csv"), row.names = FALSE)
-    shared_vs_all_auc = plot_tab$sum_stat
     
-    ## abundance of main model (we consider the validation set used to benchmark all models)
-    for (mrna in c("", "_mRNA")) {
-      scat_bench = scatterplot(log10(benchmark_df_all[, c(glue("Abundance_IsoBayes{mrna}"), "Y_validation")] + 1))  + 
-        labs(x = "Correlation Log10(Abundance)", y = "Correlation Log10(Validated Abundance)") +
-        scale_y_continuous(n.breaks = 4, limits = c(0, 4)) +
-        scale_x_continuous(n.breaks = 4, limits = c(0, 4))
-      ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_benchmark{mrna}.png"), plot = scat_bench)
-      save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_benchmark{mrna}"))
-    }
-    
-    # change mrna prot
-    for (mrna in c("", "_mRNA")) {
-      sub_data = benchmark_df_all[, c(glue("Prob_prot_inc_IsoBayes{mrna}"),
-                                      glue("TPM_IsoBayes{mrna}"),
-                                      "tpm_validation", "P_Y_validation",
-                                      glue("Log2_FC_IsoBayes{mrna}"),
-                                      "Y_validation", glue("Pi_IsoBayes{mrna}"))]
-      
-      sub_data = build_data_violin_plot(sub_data, 1.5e-06)
-      sub_data = convert_numeric_to_class(sub_data, seq(0, 1, 0.2))
-      sub_data_extreme = convert_numeric_to_class(sub_data, quantiles = c(0, 0.01, 0.99, 1))
-      sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
-      
-      if(mrna == ""){
-        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 8, limits = c(-8, 7.5))
+    for (noUP in c("", "no_UP_")) {
+      if(noUP == "no_UP_"){
+        sel = benchmark_df_all$Y_unique_IsoBayes == 0 # equal to Y_unique_IsoBayes_mRNA
       }else{
-        plot_change = plot_prob_change(sub_data) + scale_y_continuous(n.breaks = 8, limits = c(-10, 30))
+        sel = benchmark_df_all$Y_unique_IsoBayes > -Inf
       }
-      ggsave(glue("{PATH_RES_COMPETITORS}/change_mrna_prot{mrna}.png"), plot = plot_change)
-      save(plot_change, file = glue("{PATH_RES_COMPETITORS}/change_mrna_prot{mrna}"))
+      plot_tab = get_roc(benchmark_df_all[sel, ], c(selected_models, "EPIFANY", "Fido", "PIA"))
+      ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result.png"), plot = plot_tab$gplot)
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result"))
+      write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{noUP}SumTab_main_result.csv"), row.names = FALSE)
       
-      if(mrna == ""){
-        plot_change = plot_prob_change(sub_data_extreme) +
-          scale_y_continuous(n.breaks = 8, limits = c(-5, 5))
-      }else{
-        plot_change = plot_prob_change(sub_data_extreme) +
-          scale_y_continuous(n.breaks = 8, limits = c(-4, 3))
-      }
-      ggsave(glue("{PATH_RES_COMPETITORS}/change_mrna_prot_extreme{mrna}.png"), plot = plot_change)
-      save(plot_change, file = glue("{PATH_RES_COMPETITORS}/change_mrna_prot_extreme{mrna}"))
-      
-      sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-      scat_bench = scatterplot(sub_data[sel, c(glue("Log2_FC_IsoBayes{mrna}"), "Log2_FC_validation")])  + 
-        labs(x = "Correlation Log10(Log2_FC)", y = "Correlation Log10(Validated Log2_FC)")
-      if(mrna==""){
-        scat_bench = scat_bench + scale_y_continuous(n.breaks = 8, limits = c(-12, 15)) +
-          scale_x_continuous(n.breaks = 8, limits = c(-12, 15))
-      }else{
-        scat_bench = scat_bench + scale_y_continuous(n.breaks = 8, limits = c(-5, 15)) +
-          scale_x_continuous(n.breaks = 8, limits = c(-5, 15))
-      }
+      ## abundance of main model (we consider the validation set used to benchmark all models)
+      for (mrna in c("", "_mRNA")) {
+        scat_bench = scatterplot(log10(benchmark_df_all[sel, c(glue("Abundance_IsoBayes{mrna}"), "Y_validation")] + 1))  + 
+          labs(x = "Log10(Estimated abundance + 1)", y = "Log10(Validated Abundance + 1)") 
         
-      ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}.png"), plot = scat_bench)
-      save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_log2fc{mrna}"))
-    }
-    
-    ### GENE CORRELATION
-    # load validation dataset from metamorpheus
-    load(glue("{PATH_TO_DATA}/No{protease}/Validation_gene_psm"))
-    
-    for (mrna in c("", "_mRNA")) {
-      bench_gene = aggregate(benchmark_df_all[, glue("Abundance_IsoBayes{mrna}")],
-                             by = list(benchmark_df_all[, glue("Gene_IsoBayes{mrna}")]),
-                             FUN = sum)
+        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_benchmark{mrna}.png"), plot = scat_bench)
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_benchmark{mrna}"))
+      }
       
-      bench_gene = merge(VALIDATION_DF_prot, bench_gene,
-                         by.x= "Gene", by.y = "Group.1", all = T)
-      bench_gene = na.omit(bench_gene)
+      # change mrna prot
+      for (mrna in c("", "_mRNA")) {
+        sub_data = benchmark_df_all[sel, c(glue("Prob_prot_inc_IsoBayes{mrna}"),
+                                        glue("TPM_IsoBayes{mrna}"),
+                                        "tpm_validation", "P_Y_validation",
+                                        glue("Log2_FC_IsoBayes{mrna}"),
+                                        "Y_validation", glue("Pi_IsoBayes{mrna}"))
+                                    ]
+        sub_data = build_data_violin_plot(sub_data, 1.5e-06)
+        sub_data = convert_numeric_to_class(sub_data, glue("Prob_prot_inc_IsoBayes{mrna}"),
+                                            seq(0, 1, 0.2))
+        sub_data_extreme = convert_numeric_to_class(sub_data, glue("Prob_prot_inc_IsoBayes{mrna}"),
+                                                    quantiles = c(0, 0.01, 0.99, 1))
+        sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
+        
+        if(mrna == ""){
+          plot_change = plot_prob_change(sub_data) 
+        }else{
+          plot_change = plot_prob_change(sub_data) 
+        }
+        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}.png"), plot = plot_change)
+        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}"))
+        
+        if(mrna == ""){
+          plot_change = plot_prob_change(sub_data_extreme) 
+        }else{
+          plot_change = plot_prob_change(sub_data_extreme) 
+        }
+        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.png"), plot = plot_change)
+        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}"))
+        
+        sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
+        scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}"), "Log2_FC_validation")])  + 
+          labs(x = "Log2(FC)", y = "Validated Log2(FC)")
+        if(mrna==""){
+          scat_bench = scat_bench 
+            scale_x_continuous(n.breaks = 8, limits = c(-12, 15))
+        }else{
+          scat_bench = scat_bench
+        }
+        
+        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.png"), plot = scat_bench)
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}"))
+      }
       
-      scat_bench = scatterplot(log10(bench_gene[, c("x", "Y_validation")] + 1))  + 
-        labs(x = "Correlation Log10(Gene Abundance)", y = "Correlation Log10(Validated Gene Abundance)") +
-        scale_y_continuous(n.breaks = 6, limits = c(0, 4.5)) +
-        scale_x_continuous(n.breaks = 6, limits = c(0, 4.5))
-      ggsave(glue("{PATH_RES_COMPETITORS}/scatterplot_gene{mrna}.png"), plot = scat_bench)
-      save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/scatterplot_gene{mrna}"))
+      ### GENE CORRELATION
+      # load validation dataset from metamorpheus
+      load(glue("{PATH_TO_DATA}/No{protease}/Validation_gene_psm"))
+      
+      for (mrna in c("", "_mRNA")) {
+        bench_gene = aggregate(benchmark_df_all[sel, glue("Abundance_IsoBayes{mrna}")],
+                               by = list(benchmark_df_all[sel, glue("Gene_IsoBayes{mrna}")]),
+                               FUN = sum)
+        
+        bench_gene = merge(VALIDATION_DF_prot, bench_gene,
+                           by.x= "Gene", by.y = "Group.1", all = T)
+        bench_gene = na.omit(bench_gene)
+        
+        scat_bench = scatterplot(log10(bench_gene[, c("x", "Y_validation")] + 1))  + 
+          labs(x = "Log10(Gene Abundance + 1)", y = "Log10(Validated Gene Abundance + 1)")
+        
+        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}.png"), plot = scat_bench)
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}"))
+      }
     }
-    
-    # Focus on validation without isoform with Unique Peptide (UP)
-    plot_tab = get_roc(benchmark_df_all[benchmark_df_all$Y_unique_IsoBayes == 0, ], c(selected_models, "Epifany", "Fido", "PIA"))
-    ggsave(glue("{PATH_RES_COMPETITORS}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
-    save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/ROC_main_result_no_UP"))
-    shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
-    colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
-    
-    write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/SumTab_main_result_no_UP.csv"), row.names = FALSE) 
   }
   
   #################################################################################################
@@ -232,12 +233,14 @@ main = function(models, proteases){
     job_name = gsub(", queue.*", "", job_name)
     
     i_res_used = grep('walltime', res_used)
-    ramMB = round(as.numeric(gsub("kb resources_used.ncp.*", "", gsub(".*used.mem=", "", res_used[i_res_used]))) * 0.0009765625)
+    ramMB = round(as.numeric(gsub("kb resources_used.ncp.*", "",
+                                  gsub(".*used.mem=", "",
+                                       res_used[i_res_used]))) * 0.0009765625)
     
     wallTime = gsub(".*walltime=", "", res_used[i_res_used])
     wallTime = as.POSIXlt(wallTime,format="%H:%M:%S")
     wallTime = unclass(wallTime)
-    wallTime = round(wallTime$min + wallTime$sec / 60, 2)
+    wallTime = round(wallTime$min + wallTime$sec / 60, 1)
     
     info_model = strsplit(job_name, "_")[[1]]
     
@@ -272,10 +275,11 @@ main = function(models, proteases){
     #data_protease = data_protease[!grepl("PEP", data_protease$Model), ]
     
     # RUN TIME
+    data_protease$RunTime = round(data_protease$RunTime, 1)
     id_sort = sort(data_protease$RunTime, decreasing = TRUE, index.return = TRUE)$ix
     data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
     
-    pp = run_time_plot(data_protease, title = glue("Run-Time - {protease} - {DATA}"))
+    pp = run_time_plot(data_protease, title = glue("Runtime - {protease} - {DATA}"))
     ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Run-Time.png"), plot = pp)
     
     if(is.null(data_protease_all)){
@@ -285,6 +289,7 @@ main = function(models, proteases){
     }
     
     # Memory usage (RAM MB)
+    data_protease$RAM = round(data_protease$RAM)
     id_sort = sort(data_protease$RAM, decreasing = TRUE, index.return = TRUE)$ix
     data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
     
@@ -312,7 +317,7 @@ main = function(models, proteases){
   #############################################
   # average RAM
   #############################################
-  data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM/length(proteases)/2)
+  data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM / length(proteases))
   id_sort = sort(data_protease_all_RAM$RAM, decreasing = TRUE, index.return = TRUE)$ix
   data_protease_all_RAM$Model = factor(data_protease_all_RAM$Model, levels = data_protease_all_RAM$Model[id_sort])
   

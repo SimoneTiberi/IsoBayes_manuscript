@@ -1,8 +1,8 @@
 plot_prob_change = function(benchmark_df, violin = FALSE){
-  #vec_up = benchmark_df$Log2_FC_validation[benchmark_df$Prob_prot_inc > 0.8]
-  #vec_down = benchmark_df$Log2_FC_validation[benchmark_df$Prob_prot_inc < 0.2]
-  #iqr_up = IQR(vec_up)
-  #iqr_down = IQR(vec_down)
+  vec_up = benchmark_df$Log2_FC_validation[benchmark_df$Prob_prot_inc > 0.8]
+  vec_down = benchmark_df$Log2_FC_validation[benchmark_df$Prob_prot_inc < 0.2]
+  iqr_up = IQR(vec_up)
+  iqr_down = IQR(vec_down)
   
   pp = ggplot(benchmark_df, aes(class_Prob_prot_inc, Log2_FC_validation))
   if(violin){
@@ -11,18 +11,20 @@ plot_prob_change = function(benchmark_df, violin = FALSE){
     pp = pp + geom_boxplot(fill="plum", varwidth=T, outlier.shape = NA)
   }
   pp = pp + labs(title = DATA,
-                 subtitle = "Change in protein and mRNA isoform relative abundances",
-                 x = "P(Protein > Transcript)",
-                 y = "Log2FC of isoform relative abundances") +
+                 #subtitle = "Change in protein and mRNA isoform relative abundances",
+                 x = latex2exp::TeX("$Pr\\left(\\pi_p > \\pi_p^T\\right)$"),
+                 y = "Validated Log2(FC)") +
+    
     theme_bw() +
     theme(plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
           axis.title = element_text(size = 11, face = "bold"),
           legend.title = element_text(size = 11, face = "bold"),
           axis.text.x = element_text(size = 10, face = "bold"),
           axis.text.y = element_text(size = 10, face = "bold"),
-          legend.text = element_text(size = 10)) #+
-    #coord_cartesian(ylim = c(quantile(vec_down, 0.25) - 1.5 * iqr_down,
-     #                        quantile(vec_up, 0.75) + 1 * iqr_up)
-    #)
+          legend.text = element_text(size = 10)) +
+    scale_y_continuous(n.breaks = 8,
+                       limits = c(quantile(vec_down, 0.25) - 2 * iqr_down,
+                                  quantile(vec_up, 0.75) + 2 * iqr_up)
+                       )
   pp
 }

@@ -1,4 +1,8 @@
-get_roc = function(benchmark, name_models){
+get_roc = function(benchmark, name_models, protease = ""){
+  normalize = function(x) {
+    return((x- min(x)) /(max(x)-min(x)))
+  }
+  
   name_models = sort(name_models)
   scores = list()
   labels = list()
@@ -25,18 +29,18 @@ get_roc = function(benchmark, name_models){
     linetype_models[check] = "dotted"
   }
   
-  pp = pp + scale_colour_manual("Model", values = palette_models, labels = labs_roc)
+  pp = pp + scale_colour_manual("", values = palette_models, labels = labs_roc)
   
   if(any(check)){
-    pp = pp + scale_linetype_manual("Model", values = linetype_models, labels = labs_roc)
+    pp = pp + scale_linetype_manual("", values = linetype_models, labels = labs_roc)
   }else{
-    pp = pp +geom_line(linewidth=0.8) + labs(title = DATA) +
+    pp = pp + geom_line(linewidth = 1.25) + labs(title = glue("{DATA}{protease}")) +
       theme(plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
             axis.title = element_text(size = 11, face = "bold"),
-            legend.title = element_text(size = 11, face = "bold"),
+            #legend.title = element_text(size = 11, face = "bold"),
             axis.text.x = element_text(size = 10, face = "bold"),
             axis.text.y = element_text(size = 10, face = "bold"),
-            legend.text = element_text(size = 10)
+            legend.text = element_text(size = 12)
       )
   }
   
