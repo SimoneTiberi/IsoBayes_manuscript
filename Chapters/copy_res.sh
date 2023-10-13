@@ -9,6 +9,12 @@ cp $PATH_WD/Benchmark_results/scatterplot_abundance_*.png 1/
 cp $PATH_WD/Benchmark_results/change_mrna_prot*.png 1/
 cp $PATH_WD/Benchmark_results/scatterplot_log2fc*.png 1/
 
+# Chapter 2
+cp $PATH_WD/Benchmark_results/no_UP_ROC_main_result.png 2/
+cp $PATH_WD/Benchmark_results/no_UP_scatterplot_abundance_*.png 2/
+cp $PATH_WD/Benchmark_results/no_UP_change_mrna_prot*.png 2/
+cp $PATH_WD/Benchmark_results/no_UP_scatterplot_log2fc*.png 2/
+
 for data in 'jurkat' 'wtc11'
 do
 	# Chapter 1
@@ -23,14 +29,14 @@ do
 	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS_mRNA.png 1/$data
 
 	# Chapter 2
-	cp $PATH_WD/Benchmark_results/$data/ROC_main_result_no*.png 2/$data
-	cp $PATH_WD/Benchmark_results/$data/SumTab_main_result_no*.csv 2/$data
+	#cp $PATH_WD/Benchmark_results/$data/ROC_main_result_no*.png 2/$data
+	cp $PATH_WD/Benchmark_results/$data/no_UP_SumTab_main_result.csv 2/$data
 
-	cp $PATH_WD/Abundance_correlation/$data/scatterplot_no_unique_OpenMS*.png 2/$data
-	cp $PATH_WD/Abundance_correlation/$data/correlation_no_unique_OpenMS*.csv 2/$data
+	#cp $PATH_WD/Abundance_correlation/$data/scatterplot_no_unique_OpenMS*.png 2/$data
+	#cp $PATH_WD/Abundance_correlation/$data/correlation_no_unique_OpenMS*.csv 2/$data
 
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS*no_unique.png 2/$data
-	cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS*no_unique.png 2/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/main_result_*OpenMS*no_unique.png 2/$data
+	#cp $PATH_WD/Change_protein_mRNA_isoform/$data/scatterplot_log2FC_OpenMS*no_unique.png 2/$data
 
 	# Chapter 3
 	cp $PATH_WD/Robustness/$data/ROC_MM_vs_OpenMS.png 3/$data

@@ -6,21 +6,33 @@ library(ggplot2)
 PATH_WD = "/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper"
 size = 10 ; scale = 0.5
 source(glue("{PATH_WD}/utils_function/grid_arrange_shared_legend.R"))
+<<<<<<< HEAD
 list_plot_bench = list()
 
 for (noUP in c("", "no_UP_")) {
 
+=======
+
+for (noUP in c("", "no_UP_")) {
+
+  list_plot_bench = list()
+>>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
   list_plot_bench_abundance = list()
   list_plot_bench_change = list()
   list_plot_bench_time = list()
   list_plot_bench_memory = list()
   
   for (dat in c("jurkat", "wtc11")) {
+<<<<<<< HEAD
     proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
     for (prot in proteases) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{prot}/{noUP}ROC_main_result"))
       list_plot_bench = append(list_plot_bench, list(plot_tab))
     }
+=======
+    load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}ROC_main_result"))
+    list_plot_bench = append(list_plot_bench, list(plot_tab))
+>>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
     
     for (mrna in c("", "_mRNA")) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}scatterplot_benchmark{mrna}"))
@@ -45,6 +57,13 @@ for (noUP in c("", "no_UP_")) {
     list_plot_bench_memory = append(list_plot_bench_memory, list(pp))
   }
   
+<<<<<<< HEAD
+=======
+  a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot, list_plot_bench[[2]]$gplot, nrow =1)
+  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}ROC_main_result.png"), plot = a,
+         height = size * scale, width = size)
+  
+>>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
   a = grid.arrange(list_plot_bench_time[[1]], list_plot_bench_time[[2]], nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/Average_Run-Time.png"), plot = a,
          height = size * scale, width = size)
@@ -93,6 +112,7 @@ for (noUP in c("", "no_UP_")) {
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_log2fc_mRNA.png"), plot = a,
          height = size * scale, width = size)
 }
+<<<<<<< HEAD
 
 
 a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot,
@@ -220,3 +240,5 @@ for (i in 1:half_length) {
 }
 
 
+=======
+>>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
