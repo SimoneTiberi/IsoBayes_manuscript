@@ -6,33 +6,21 @@ library(ggplot2)
 PATH_WD = "/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper"
 size = 10 ; scale = 0.5
 source(glue("{PATH_WD}/utils_function/grid_arrange_shared_legend.R"))
-<<<<<<< HEAD
 list_plot_bench = list()
 
 for (noUP in c("", "no_UP_")) {
 
-=======
-
-for (noUP in c("", "no_UP_")) {
-
-  list_plot_bench = list()
->>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
   list_plot_bench_abundance = list()
   list_plot_bench_change = list()
   list_plot_bench_time = list()
   list_plot_bench_memory = list()
   
   for (dat in c("jurkat", "wtc11")) {
-<<<<<<< HEAD
     proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
     for (prot in proteases) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{prot}/{noUP}ROC_main_result"))
       list_plot_bench = append(list_plot_bench, list(plot_tab))
     }
-=======
-    load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}ROC_main_result"))
-    list_plot_bench = append(list_plot_bench, list(plot_tab))
->>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
     
     for (mrna in c("", "_mRNA")) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}scatterplot_benchmark{mrna}"))
@@ -57,13 +45,6 @@ for (noUP in c("", "no_UP_")) {
     list_plot_bench_memory = append(list_plot_bench_memory, list(pp))
   }
   
-<<<<<<< HEAD
-=======
-  a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot, list_plot_bench[[2]]$gplot, nrow =1)
-  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}ROC_main_result.png"), plot = a,
-         height = size * scale, width = size)
-  
->>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
   a = grid.arrange(list_plot_bench_time[[1]], list_plot_bench_time[[2]], nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/Average_Run-Time.png"), plot = a,
          height = size * scale, width = size)
@@ -112,7 +93,6 @@ for (noUP in c("", "no_UP_")) {
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_log2fc_mRNA.png"), plot = a,
          height = size * scale, width = size)
 }
-<<<<<<< HEAD
 
 
 a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot,
@@ -149,32 +129,34 @@ list_plot_abundance = list()
 list_plot_change = list()
 
 for (dat in c("jurkat", "wtc11")) {
-  load(glue("{PATH_WD}/Robustness/{dat}/ROC_MM_vs_OpenMS"))
-  list_plot_roc = append(list_plot_roc, list(plot_tab))
-  
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  for (prot in proteases) {
+    load(glue("{PATH_WD}/Robustness/{dat}/ROC_OpenMS_vs_MM_psm"))
+    list_plot_roc = append(list_plot_roc, list(plot_tab))
+  }
   for (mrna in c("", "_mRNA")) {
     for (input in c("OpenMS", "MM_psm")) {
-      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_MM_vs_OpenMS"))
-      scat_bench$name = glue("scatterplot_{input}{mrna}_MM_vs_OpenMS")
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_OpenMS_vs_MM_psm"))
+      scat_bench$name = glue("scatterplot_{input}{mrna}_OpenMS_vs_MM_psm")
       list_plot_abundance = append(list_plot_abundance, list(scat_bench))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_{input}{mrna}_MM_vs_OpenMS"))
-      plot_change$name = glue("change_mrna_prot_{input}{mrna}_MM_vs_OpenMS")
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot{mrna}_OpenMS_vs_MM_psm"))
+      plot_change$name = glue("change_mrna_prot_{input}{mrna}_OpenMS_vs_MM_psm")
       list_plot_change = append(list_plot_change, list(plot_change))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme_{input}{mrna}_MM_vs_OpenMS"))
-      plot_change$name = glue("change_mrna_prot_extreme_{input}{mrna}_MM_vs_OpenMS")
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme{mrna}_OpenMS_vs_MM_psm"))
+      plot_change$name = glue("change_mrna_prot_extreme_{input}{mrna}_OpenMS_vs_MM_psm")
       list_plot_change = append(list_plot_change, list(plot_change))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_MM_vs_OpenMS"))
-      scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_MM_vs_OpenMS")
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_OpenMS_vs_MM_psm"))
+      scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_OpenMS_vs_MM_psm")
       list_plot_change = append(list_plot_change, list(scat_bench))
     }
   }
 }
 
 a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
-ggsave(glue("{PATH_WD}/Robustness/ROC_MM_vs_OpenMS.png"), plot = a,
+ggsave(glue("{PATH_WD}/Robustness/ROC_OpenMS_vs_MM_psm.png"), plot = a,
        height = size * scale, width = size)
 
 half_length = length(list_plot_abundance)/2
@@ -197,32 +179,35 @@ list_plot_abundance = list()
 list_plot_change = list()
 
 for (dat in c("jurkat", "wtc11")) {
-  load(glue("{PATH_WD}/Robustness/{dat}/ROC_psm_vs_intensities"))
-  list_plot_roc = append(list_plot_roc, list(plot_tab))
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  for (prot in proteases) {
+    load(glue("{PATH_WD}/Robustness/{dat}/ROC_MM_psm_vs_MM_intensities"))
+    list_plot_roc = append(list_plot_roc, list(plot_tab))
+  }
   
   for (mrna in c("", "_mRNA")) {
     for (input in c("MM_intensities", "MM_psm")) {
-      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_psm_vs_intensities"))
-      scat_bench$name = glue("scatterplot_{input}{mrna}_psm_vs_intensities")
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities"))
+      scat_bench$name = glue("scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities")
       list_plot_abundance = append(list_plot_abundance, list(scat_bench))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_{input}{mrna}_psm_vs_intensities"))
-      plot_change$name = glue("change_mrna_prot_{input}{mrna}_psm_vs_intensities")
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot{mrna}_MM_psm_vs_MM_intensities"))
+      plot_change$name = glue("change_mrna_prot{mrna}_MM_psm_vs_MM_intensities")
       list_plot_change = append(list_plot_change, list(plot_change))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme_{input}{mrna}_psm_vs_intensities"))
-      plot_change$name = glue("change_mrna_prot_extreme_{input}{mrna}_psm_vs_intensities")
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities"))
+      plot_change$name = glue("change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities")
       list_plot_change = append(list_plot_change, list(plot_change))
       
-      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_psm_vs_intensities"))
-      scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_psm_vs_intensities")
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities"))
+      scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities")
       list_plot_change = append(list_plot_change, list(scat_bench))
     }
   }
 }
 
 a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
-ggsave(glue("{PATH_WD}/Robustness/ROC_psm_vs_intensities.png"), plot = a,
+ggsave(glue("{PATH_WD}/Robustness/ROC_MM_psm_vs_MM_intensities.png"), plot = a,
        height = size * scale, width = size)
 
 half_length = length(list_plot_abundance)/2
@@ -239,6 +224,105 @@ for (i in 1:half_length) {
          height = size * scale, width = size)
 }
 
+#
+############################# 4.1 ###################################################
+list_plot_roc = list()
+list_plot_abundance = list()
+list_plot_change = list()
 
-=======
->>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
+for (dat in c("jurkat", "wtc11")) {
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  for (prot in proteases) {
+    load(glue("{PATH_WD}/Robustness/{dat}/ROC_pep_vs_no_pep"))
+    list_plot_roc = append(list_plot_roc, list(plot_tab))
+  }
+  for (mrna in c("", "_mRNA")) {
+    for (pep in c("_PEP", "")) {
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot{pep}{mrna}_pep_vs_no_pep"))
+      scat_bench$name = glue("scatterplot{pep}{mrna}_pep_vs_no_pep")
+      list_plot_abundance = append(list_plot_abundance, list(scat_bench))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot{mrna}_pep_vs_no_pep"))
+      plot_change$name = glue("change_mrna_prot{mrna}_pep_vs_no_pep")
+      list_plot_change = append(list_plot_change, list(plot_change))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme{mrna}_pep_vs_no_pep"))
+      plot_change$name = glue("change_mrna_prot_extreme_{input}{mrna}_pep_vs_no_pep")
+      list_plot_change = append(list_plot_change, list(plot_change))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc{pep}{mrna}_pep_vs_no_pep"))
+      scat_bench$name = glue("scatterplot_log2fc{pep}{mrna}_pep_vs_no_pep")
+      list_plot_change = append(list_plot_change, list(scat_bench))
+    }
+  }
+}
+
+a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
+ggsave(glue("{PATH_WD}/Robustness/ROC_pep_vs_no_pep.png"), plot = a,
+       height = size * scale, width = size)
+
+half_length = length(list_plot_abundance)/2
+for (i in 1:half_length) {
+  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]], nrow =1)
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
+         height = size * scale, width = size)
+}
+
+half_length = length(list_plot_change)/2
+for (i in 1:half_length) {
+  a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]], nrow =1)
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
+         height = size * scale, width = size)
+}
+
+############################# 3.2 ###################################################
+list_plot_roc = list()
+list_plot_abundance = list()
+list_plot_change = list()
+
+for (dat in c("jurkat", "wtc11")) {
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  for (prot in proteases) {
+    load(glue("{PATH_WD}/Robustness/{dat}/ROC_MM_psm_vs_MM_intensities"))
+    list_plot_roc = append(list_plot_roc, list(plot_tab))
+  }
+  
+  for (mrna in c("", "_mRNA")) {
+    for (input in c("MM_intensities", "MM_psm")) {
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities"))
+      scat_bench$name = glue("scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities")
+      list_plot_abundance = append(list_plot_abundance, list(scat_bench))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot{mrna}_MM_psm_vs_MM_intensities"))
+      plot_change$name = glue("change_mrna_prot{mrna}_MM_psm_vs_MM_intensities")
+      list_plot_change = append(list_plot_change, list(plot_change))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities"))
+      plot_change$name = glue("change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities")
+      list_plot_change = append(list_plot_change, list(plot_change))
+      
+      load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities"))
+      scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities")
+      list_plot_change = append(list_plot_change, list(scat_bench))
+    }
+  }
+}
+
+a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
+ggsave(glue("{PATH_WD}/Robustness/ROC_MM_psm_vs_MM_intensities.png"), plot = a,
+       height = size * scale, width = size)
+
+half_length = length(list_plot_abundance)/2
+for (i in 1:half_length) {
+  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]], nrow =1)
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
+         height = size * scale, width = size)
+}
+
+half_length = length(list_plot_change)/2
+for (i in 1:half_length) {
+  a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]], nrow =1)
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
+         height = size * scale, width = size)
+}
+
