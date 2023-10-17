@@ -1,10 +1,6 @@
 "Model","AUC"
-<<<<<<< HEAD
 "EPIFANY",0.666
-=======
-"Epifany",0.666
->>>>>>> 79cd8d04392b36c3df53aaf75b49c745b2d2a0de
-"Fido",0.533
+"FIDO",0.533
 "IsoBayes",0.721
 "IsoBayes_mRNA",0.83
 "PIA",0.529
