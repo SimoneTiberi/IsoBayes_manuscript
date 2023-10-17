@@ -43,13 +43,13 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
     
     plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, "_", rep(inputs, each=2)))
     ggsave(glue("{PATH_RES_roc}/{protease}/ROC_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_tab$gplot)
-    save(plot_tab, file = glue("{PATH_RES_roc}/{protease}/ROC_{inputs[1]}_vs_{inputs[2]}"))
+    save(plot_tab, file = glue("{PATH_RES_roc}/{protease}/ROC_{inputs[1]}_vs_{inputs[2]}.rdata"))
     write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_{inputs[1]}_vs_{inputs[2]}.csv"), row.names = FALSE)
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
   }
   plot_tab = get_roc(benchmark_df_all, paste0(sub_selected_models, "_", rep(inputs, each=2)))
   ggsave(glue("{PATH_RES_roc}/ROC_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_tab$gplot)
-  save(plot_tab, file = glue("{PATH_RES_roc}/ROC_{inputs[1]}_vs_{inputs[2]}"))
+  save(plot_tab, file = glue("{PATH_RES_roc}/ROC_{inputs[1]}_vs_{inputs[2]}.rdata"))
   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_{inputs[1]}_vs_{inputs[2]}.csv"), row.names = FALSE)
   
   ## abundance of OpensMS vs MM
@@ -61,7 +61,7 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
                                                           glue("Y_validation_IsoBayes{mrna}_{input}"))] + 1))  + 
         labs(x = "Log10(Estimated Abundance + 1)", y = "Log10(Validated Abundance + 1)") 
       ggsave(glue("{PATH_RES_roc}/scatterplot_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}.png"), plot = scat_bench)
-      save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}"))
+      save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}.rdata"))
       
       # change mrna prot
       sub_data = benchmark_df_all[, c(glue("Prob_prot_inc_IsoBayes{mrna}_{input}"),
@@ -106,24 +106,24 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
         labs(x = "Log2(FC)", y = "Validated Log2(FC)")
       
       ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}.png"), plot = scat_bench)
-      save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}"))
+      save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{mrna}_{inputs[1]}_vs_{inputs[2]}.rdata"))
     }
   }
   # plot prob change
   plot_change = plot_prob_change_group(plot_prob_change_data[plot_prob_change_data$mrna == "mRNA", ])
   ggsave(glue("{PATH_RES_roc}/change_mrna_prot_mRNA_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_change)
-  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_mRNA_{inputs[1]}_vs_{inputs[2]}"))
+  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_mRNA_{inputs[1]}_vs_{inputs[2]}.rdata"))
   
   plot_change = plot_prob_change_group(plot_prob_change_data[plot_prob_change_data$mrna != "mRNA", ])
   ggsave(glue("{PATH_RES_roc}/change_mrna_prot_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_change)
-  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_{inputs[1]}_vs_{inputs[2]}"))
+  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_{inputs[1]}_vs_{inputs[2]}.rdata"))
   
   # plot prob change extreme
   plot_change = plot_prob_change_group(plot_prob_change_data_extreme[plot_prob_change_data_extreme$mrna == "mRNA", ])
   ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_mRNA_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_change)
-  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_mRNA_{inputs[1]}_vs_{inputs[2]}"))
+  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_mRNA_{inputs[1]}_vs_{inputs[2]}.rdata"))
   
   plot_change = plot_prob_change_group(plot_prob_change_data_extreme[plot_prob_change_data_extreme$mrna != "mRNA", ])
   ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_{inputs[1]}_vs_{inputs[2]}.png"), plot = plot_change)
-  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_{inputs[1]}_vs_{inputs[2]}"))
+  save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_{inputs[1]}_vs_{inputs[2]}.rdata"))
 }

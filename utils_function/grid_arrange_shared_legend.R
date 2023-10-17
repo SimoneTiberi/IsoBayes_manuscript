@@ -13,13 +13,17 @@ grid_arrange_shared_legend <-
     lheight <- sum(legend$height)
     lwidth <- sum(legend$width)
     gl <- lapply(plots, function(x)
-      x + theme(legend.position = "none"))
+      x + theme(legend.position = "none")) 
     gl <- c(gl, ncol = ncol, nrow = nrow)
     
     combined <- switch(
       position,
       "bottom" = arrangeGrob(
         do.call(arrangeGrob, gl),
+        #bottom = textGrob("FPR", x = unit(0.5, "npc"), y = unit(4, "npc"),
+        #                  gp=gpar(fontface="bold", fontsize=15)),
+        #left = textGrob("TPR", x = unit(1, "npc"), y = unit(0.5, "npc"),
+        #                gp = gpar(fontface = "bold", fontsize = 15)),
         legend,
         ncol = 1,
         heights = unit.c(unit(1, "npc") - lheight, lheight)

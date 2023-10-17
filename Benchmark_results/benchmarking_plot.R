@@ -78,8 +78,8 @@ main = function(models, proteases){
       
       # FIDO
       res = get_score_from_idXML(paste0(PATH_RES_COMPETITORS, "/", protease, "/fido.idXML"))
-      colnames(res) = paste0(colnames(res), "_Fido")
-      benchmark_df = merge(benchmark_df, res, by.x = "proteins", by.y = "Isoform_Fido", all = T)
+      colnames(res) = paste0(colnames(res), "_FIDO")
+      benchmark_df = merge(benchmark_df, res, by.x = "proteins", by.y = "Isoform_FIDO", all = T)
       
       # PIA
       path_file = paste0(PATH_RES_COMPETITORS, "/", protease, "/pia_results.mzTab")
@@ -107,14 +107,14 @@ main = function(models, proteases){
       colnames(benchmark_df) = gsub(".*Prob_present_", "", colnames(benchmark_df))
       colnames(benchmark_df) = gsub(".*score_", "", colnames(benchmark_df))
       
-      for (nm in c(selected_models, "EPIFANY", "Fido", "PIA")) {
+      for (nm in c(selected_models, "EPIFANY", "FIDO", "PIA")) {
         benchmark_df[, paste0("Present_", nm)] = benchmark_df$Present
       }
       
-      plot_tab = get_roc(benchmark_df, c(selected_models, "EPIFANY", "Fido", "PIA"),
-                         protease = glue("_{protease}"))
+      plot_tab = get_roc(benchmark_df, c(selected_models, "EPIFANY", "FIDO", "PIA"),
+                         protease = glue(" - {protease}"))
       ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
-      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result"))
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.rdata"))
       shared_vs_all_auc = plot_tab$sum_stat
       
       write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"), row.names = FALSE)
@@ -122,11 +122,11 @@ main = function(models, proteases){
       
       # Focus on validation without isoform with Unique Peptide (UP)
       plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ],
-                         c(selected_models, "EPIFANY", "Fido", "PIA"),
-                         protease = glue("_{protease}")
+                         c(selected_models, "EPIFANY", "FIDO", "PIA"),
+                         protease = glue(" - {protease}")
                          )
       ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result_no_UP.png"), plot = plot_tab$gplot)
-      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/no_UP_ROC_main_result"))
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/no_UP_ROC_main_result.rdata"))
       shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
       colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
       
@@ -139,9 +139,9 @@ main = function(models, proteases){
       }else{
         sel = benchmark_df_all$Y_unique_IsoBayes > -Inf
       }
-      plot_tab = get_roc(benchmark_df_all[sel, ], c(selected_models, "EPIFANY", "Fido", "PIA"))
+      plot_tab = get_roc(benchmark_df_all[sel, ], c(selected_models, "EPIFANY", "FIDO", "PIA"))
       ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result.png"), plot = plot_tab$gplot)
-      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result"))
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result.rdata"))
       write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{noUP}SumTab_main_result.csv"), row.names = FALSE)
       
       ## abundance of main model (we consider the validation set used to benchmark all models)
@@ -150,7 +150,7 @@ main = function(models, proteases){
           labs(x = "Log10(Estimated abundance + 1)", y = "Log10(Validated Abundance + 1)") 
         
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_benchmark{mrna}.png"), plot = scat_bench)
-        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_benchmark{mrna}"))
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_benchmark{mrna}.rdata"))
       }
       
       # change mrna prot
@@ -174,7 +174,7 @@ main = function(models, proteases){
           plot_change = plot_prob_change(sub_data) 
         }
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}.png"), plot = plot_change)
-        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}"))
+        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}.rdata"))
         
         if(mrna == ""){
           plot_change = plot_prob_change(sub_data_extreme) 
@@ -182,7 +182,7 @@ main = function(models, proteases){
           plot_change = plot_prob_change(sub_data_extreme) 
         }
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.png"), plot = plot_change)
-        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}"))
+        save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.rdata"))
         
         sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
         scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}"), "Log2_FC_validation")])  + 
@@ -195,7 +195,7 @@ main = function(models, proteases){
         }
         
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.png"), plot = scat_bench)
-        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}"))
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.rdata"))
       }
       
       ### GENE CORRELATION
@@ -215,7 +215,7 @@ main = function(models, proteases){
           labs(x = "Log10(Gene Abundance + 1)", y = "Log10(Validated Gene Abundance + 1)")
         
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}.png"), plot = scat_bench)
-        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}"))
+        save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}.rdata"))
       }
     }
   }
@@ -259,6 +259,8 @@ main = function(models, proteases){
     Data = rbind(Data, df)
   }
   Data$Model[grep("PiaTot", Data$Model)] = "PIA"
+  Data$Model[grep("Epifany", Data$Model)] = "EPIFANY"
+  Data$Model[grep("Fido", Data$Model)] = "FIDO"
   
   data_protease_all = NULL
   data_protease_all_RAM = NULL
@@ -312,7 +314,7 @@ main = function(models, proteases){
   pp = run_time_plot(data_protease_all, title = glue("{DATA}"))
   write.csv(data_protease_all_RAM, glue("{PATH_RES_COMPETITORS}/Average_Run-Time.csv"))
   ggsave(glue("{PATH_RES_COMPETITORS}/Average_Run-Time.png"), plot = pp)
-  save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Run-Time"))
+  save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Run-Time.rdata"))
   
   #############################################
   # average RAM
@@ -324,7 +326,7 @@ main = function(models, proteases){
   pp = memory_plot(data_protease_all_RAM, title = glue("{DATA}"))
   write.csv(data_protease_all_RAM, glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.csv"))
   ggsave(glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.png"), plot = pp)
-  save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Memory_usage"))
+  save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.rdata"))
   
 }
 
