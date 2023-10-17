@@ -108,7 +108,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
       
       sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}{pep}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
       scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}{pep}"), "Log2_FC_validation")])  + 
-        labs(x = "Log2(FC)", y = "Validated Log2(FC)")
+        labs(x = "Log2-FC", y = "Validated Log2-FC")
       
       ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.rdata"))
@@ -116,19 +116,19 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
   }
   # plot prob change
   plot_change = plot_prob_change_group(plot_prob_change_data[plot_prob_change_data$mrna == "mRNA", ])
-  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_{input}_mRNA_pep_vs_no_pep.png"), plot = plot_change)
+  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_{input}_mRNA_pep_vs_no_pep.pdf"), plot = plot_change)
   save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_{input}_mRNA_pep_vs_no_pep.rdata"))
   
   plot_change = plot_prob_change_group(plot_prob_change_data[plot_prob_change_data$mrna != "mRNA", ])
-  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_{input}_pep_vs_no_pep.png"), plot = plot_change)
+  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_{input}_pep_vs_no_pep.pdf"), plot = plot_change)
   save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_{input}_pep_vs_no_pep.rdata"))
   
   # plot prob change extreme
   plot_change = plot_prob_change_group(plot_prob_change_data_extreme[plot_prob_change_data_extreme$mrna == "mRNA", ])
-  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_mRNA_pep_vs_no_pep.png"), plot = plot_change)
+  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_mRNA_pep_vs_no_pep.pdf"), plot = plot_change)
   save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_mRNA_pep_vs_no_pep.rdata"))
   
   plot_change = plot_prob_change_group(plot_prob_change_data_extreme[plot_prob_change_data_extreme$mrna != "mRNA", ])
-  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_pep_vs_no_pep.png"), plot = plot_change)
+  ggsave(glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_pep_vs_no_pep.pdf"), plot = plot_change)
   save(plot_change, file = glue("{PATH_RES_roc}/change_mrna_prot_extreme_{input}_pep_vs_no_pep.rdata"))
 }

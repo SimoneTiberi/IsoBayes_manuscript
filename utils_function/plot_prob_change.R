@@ -10,17 +10,17 @@ plot_prob_change = function(benchmark_df, violin = FALSE){
   }else{
     pp = pp + geom_boxplot(fill="plum", varwidth=T, outlier.shape = NA)
   }
-  pp = pp + labs(title = DATA,
+  pp = pp + labs(title = DATA_name,
                  #subtitle = "Change in protein and mRNA isoform relative abundances",
-                 x = latex2exp::TeX("$Pr(\\pi_p > \\pi_p^T)$"),
+                 x = latex2exp::TeX("$Pr \\left(\\pi_p > \\pi_p^T \\right)$"),
                  y = "Validated Log2(FC)") +
     
     theme_bw() +
-    theme(plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
-          axis.title = element_text(size = 12, face = "bold"),
-          legend.title = element_text(size = 12, face = "bold"),
-          axis.text.x = element_text(size = 11, face = "bold"),
-          axis.text.y = element_text(size = 11, face = "bold"),
+    theme(plot.title = element_text(size = 15, hjust = 0.5),
+          axis.title = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          axis.text.x = element_text(size = 11),
+          axis.text.y = element_text(size = 11),
           legend.text = element_text(size = 11)) +
     scale_y_continuous(n.breaks = 8#,
                        #limits = c(quantile(vec_down, 0.25) - 2 * iqr_down,

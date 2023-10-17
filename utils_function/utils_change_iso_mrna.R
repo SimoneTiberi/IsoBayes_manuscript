@@ -13,13 +13,21 @@ build_data_violin_plot = function(df, ths){
 convert_numeric_to_class = function(df, var, quantiles){
   quantiles[1] = -Inf
   class_Prob_prot_inc = rep("0", nrow(df))
+  lab_levels = c()
   
   for (i in seq_len(length(quantiles)-1)) {
     sel = which(df[, var] > quantiles[i] & df[, var] <= quantiles[i+1])
     quantiles[1] = 0
-    class_Prob_prot_inc[sel] = glue("({round(quantiles[i], 2)} ; {round(quantiles[i+1], 2)}]")
+    first_brack = "("
+    if(i == 1){
+      first_brack = "["
+    }
+    lab_level = glue("{first_brack}{round(quantiles[i], 2)}, {round(quantiles[i+1], 2)}]")
+    class_Prob_prot_inc[sel] = lab_level
+    lab_levels = c(lab_levels, lab_level)
   }
   df$class_Prob_prot_inc = class_Prob_prot_inc
+  df$class_Prob_prot_inc = factor(df$class_Prob_prot_inc, levels = lab_levels)
   
   df
 }

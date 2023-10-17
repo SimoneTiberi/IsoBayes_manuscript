@@ -45,35 +45,35 @@ for (noUP in c("", "no_UP_")) {
     list_plot_bench_memory = append(list_plot_bench_memory, list(pp))
   }
   
-  a = grid.arrange(list_plot_bench_time[[1]], list_plot_bench_time[[2]], nrow =1)
+  a = grid.arrange(list_plot_bench_time[[1]], list_plot_bench_time[[2]] + ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/Average_Run-Time.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_memory[[1]], list_plot_bench_memory[[2]], nrow =1)
+  a = grid.arrange(list_plot_bench_memory[[1]], list_plot_bench_memory[[2]] + ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/Average_Memory_usage.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_abundance[[1]], list_plot_bench_abundance[[5]], nrow =1)
+  a = grid.arrange(list_plot_bench_abundance[[1]], list_plot_bench_abundance[[5]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_abundance_benchmark.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_abundance[[2]], list_plot_bench_abundance[[6]], nrow =1)
+  a = grid.arrange(list_plot_bench_abundance[[2]], list_plot_bench_abundance[[6]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_abundance_gene_benchmark.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_abundance[[3]], list_plot_bench_abundance[[7]], nrow =1)
+  a = grid.arrange(list_plot_bench_abundance[[3]], list_plot_bench_abundance[[7]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_abundance_benchmark_mRNA.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_abundance[[4]], list_plot_bench_abundance[[8]], nrow =1)
+  a = grid.arrange(list_plot_bench_abundance[[4]], list_plot_bench_abundance[[8]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_abundance_gene_benchmark_mRNA.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[7]], nrow =1) 
+  a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[7]]+ ylab(""), nrow =1) 
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[2]], list_plot_bench_change[[8]], nrow =1)
+  a = grid.arrange(list_plot_bench_change[[2]], list_plot_bench_change[[8]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_extreme.png"), plot = a,
          height = size * scale, width = size)
   

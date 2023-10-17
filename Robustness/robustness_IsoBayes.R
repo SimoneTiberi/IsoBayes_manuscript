@@ -1,6 +1,12 @@
 PATH_WD = commandArgs(trailingOnly = TRUE)[1]
 DATA = commandArgs(trailingOnly = TRUE)[2]
 
+if(DATA == "wtc11"){
+  DATA_name = "WTC-11"
+}else{
+  DATA_name = "jurkat"
+}
+
 # Set path, global variable and libraries
 ###########################################################################################
 library(ggplot2)

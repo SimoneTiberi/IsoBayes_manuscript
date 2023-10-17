@@ -7,15 +7,14 @@ memory_plot = function(df, title){
          y = "Memory (MB)",
          title = title) +
     theme_classic() +
-    theme(plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
-          axis.title.y = element_text(size = 14, face = "bold"),
-          axis.text.x = element_text(size = 12, face = "bold",
+    theme(plot.title = element_text(size = 15, hjust = 0.5),
+          axis.title.y = element_text(size = 14),
+          axis.text.x = element_text(size = 12,
                                      angle = 45, margin = margin(t = 40, r = 0,
                                                                  b = -50, l = 0,
                                                                  unit = "pt")),
-          axis.text.y = element_text(size = 10, face = "bold"),
+          axis.text.y = element_text(size = 10),
           legend.position = "none") #+
     #geom_errorbar(aes(ymin=RAM-RAM_sd, ymax=RAM+RAM_sd), width=.1, size = 0.5,
      #             position=position_dodge(.9))
 }
-pippo

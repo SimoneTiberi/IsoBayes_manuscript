@@ -8,13 +8,13 @@ run_time_plot = function(df, title){
          title = title) +
     theme_classic() +
     coord_trans(y = "sqrt") +
-    theme(plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
-          axis.title.y = element_text(size = 14, face = "bold"),
-          axis.text.x = element_text(size = 12, face = "bold",
+    theme(plot.title = element_text(size = 15, hjust = 0.5),
+          axis.title.y = element_text(size = 14),
+          axis.text.x = element_text(size = 12,
                                      angle = 45,
                                      margin = margin(t = 40, r = 0,
                                                      b = -50, l = 0,
                                                      unit = "pt")),
-          axis.text.y = element_text(size = 10, face = "bold"),
+          axis.text.y = element_text(size = 10),
           legend.position = "none")
 }
