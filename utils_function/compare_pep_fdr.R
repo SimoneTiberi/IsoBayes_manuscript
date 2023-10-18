@@ -41,7 +41,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
     }
     benchmark_df = concat_models(benchmark_df, union = FALSE)
     
-    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, rep(c("_PEP", ""), each=2)))
+    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, rep(c("_PEP", ""), each=2)), protease = glue("- {protease}"))
     ggsave(glue("{PATH_RES_roc}/{protease}/ROC_{input}_pep_vs_no_pep.png"), plot = plot_tab$gplot)
     save(plot_tab, file = glue("{PATH_RES_roc}/{protease}/ROC_{input}_pep_vs_no_pep.rdata"))
     write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_{input}_pep_vs_no_pep.csv"), row.names = FALSE)

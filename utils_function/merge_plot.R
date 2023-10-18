@@ -69,27 +69,33 @@ for (noUP in c("", "no_UP_")) {
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_abundance_gene_benchmark_mRNA.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[1]], list_plot_bench_change[[7]]+ ylab(""), nrow =1) 
-  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot.png"), plot = a,
+  a = grid.arrange(list_plot_bench_change[[1]],
+                   list_plot_bench_change[[7]] +
+                     ylab(""),
+                   nrow =1) 
+  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot.pdf"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[2]], list_plot_bench_change[[8]]+ ylab(""), nrow =1)
-  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_extreme.png"), plot = a,
+  a = grid.arrange(list_plot_bench_change[[2]],
+                   list_plot_bench_change[[8]]+ ylab(""), nrow =1)
+  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_extreme.pdf"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[3]], list_plot_bench_change[[9]], nrow =1)
+  a = grid.arrange(list_plot_bench_change[[3]], list_plot_bench_change[[9]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_log2fc.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[4]], list_plot_bench_change[[10]], nrow =1)
+  a = grid.arrange(list_plot_bench_change[[4]],
+                   list_plot_bench_change[[10]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_mRNA.png"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[5]], list_plot_bench_change[[11]], nrow =1)
-  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_extreme_mRNA.png"), plot = a,
+  a = grid.arrange(list_plot_bench_change[[5]],
+                   list_plot_bench_change[[11]], nrow =1)
+  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_extreme_mRNA.pdf"), plot = a,
          height = size * scale, width = size)
   
-  a = grid.arrange(list_plot_bench_change[[6]], list_plot_bench_change[[12]], nrow =1)
+  a = grid.arrange(list_plot_bench_change[[6]], list_plot_bench_change[[12]]+ ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}scatterplot_log2fc_mRNA.png"), plot = a,
          height = size * scale, width = size)
 }
@@ -105,6 +111,18 @@ a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot + xlab(""),
                                list_plot_bench[[9]]$gplot + ylab(""),
                                list_plot_bench[[10]]$gplot + ylab(""),
                                nrow = 2, ncol = 5)
+
+# ggpubr::ggarrange(list_plot_bench[[1]]$gplot + xlab(""),
+#                   list_plot_bench[[2]]$gplot + xlab("") + ylab(""),
+#                   list_plot_bench[[3]]$gplot + xlab("") + ylab(""),
+#                   list_plot_bench[[4]]$gplot + xlab("") + ylab(""),
+#                   list_plot_bench[[5]]$gplot + xlab("") + ylab(""),
+#                   list_plot_bench[[6]]$gplot,
+#                   list_plot_bench[[7]]$gplot + ylab(""),
+#                   list_plot_bench[[8]]$gplot + ylab(""),
+#                   list_plot_bench[[9]]$gplot + ylab(""),
+#                   list_plot_bench[[10]]$gplot + ylab(""),
+#                   nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
 
 ggsave(glue("{PATH_WD}/Benchmark_results/ROC_main_result.png"), plot = a,
        height = size * scale, width = size)
@@ -162,14 +180,18 @@ ggsave(glue("{PATH_WD}/Robustness/ROC_OpenMS_vs_MM_psm.png"), plot = a,
 
 half_length = length(list_plot_abundance)/2
 for (i in 1:half_length) {
-  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]], nrow =1)
+  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]] + ylab(""), nrow =1)
   ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
          height = size * scale, width = size)
 }
 
 half_length = length(list_plot_change)/2
 for (i in 1:half_length) {
-  a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]], nrow =1)
+  if(grepl("change", list_plot_change[[i]]$name)){
+    a = grid_arrange_shared_legend(list_plot_change[[i]], list_plot_change[[i+half_length]] + ylab(""), nrow =1)
+  }else{
+    a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]] + ylab(""), nrow =1)
+  }
   ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
          height = size * scale, width = size)
 }
