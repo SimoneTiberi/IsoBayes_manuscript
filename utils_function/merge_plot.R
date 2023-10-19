@@ -87,7 +87,7 @@ for (noUP in c("", "no_UP_")) {
   
   a = grid.arrange(list_plot_bench_change[[4]],
                    list_plot_bench_change[[10]]+ ylab(""), nrow =1)
-  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_mRNA.png"), plot = a,
+  ggsave(glue("{PATH_WD}/Benchmark_results/{noUP}change_mrna_prot_mRNA.pdf"), plot = a,
          height = size * scale, width = size)
   
   a = grid.arrange(list_plot_bench_change[[5]],
@@ -100,44 +100,32 @@ for (noUP in c("", "no_UP_")) {
          height = size * scale, width = size)
 }
 
-a = grid_arrange_shared_legend(list_plot_bench[[1]]$gplot + xlab(""),
-                               list_plot_bench[[2]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[3]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[4]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[5]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[6]]$gplot,
-                               list_plot_bench[[7]]$gplot + ylab(""),
-                               list_plot_bench[[8]]$gplot + ylab(""),
-                               list_plot_bench[[9]]$gplot + ylab(""),
-                               list_plot_bench[[10]]$gplot + ylab(""),
-                               nrow = 2, ncol = 5)
-
-# ggpubr::ggarrange(list_plot_bench[[1]]$gplot + xlab(""),
-#                   list_plot_bench[[2]]$gplot + xlab("") + ylab(""),
-#                   list_plot_bench[[3]]$gplot + xlab("") + ylab(""),
-#                   list_plot_bench[[4]]$gplot + xlab("") + ylab(""),
-#                   list_plot_bench[[5]]$gplot + xlab("") + ylab(""),
-#                   list_plot_bench[[6]]$gplot,
-#                   list_plot_bench[[7]]$gplot + ylab(""),
-#                   list_plot_bench[[8]]$gplot + ylab(""),
-#                   list_plot_bench[[9]]$gplot + ylab(""),
-#                   list_plot_bench[[10]]$gplot + ylab(""),
-#                   nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
+a = ggpubr::ggarrange(list_plot_bench[[1]]$gplot + xlab(NULL),
+                  list_plot_bench[[2]]$gplot + xlab(NULL) + ylab(NULL),
+                  list_plot_bench[[3]]$gplot + xlab(NULL) + ylab(NULL),
+                  list_plot_bench[[4]]$gplot + xlab(NULL) + ylab(NULL),
+                  list_plot_bench[[5]]$gplot + xlab(NULL) + ylab(NULL),
+                  list_plot_bench[[6]]$gplot,
+                  list_plot_bench[[7]]$gplot + ylab(NULL),
+                  list_plot_bench[[8]]$gplot + ylab(NULL),
+                  list_plot_bench[[9]]$gplot + ylab(NULL),
+                  list_plot_bench[[10]]$gplot + ylab(NULL),
+                  nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
 
 ggsave(glue("{PATH_WD}/Benchmark_results/ROC_main_result.png"), plot = a,
        height = size * scale, width = size)
 
-a = grid_arrange_shared_legend(list_plot_bench[[11]]$gplot + xlab(""),
-                               list_plot_bench[[12]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[13]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[14]]$gplot + xlab("") + ylab(""),
-                               list_plot_bench[[15]]$gplot + xlab("") + ylab(""),
+a = ggpubr::ggarrange(list_plot_bench[[11]]$gplot + xlab(NULL),
+                               list_plot_bench[[12]]$gplot + xlab(NULL) + ylab(NULL),
+                               list_plot_bench[[13]]$gplot + xlab(NULL) + ylab(NULL),
+                               list_plot_bench[[14]]$gplot + xlab(NULL) + ylab(NULL),
+                               list_plot_bench[[15]]$gplot + xlab(NULL) + ylab(NULL),
                                list_plot_bench[[16]]$gplot,
-                               list_plot_bench[[17]]$gplot + ylab(""),
-                               list_plot_bench[[18]]$gplot + ylab(""),
-                               list_plot_bench[[19]]$gplot + ylab(""),
-                               list_plot_bench[[20]]$gplot + ylab(""),
-                               nrow = 2, ncol = 5)
+                               list_plot_bench[[17]]$gplot + ylab(NULL),
+                               list_plot_bench[[18]]$gplot + ylab(NULL),
+                               list_plot_bench[[19]]$gplot + ylab(NULL),
+                               list_plot_bench[[20]]$gplot + ylab(NULL),
+                      nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
 
 ggsave(glue("{PATH_WD}/Benchmark_results/no_UP_ROC_main_result.png"), plot = a,
        height = size * scale, width = size)
@@ -150,7 +138,7 @@ list_plot_change = list()
 for (dat in c("jurkat", "wtc11")) {
   proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
   for (prot in proteases) {
-    load(glue("{PATH_WD}/Robustness/{dat}/ROC_OpenMS_vs_MM_psm.rdata"))
+    load(glue("{PATH_WD}/Robustness/{dat}/{prot}/ROC_OpenMS_vs_MM_psm.rdata"))
     list_plot_roc = append(list_plot_roc, list(plot_tab))
   }
   for (mrna in c("", "_mRNA")) {
@@ -174,25 +162,38 @@ for (dat in c("jurkat", "wtc11")) {
   }
 }
 
-a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
+a = ggpubr::ggarrange(list_plot_roc[[1]]$gplot + xlab(NULL),
+                      list_plot_roc[[2]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[3]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[4]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[5]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[6]]$gplot,
+                      list_plot_roc[[7]]$gplot + ylab(NULL),
+                      list_plot_roc[[8]]$gplot + ylab(NULL),
+                      list_plot_roc[[9]]$gplot + ylab(NULL),
+                      list_plot_roc[[10]]$gplot + ylab(NULL),
+                      nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
+
 ggsave(glue("{PATH_WD}/Robustness/ROC_OpenMS_vs_MM_psm.png"), plot = a,
        height = size * scale, width = size)
 
 half_length = length(list_plot_abundance)/2
 for (i in 1:half_length) {
-  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]] + ylab(""), nrow =1)
+  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]] + ylab(NULL), nrow =1)
   ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
          height = size * scale, width = size)
 }
 
 half_length = length(list_plot_change)/2
 for (i in 1:half_length) {
+  ext = "png"
   if(grepl("change", list_plot_change[[i]]$name)){
-    a = grid_arrange_shared_legend(list_plot_change[[i]], list_plot_change[[i+half_length]] + ylab(""), nrow =1)
+    a = grid_arrange_shared_legend(list_plot_change[[i]], list_plot_change[[i+half_length]] + ylab(NULL), nrow =1)
+    ext = "pdf"
   }else{
     a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]] + ylab(""), nrow =1)
   }
-  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.{ext}"), plot = a,
          height = size * scale, width = size)
 }
 
@@ -204,7 +205,7 @@ list_plot_change = list()
 for (dat in c("jurkat", "wtc11")) {
   proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
   for (prot in proteases) {
-    load(glue("{PATH_WD}/Robustness/{dat}/ROC_MM_psm_vs_MM_intensities.rdata"))
+    load(glue("{PATH_WD}/Robustness/{dat}/{prot}/ROC_MM_psm_vs_MM_intensities.rdata"))
     list_plot_roc = append(list_plot_roc, list(plot_tab))
   }
   
@@ -229,21 +230,44 @@ for (dat in c("jurkat", "wtc11")) {
   }
 }
 
-a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
+a = ggpubr::ggarrange(list_plot_roc[[1]]$gplot + xlab(NULL),
+                      list_plot_roc[[2]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[3]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[4]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[5]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_roc[[6]]$gplot,
+                      list_plot_roc[[7]]$gplot + ylab(NULL),
+                      list_plot_roc[[8]]$gplot + ylab(NULL),
+                      list_plot_roc[[9]]$gplot + ylab(NULL),
+                      list_plot_roc[[10]]$gplot + ylab(NULL),
+                      nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
 ggsave(glue("{PATH_WD}/Robustness/ROC_MM_psm_vs_MM_intensities.png"), plot = a,
        height = size * scale, width = size)
 
 half_length = length(list_plot_abundance)/2
 for (i in 1:half_length) {
-  a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]], nrow =1)
-  ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
+  ext = "png"
+  a = grid.arrange(list_plot_abundance[[i]],
+                   list_plot_abundance[[i+half_length]] + ylab(NULL),
+                   nrow =1)
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.{ext}"), plot = a,
          height = size * scale, width = size)
 }
 
 half_length = length(list_plot_change)/2
 for (i in 1:half_length) {
-  a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]], nrow =1)
-  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
+  ext = "png"
+  if(grepl("change", list_plot_change[[i]]$name)){
+    ext = "pdf"
+    a = grid_arrange_shared_legend(list_plot_change[[i]],
+                                   list_plot_change[[i+half_length]] + ylab(NULL),
+                                   nrow =1)
+  }else{
+    a = grid.arrange(list_plot_change[[i]],
+                     list_plot_change[[i+half_length]] + ylab(NULL),
+                     nrow =1)
+  }
+  ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.{ext}"), plot = a,
          height = size * scale, width = size)
 }
 
@@ -256,7 +280,7 @@ for (input in c("MM_psm", "MM_intensities")) {
   for (dat in c("jurkat", "wtc11")) {
     proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
     for (prot in proteases) {
-      load(glue("{PATH_WD}/Robustness/{dat}/ROC_{input}_pep_vs_no_pep.rdata"))
+      load(glue("{PATH_WD}/Robustness/{dat}/{prot}/ROC_{input}_pep_vs_no_pep.rdata"))
       list_plot_roc = append(list_plot_roc, list(plot_tab))
     }
     for (mrna in c("", "_mRNA")) {
@@ -279,22 +303,48 @@ for (input in c("MM_psm", "MM_intensities")) {
       }
     }
   }
-  
-  a = grid_arrange_shared_legend(list_plot_roc[[1]]$gplot, list_plot_roc[[2]]$gplot, nrow =1)
+  a = ggpubr::ggarrange(list_plot_roc[[1]]$gplot + xlab(NULL),
+                        list_plot_roc[[2]]$gplot + xlab(NULL) + ylab(NULL),
+                        list_plot_roc[[3]]$gplot + xlab(NULL) + ylab(NULL),
+                        list_plot_roc[[4]]$gplot + xlab(NULL) + ylab(NULL),
+                        list_plot_roc[[5]]$gplot + xlab(NULL) + ylab(NULL),
+                        list_plot_roc[[6]]$gplot,
+                        list_plot_roc[[7]]$gplot + ylab(NULL),
+                        list_plot_roc[[8]]$gplot + ylab(NULL),
+                        list_plot_roc[[9]]$gplot + ylab(NULL),
+                        list_plot_roc[[10]]$gplot + ylab(NULL),
+                        nrow = 2, ncol = 5,
+                        common.legend = TRUE,
+                        legend="bottom"
+                        )
   ggsave(glue("{PATH_WD}/Robustness/ROC_{input}_pep_vs_no_pep.png"), plot = a,
          height = size * scale, width = size)
   
   half_length = length(list_plot_abundance)/2
   for (i in 1:half_length) {
-    a = grid.arrange(list_plot_abundance[[i]], list_plot_abundance[[i+half_length]], nrow =1)
-    ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.png"), plot = a,
+    ext = "png"
+    a = grid.arrange(list_plot_abundance[[i]],
+                     list_plot_abundance[[i+half_length]] + ylab(NULL),
+                     nrow =1)
+    ggsave(glue("{PATH_WD}/Robustness/{list_plot_abundance[[i]]$name}.{ext}"), plot = a,
            height = size * scale, width = size)
   }
   
   half_length = length(list_plot_change)/2
   for (i in 1:half_length) {
-    a = grid.arrange(list_plot_change[[i]], list_plot_change[[i+half_length]], nrow =1)
-    ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.png"), plot = a,
+    ext = "png"
+    if(grepl("change", list_plot_change[[i]]$name)){
+      ext = "pdf"
+      a = grid_arrange_shared_legend(list_plot_change[[i]],
+                                     list_plot_change[[i+half_length]] + ylab(NULL),
+                                     nrow =1)
+    }else{
+      a = grid.arrange(list_plot_change[[i]],
+                       list_plot_change[[i+half_length]] + ylab(NULL),
+                       nrow =1)
+    }
+    
+    ggsave(glue("{PATH_WD}/Robustness/{list_plot_change[[i]]$name}.{ext}"), plot = a,
            height = size * scale, width = size)
   }
 }

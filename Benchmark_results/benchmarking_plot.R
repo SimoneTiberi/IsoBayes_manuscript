@@ -322,11 +322,11 @@ main = function(models, proteases){
   #############################################
   # average RAM
   #############################################
-  data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM / length(proteases))
+  data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM / length(proteases) / 1000, 1)
   id_sort = sort(data_protease_all_RAM$RAM, decreasing = TRUE, index.return = TRUE)$ix
   data_protease_all_RAM$Model = factor(data_protease_all_RAM$Model, levels = data_protease_all_RAM$Model[id_sort])
   
-  pp = memory_plot(data_protease_all_RAM, title = glue("{DATA_name}"))
+  pp = memory_plot(data_protease_all_RAM, title = glue("{DATA_name}")) + ylab("Memory (GB)")
   write.csv(data_protease_all_RAM, glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.csv"))
   ggsave(glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.png"), plot = pp)
   save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.rdata"))

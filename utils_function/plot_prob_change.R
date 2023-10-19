@@ -39,6 +39,3 @@ plot_prob_change = function(benchmark_df, violin = FALSE){
   
   pp
 }
-
-a = boxplot(benchmark_df$Log2_FC_validation ~ benchmark_df$class_Prob_prot_inc)
-grid(nx=16, ny=5)

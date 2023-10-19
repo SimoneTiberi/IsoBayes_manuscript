@@ -31,11 +31,10 @@ plot_prob_change_group = function(benchmark_df, violin = FALSE){
     theme_bw() +
     theme(plot.title = element_text(size = 15, hjust = 0.5),
           axis.title = element_text(size = 14),
-          legend.title = element_text(size = 12),
+          legend.title = element_blank(),
           axis.text.x = element_text(size = 11),
           axis.text.y = element_text(size = 11),
           legend.text = element_text(size = 11)) +
-    scale_y_continuous(n.breaks = 8, limits = c(q25, q75)) +
-    scale_fill_manual("")
+    scale_y_continuous(n.breaks = 8, limits = c(bottom_hinge, top_hinge)) 
   pp
 }
