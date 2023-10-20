@@ -68,10 +68,10 @@ main = function(models, proteases){
   #   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_PEP_vs_no_PEP_mRNA_vs_no_mRNA_{input}.csv"), row.names = FALSE)
   # }
   # OpenMS vs MM_psm
-  compare_inputs(inputs = c("OpenMS", "MM_psm"), selected_models[c(1, 3)], proteases, models)
+  #compare_inputs(inputs = c("OpenMS", "MM_psm"), selected_models[c(1, 3)], proteases, models)
   
-  # MM_psm vs MM_intensities
-  compare_inputs(inputs = c("MM_psm", "MM_intensities"), selected_models[c(1, 3)], proteases, models)
+  # MM_psm vs MM_intensities vs OpenMS
+  compare_inputs(inputs = c("MM_psm", "MM_intensities", "OpenMS"), selected_models[c(1, 3)], proteases, models)
   
   # PEP vs FDR - MM_psm
   compare_pep_fdr("MM_psm", selected_models[c(1, 3)], proteases, models)

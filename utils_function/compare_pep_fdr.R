@@ -78,7 +78,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
                                           seq(0, 1, 0.2))
       sub_data_extreme = convert_numeric_to_class(sub_data, glue("Prob_prot_inc_IsoBayes{mrna}{pep}"),
                                                   quantiles = c(0, 0.01, 0.99, 1))
-      sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01 ; 0.99]", ]
+      sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01, 0.99]", ]
       
       if(mrna == ""){
         sub_data$mrna = "No mRNA"

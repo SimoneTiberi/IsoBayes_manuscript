@@ -35,12 +35,12 @@ get_roc = function(benchmark, name_models, protease = ""){
     pp = pp + scale_linetype_manual("", values = linetype_models, labels = labs_roc)
   }else{
     pp = pp + geom_line(linewidth = 1) + labs(title = glue("{DATA_name}{protease}")) +
-      theme(plot.title = element_text(size = 12, hjust = 0.5),
-            axis.title = element_text(size = 11),
+      theme(plot.title = element_text(size = 11, hjust = 0.5),
+            axis.title = element_text(size = 10),
             #legend.title = element_text(size = 11, face = "bold"),
             axis.text.x = element_text(size = 8, angle = 45, vjust = 0.8),
             axis.text.y = element_text(size = 8),
-            legend.text = element_text(size = 12)
+            legend.text = element_text(size = 11)
       )
   }
   
