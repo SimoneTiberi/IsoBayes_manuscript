@@ -106,8 +106,14 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
                                                                  "Model", "mrna")]
       )
       
-      sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}{pep}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-      scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}{pep}"), "Log2_FC_validation")])  + 
+      #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}{pep}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
+      
+      ths = 1.5e-06
+      p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}{pep}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}{pep}")]+ths)
+      pi = (sub_data[, glue("Pi_IsoBayes{mrna}{pep}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}{pep}")]+ths)
+      sub_data$Log2_FC_adj = log2(pi/p_tpm_adj)
+      
+      scat_bench = scatterplot(sub_data[, c("Log2_FC_adj", "Log2_FC_validation")])  + 
         labs(x = "Log2-FC", y = "Validated Log2-FC")
       
       ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.png"), plot = scat_bench)

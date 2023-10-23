@@ -1,8 +1,5 @@
-get_roc = function(benchmark, name_models, protease = ""){
-  normalize = function(x) {
-    return((x- min(x)) /(max(x)-min(x)))
-  }
-  
+get_roc = function(benchmark, name_models, protease = "", labs = NULL){
+
   name_models = sort(name_models)
   scores = list()
   labels = list()
@@ -16,7 +13,12 @@ get_roc = function(benchmark, name_models, protease = ""){
   
   auc_roc = round(precrec::auc(roc_pr_curves)[precrec::auc(roc_pr_curves)[, "curvetypes"] == "ROC", "aucs"], 3)
   sum_stat = data.frame(Model = name_models, AUC = auc_roc)
-  labs_roc = name_models#paste0(name_models, "\nAUC: ", auc_roc)
+  
+  if(is.null(labs)){
+    labs_roc = name_models#paste0(name_models, "\nAUC: ", auc_roc)
+  }else{
+    labs_roc = labs
+  }
   palette_models = PALETTE_MODELS[name_models]
   
   pp = autoplot(roc_pr_curves, "ROC")

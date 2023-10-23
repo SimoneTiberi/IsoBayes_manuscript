@@ -50,7 +50,15 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
   }
   
-  plot_tab = get_roc(benchmark_df_all, paste0(sub_selected_models, "_", rep(inputs, each=2)))
+  nm = paste0(sub_selected_models, "_", rep(inputs, each=2))
+  plot_tab = get_roc(benchmark_df_all, nm, labs = c("MM_int", "MM_PSM",
+                                                    "MM_int_mRNA", "MM_PSM_mRNA",
+                                                    "OpenMS_mRNA", "OpenMS"))
+  
+  plot_tab = plot_tab + scale_colour_manual("", values = PALETTE_MODELS[nm], labels = c("MM_int", "MM_PSM",
+                                                                    "MM_int_mRNA", "MM_PSM_mRNA",
+                                                                    "OpenMS_mRNA", "OpenMS"))
+  
   ggsave(glue("{PATH_RES_roc}/ROC_{name_file}.png"), plot = plot_tab$gplot)
   save(plot_tab, file = glue("{PATH_RES_roc}/ROC_{name_file}.rdata"))
   write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_{name_file}.csv"), row.names = FALSE)
@@ -104,8 +112,14 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
                                                                  "Model", "mrna")]
       )
       
-      sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}_{input}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-      scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}_{input}"), "Log2_FC_validation")])  + 
+      #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}_{input}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
+      
+      ths = 1.5e-06
+      p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}_{input}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}_{input}")]+ths)
+      pi = (sub_data[, glue("Pi_IsoBayes{mrna}_{input}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}_{input}")]+ths)
+      sub_data$Log2_FC_adj = log2(pi/p_tpm_adj)
+      
+      scat_bench = scatterplot(sub_data[, c("Log2_FC_adj", "Log2_FC_validation")])  + 
         labs(x = "Log2-FC", y = "Validated Log2-FC")
       
       ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{mrna}_{name_file}.png"), plot = scat_bench)

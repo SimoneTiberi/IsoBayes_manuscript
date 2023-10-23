@@ -1,40 +1,38 @@
-plot_prob_change = function(benchmark_df, violin = FALSE){
+plot_prob_change = function(benchmark_df){
   
-  q25 = unlist(lapply(unique(benchmark_df$class_Prob_prot_inc), FUN = function(x){
+  q25 = unlist(lapply(levels(benchmark_df$class_Prob_prot_inc), FUN = function(x){
     quantile(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x], 0.25)
   }))
-  Min = unlist(lapply(unique(benchmark_df$class_Prob_prot_inc), FUN = function(x){
-    min(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x])
+  Min = unlist(lapply(levels(benchmark_df$class_Prob_prot_inc), FUN = function(x){
+    quantile(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x], 0)
   }))
-  q75 = unlist(lapply(unique(benchmark_df$class_Prob_prot_inc), FUN = function(x){
+  q75 = unlist(lapply(levels(benchmark_df$class_Prob_prot_inc), FUN = function(x){
     quantile(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x], 0.75)
   }))
-  Max = unlist(lapply(unique(benchmark_df$class_Prob_prot_inc), FUN = function(x){
-    max(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x])
+  Max = unlist(lapply(levels(benchmark_df$class_Prob_prot_inc), FUN = function(x){
+    quantile(benchmark_df$Log2_FC_validation[benchmark_df$class_Prob_prot_inc == x], 1)
   }))
   
-  i_min = which.min(q25)
-  i_max = which.max(q75)
+  bottom_whisker = q25 - (q75 - q25) * 1.5
+  top_whisker = q75 + (q75 - q25) * 1.5
   
-  bottom_whisker = max(q25[i_min] - (q75[i_min] - q25[i_min]) * 1.5, Min[i_min])
-  top_whisker = min(q75[i_max] + (q75[i_max] - q25[i_max]) * 1.5, Max[i_max])
+  y_bottom = max(min(bottom_whisker, na.rm = TRUE), Min[which.min(bottom_whisker)], na.rm = TRUE)
+  y_top = min(max(top_whisker, na.rm = TRUE), Max[which.max(top_whisker)], na.rm = TRUE)
   
-  pp = ggplot(benchmark_df, aes(class_Prob_prot_inc, Log2_FC_validation))
-  if(violin){
-    pp = pp + geom_violin(fill="plum")
-  }else{
-    pp = pp + geom_boxplot(fill="plum", outlier.shape = NA)
-  }
+  pp = ggplot(benchmark_df, aes(class_Prob_prot_inc, Log2_FC_validation)) +
+    geom_boxplot(fill="plum", outlier.shape = NA)
+    
   pp = pp + labs(title = DATA_name,
                  x = latex2exp::TeX("$Pr \\left(\\pi_p > \\pi_p^T \\right)$"),
-                 y = "Validated Log2(FC)") +
+                 y = "Validated Log2-FC") +
     theme_bw() +
     theme(plot.title = element_text(size = 16, hjust = 0.5),
           axis.title = element_text(size = 15),
           axis.text.x = element_text(size = 11),
           axis.text.y = element_text(size = 11),
           legend.text = element_text(size = 11)) +
-    scale_y_continuous(n.breaks = 8, limits = c(bottom_whisker, top_whisker))
-  
+    scale_y_continuous(n.breaks = 8) +
+    coord_cartesian(ylim = c(y_bottom, y_top))
+
   pp
 }

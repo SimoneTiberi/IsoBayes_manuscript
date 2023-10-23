@@ -174,30 +174,24 @@ main = function(models, proteases){
                                                     quantiles = c(0, 0.01, 0.99, 1))
         sub_data_extreme = sub_data_extreme[sub_data_extreme$class_Prob_prot_inc != "(0.01, 0.99]", ]
         
-        if(mrna == ""){
-          plot_change = plot_prob_change(sub_data) 
-        }else{
-          plot_change = plot_prob_change(sub_data) 
-        }
+        plot_change = plot_prob_change(sub_data) 
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}.pdf"), plot = plot_change)
         save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot{mrna}.rdata"))
         
-        if(mrna == ""){
-          plot_change = plot_prob_change(sub_data_extreme) 
-        }else{
-          plot_change = plot_prob_change(sub_data_extreme) 
-        }
+        plot_change = plot_prob_change(sub_data_extreme) 
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.pdf"), plot = plot_change)
         save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.rdata"))
         
-        sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-        scat_bench = scatterplot(sub_data[sub_sel, c(glue("Log2_FC_IsoBayes{mrna}"), "Log2_FC_validation")])  + 
+        #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
+        
+        ths = 1.5e-06
+        p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}")]+ths)
+        pi = (sub_data[, glue("Pi_IsoBayes{mrna}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}")]+ths)
+        sub_data$Log2_FC_adj = log2(pi/p_tpm_adj)
+
+        scat_bench = scatterplot(sub_data[, c(glue("Log2_FC_adj"), "Log2_FC_validation")])  + 
           labs(x = "Log2-FC", y = "Validated Log2-FC")
-        if(mrna==""){
-          scat_bench = scat_bench 
-        }else{
-          scat_bench = scat_bench
-        }
+
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.png"), plot = scat_bench)
         save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.rdata"))
       }
