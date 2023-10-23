@@ -1,0 +1,108 @@
+Loading input...
+Warning: unknown modification '87.044604465' of residue 'K' - adding it to the database
+Loading took 5.40 s (wall), 5.39 s (CPU), 0.19 s (system), 5.20 s (user)
+Requested score type already set as main score: pep
+Peptide FDR AUC before protein inference: 0.939802
+Building graph on 33946 spectra and 28212 proteins.
+Progress of 'Building graph...':
+-- done [took 0.21 s (CPU), 0.21 s (Wall)] -- 
+Found 6308 connected components.
+Testing 45 param combinations.
+Evaluating: 0.1 0.01 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.284334 and roc100 = 0.856991
+Evaluating: 0.1 0.01 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.160056 and roc100 = 0.837996
+Evaluating: 0.1 0.01 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.0896312 and roc100 = 0.825939
+Evaluating: 0.1 0.2 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.33637 and roc100 = 0.901402
+Evaluating: 0.1 0.2 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.19298 and roc100 = 0.888322
+Evaluating: 0.1 0.2 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.110456 and roc100 = 0.887608
+Evaluating: 0.1 0.4 0.2
+Skipping improbable parameter combination.. 
+Evaluating: 0.1 0.4 0.5
+Evaluating: 0.1 0.4 0.7
+Evaluating: 0.25 0.01 0.2
+<Skipping improbable parameter combination.. > occurred 3 times
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.277239 and roc100 = 0.81503
+Evaluating: 0.25 0.01 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.158626 and roc100 = 0.776248
+Evaluating: 0.25 0.01 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.0880338 and roc100 = 0.781769
+Evaluating: 0.25 0.2 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.314053 and roc100 = 0.88846
+Evaluating: 0.25 0.2 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.181366 and roc100 = 0.847391
+Evaluating: 0.25 0.2 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.102937 and roc100 = 0.844497
+Evaluating: 0.25 0.4 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.342598 and roc100 = 0.900829
+Evaluating: 0.25 0.4 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.20097 and roc100 = 0.880153
+Evaluating: 0.25 0.4 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.116023 and roc100 = 0.883267
+Evaluating: 0.5 0.01 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.283811 and roc100 = 0.759684
+Evaluating: 0.5 0.01 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.16646 and roc100 = 0.735117
+Evaluating: 0.5 0.01 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.0915886 and roc100 = 0.692683
+Evaluating: 0.5 0.2 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.310107 and roc100 = 0.851204
+Evaluating: 0.5 0.2 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.182926 and roc100 = 0.798479
+Evaluating: 0.5 0.2 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.102835 and roc100 = 0.743183
+Evaluating: 0.5 0.4 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.333205 and roc100 = 0.882829
+Evaluating: 0.5 0.4 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.198636 and roc100 = 0.841019
+Evaluating: 0.5 0.4 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.113974 and roc100 = 0.783715
+Evaluating: 0.65 0.01 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.289671 and roc100 = 0.7282
+Evaluating: 0.65 0.01 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.171493 and roc100 = 0.679822
+Evaluating: 0.65 0.01 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.0939381 and roc100 = 0.621831
+Evaluating: 0.65 0.2 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.31271 and roc100 = 0.832454
+Evaluating: 0.65 0.2 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.186176 and roc100 = 0.738696
+Evaluating: 0.65 0.2 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.104074 and roc100 = 0.672869
+Evaluating: 0.65 0.4 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.33322 and roc100 = 0.871639
+Evaluating: 0.65 0.4 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.200337 and roc100 = 0.776286
+Evaluating: 0.65 0.4 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.114288 and roc100 = 0.717266
+Evaluating: 0.8 0.01 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.295676 and roc100 = 0.733
+Evaluating: 0.8 0.01 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.175909 and roc100 = 0.622785
+Evaluating: 0.8 0.01 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.0950299 and roc100 = 0.588878
+Evaluating: 0.8 0.2 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.316664 and roc100 = 0.819093
+Evaluating: 0.8 0.2 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.189375 and roc100 = 0.68466
+Evaluating: 0.8 0.2 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.10438 and roc100 = 0.627896
+Evaluating: 0.8 0.4 0.2
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.335035 and roc100 = 0.865777
+Evaluating: 0.8 0.4 0.5
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.202631 and roc100 = 0.73471
+Evaluating: 0.8 0.4 0.7
+Evaluation of protein probabilities: Difference estimated vs. T-D FDR = 0.114098 and roc100 = 0.676983
+Best params found at a=0.1, b=0.2, g=0.7
+Running with best parameters:
+Progress of 'Annotating indistinguishable proteins...':
+-- done [took 0.06 s (CPU), 0.01 s (Wall)] -- 
+Annotated 5790 indist. protein groups.
+Peptide FDR AUC after protein inference: 0.938643
+Inference total took 01:10 m (wall), 09:13 m (CPU), 0.38 s (system), 09:12 m (user)
+Writing inference run as first ProteinIDRun with 28212 proteins in 15337 indist. groups.
+Epifany took 01:17 m (wall), 09:19 m (CPU), 0.62 s (system), 09:18 m (user); Peak Memory Usage: 232 MB.

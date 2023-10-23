@@ -1,0 +1,12 @@
+
+Job: 1144684.5kgpsmhpcfe
+
+10/12/2023 16:55:44  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 16:55:44  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_PiaTot_Chym, queue = cpunodes
+10/12/2023 16:55:45  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 17:01:20  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 17:01:30  L    Considering job to run
+10/12/2023 17:01:30  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc02:ncpus=8:mem=31457280kb)
+10/12/2023 17:01:30  L    Job run
+10/12/2023 17:01:42  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 17:01:42  S    Exit_status=0 resources_used.cpupercent=360 resources_used.cput=00:00:46 resources_used.mem=941976kb resources_used.ncpus=8 resources_used.vmem=38749864kb resources_used.walltime=00:00:12

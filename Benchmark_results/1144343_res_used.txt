@@ -1,0 +1,12 @@
+
+Job: 1144343.5kgpsmhpcfe
+
+10/12/2023 14:12:47  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_Epifany_AspN, queue = cpunodes
+10/12/2023 14:12:47  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 14:12:47  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 14:16:40  L    Not enough free nodes available
+10/12/2023 14:17:33  L    Considering job to run
+10/12/2023 14:17:33  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc02:ncpus=8:mem=31457280kb)
+10/12/2023 14:17:33  L    Job run
+10/12/2023 14:18:44  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 14:18:44  S    Exit_status=0 resources_used.cpupercent=207 resources_used.cput=00:07:25 resources_used.mem=582304kb resources_used.ncpus=8 resources_used.vmem=2426256kb resources_used.walltime=00:01:11

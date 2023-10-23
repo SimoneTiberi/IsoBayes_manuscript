@@ -1,0 +1,33 @@
+
+Job: 1144675.5kgpsmhpcfe
+
+10/12/2023 16:55:44  L    Considering job to run
+10/12/2023 16:55:44  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:55:44  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 16:55:44  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_Epifany_ArgC, queue = cpunodes
+10/12/2023 16:55:44  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 16:55:45  L    Considering job to run
+10/12/2023 16:55:45  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:55:45  L    Considering job to run
+10/12/2023 16:55:45  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:55:45  L    Considering job to run
+10/12/2023 16:55:45  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:55:46  L    Considering job to run
+10/12/2023 16:55:46  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:55:46  L    Considering job to run
+10/12/2023 16:55:46  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:56:32  L    Considering job to run
+10/12/2023 16:56:32  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:56:52  L    Considering job to run
+10/12/2023 16:56:52  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:57:22  L    Considering job to run
+10/12/2023 16:57:22  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:58:31  L    Considering job to run
+10/12/2023 16:58:31  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:59:02  L    Considering job to run
+10/12/2023 16:59:02  L    Insufficient amount of resource: ncpus (R: 8 A: 7 T: 256)
+10/12/2023 16:59:07  L    Considering job to run
+10/12/2023 16:59:07  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc06:ncpus=8:mem=31457280kb)
+10/12/2023 16:59:07  L    Job run
+10/12/2023 16:59:35  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 16:59:35  S    Exit_status=0 resources_used.cpupercent=627 resources_used.cput=00:03:17 resources_used.mem=153436kb resources_used.ncpus=8 resources_used.vmem=1975456kb resources_used.walltime=00:00:28

@@ -1,0 +1,38 @@
+
+Job: 1144970.5kgpsmhpcfe
+
+10/12/2023 19:13:38  L    Considering job to run
+10/12/2023 19:13:38  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:38  L    Considering job to run
+10/12/2023 19:13:38  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:38  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 19:13:38  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_IsoBayes_pep_TRUE_2000_AspN_mRNA, queue = cpunodes
+10/12/2023 19:13:38  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 19:13:39  L    Considering job to run
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:39  L    Considering job to run
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:39  L    Considering job to run
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:14:31  L    Considering job to run
+10/12/2023 19:14:31  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:14:31  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 19:14:53  L    Considering job to run
+10/12/2023 19:14:53  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:15:02  L    Considering job to run
+10/12/2023 19:15:02  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:15:30  L    Considering job to run
+10/12/2023 19:15:30  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:15:36  L    Considering job to run
+10/12/2023 19:15:36  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:16:01  L    Considering job to run
+10/12/2023 19:16:01  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:16:05  L    Considering job to run
+10/12/2023 19:16:05  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:16:34  L    Considering job to run
+10/12/2023 19:16:34  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:16:35  L    Considering job to run
+10/12/2023 19:16:35  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc02:ncpus=8:mem=20971520kb)
+10/12/2023 19:16:35  L    Job run
+10/12/2023 19:18:34  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 19:18:34  S    Exit_status=0 resources_used.cpupercent=141 resources_used.cput=00:03:06 resources_used.mem=2083748kb resources_used.ncpus=8 resources_used.vmem=13116792kb resources_used.walltime=00:01:59

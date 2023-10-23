@@ -1,0 +1,29 @@
+
+Job: 1149864.5kgpsmhpcfe
+
+10/23/2023 11:19:21  S    enqueuing into cpunodes, state 1 hop 1
+10/23/2023 11:19:21  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_intensities_pep_FALSE_2000_AspN_mRNA, queue = cpunodes
+10/23/2023 11:19:21  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 11:20:30  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 11:20:30  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/23/2023 11:20:30  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 11:20:30  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 11:20:30  L    Not enough free nodes available
+10/23/2023 11:20:33  L    Not enough free nodes available
+10/23/2023 11:20:34  L    Not enough free nodes available
+10/23/2023 11:20:35  L    Not enough free nodes available
+10/23/2023 11:20:35  L    Not enough free nodes available
+10/23/2023 11:20:39  L    Not enough free nodes available
+10/23/2023 11:20:44  L    Not enough free nodes available
+10/23/2023 11:20:45  L    Not enough free nodes available
+10/23/2023 11:20:47  L    Not enough free nodes available
+10/23/2023 11:20:48  L    Not enough free nodes available
+10/23/2023 11:20:57  L    Not enough free nodes available
+10/23/2023 11:21:00  L    Not enough free nodes available
+10/23/2023 11:21:06  L    Not enough free nodes available
+10/23/2023 11:21:09  L    Not enough free nodes available
+10/23/2023 11:21:23  L    Considering job to run
+10/23/2023 11:21:23  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc08:ncpus=8:mem=20971520kb)
+10/23/2023 11:21:23  L    Job run
+10/23/2023 11:21:47  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/23/2023 11:21:47  S    Exit_status=0 resources_used.cpupercent=163 resources_used.cput=00:00:39 resources_used.mem=1514860kb resources_used.ncpus=8 resources_used.vmem=12639224kb resources_used.walltime=00:00:24

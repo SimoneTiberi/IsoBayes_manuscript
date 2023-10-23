@@ -1,0 +1,11 @@
+Loading input file: /homenfs/jbollon/RNA_PROT/IsoBayes_paper/Data/wtc11/OnlyLysC/merge_index.idXML
+Merging peptide ids.
+Merging protein ids.
+PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.
+Prepared percolator input.
+PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
+Scores of all other PSMs will be set to 1.0.
+2773190 suitable PeptideHits of 2362806 PSMs were reannotated.
+PercolatorAdapter finished successfully!
+PercolatorAdapter took 17:54 m (wall), 04:28 m (CPU), 13.99 s (system), 04:14 m (user); Peak Memory Usage: 7249 MB.
+<PSM (PeptideHit) without protein reference found. This may indicate incomplete mapping during PeptideIndexing (e.g., wrong enzyme settings).Will skip this PSM.> occurred 359283 times

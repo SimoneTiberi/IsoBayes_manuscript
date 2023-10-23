@@ -1,0 +1,12 @@
+
+Job: 1144602.5kgpsmhpcfe
+
+10/12/2023 16:22:30  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_IsoBayes_pep_TRUE_2000_GluC_mRNA, queue = cpunodes
+10/12/2023 16:22:30  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 16:22:30  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 16:29:43  L    Not enough free nodes available
+10/12/2023 16:30:06  L    Considering job to run
+10/12/2023 16:30:06  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc05:ncpus=8:mem=20971520kb)
+10/12/2023 16:30:06  L    Job run
+10/12/2023 16:32:39  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 16:32:39  S    Exit_status=0 resources_used.cpupercent=119 resources_used.cput=00:02:16 resources_used.mem=512068kb resources_used.ncpus=8 resources_used.vmem=3174596kb resources_used.walltime=00:02:33

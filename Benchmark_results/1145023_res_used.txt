@@ -1,0 +1,16 @@
+
+Job: 1145023.5kgpsmhpcfe
+
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:39  L    Insufficient amount of resource: ncpus 
+10/12/2023 19:13:39  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 19:13:39  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_Fido_Trypsin, queue = cpunodes
+10/12/2023 19:13:39  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 19:14:31  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 19:39:48  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 19:40:47  L    Considering job to run
+10/12/2023 19:40:47  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc01:ncpus=8:mem=31457280kb)
+10/12/2023 19:40:47  L    Job run
+10/12/2023 21:31:21  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 21:31:21  S    Exit_status=0 resources_used.cpupercent=98 resources_used.cput=01:50:15 resources_used.mem=2341328kb resources_used.ncpus=8 resources_used.vmem=3812176kb resources_used.walltime=01:50:34

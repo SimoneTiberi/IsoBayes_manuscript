@@ -1,0 +1,27 @@
+
+Job: 1144809.5kgpsmhpcfe
+
+10/12/2023 17:33:04  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 17:33:04  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_IsoBayes_pep_FALSE_2000_Trypsin, queue = cpunodes
+10/12/2023 17:33:04  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 17:55:12  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/12/2023 17:55:53  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 17:55:53  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 17:57:23  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 17:58:20  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 17:58:28  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:00:04  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:00:05  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:00:37  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:00:59  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:02:06  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:02:07  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:02:50  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:03:32  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:03:37  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:04:18  L    Insufficient amount of resource: ncpus (R: 8 A: 1 T: 256)
+10/12/2023 18:04:56  L    Considering job to run
+10/12/2023 18:04:56  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc03:ncpus=8:mem=20971520kb)
+10/12/2023 18:04:56  L    Job run
+10/12/2023 18:11:46  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 18:11:46  S    Exit_status=0 resources_used.cpupercent=203 resources_used.cput=00:08:17 resources_used.mem=4380160kb resources_used.ncpus=8 resources_used.vmem=15311640kb resources_used.walltime=00:06:50

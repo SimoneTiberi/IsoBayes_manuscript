@@ -1,0 +1,12 @@
+
+Job: 1144638.5kgpsmhpcfe
+
+10/12/2023 16:22:30  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_IsoBayes_pep_FALSE_2000_LysC, queue = cpunodes
+10/12/2023 16:22:30  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/12/2023 16:22:30  S    enqueuing into cpunodes, state 1 hop 1
+10/12/2023 16:46:06  L    Not enough free nodes available
+10/12/2023 16:46:12  L    Considering job to run
+10/12/2023 16:46:12  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc07:ncpus=8:mem=20971520kb)
+10/12/2023 16:46:12  L    Job run
+10/12/2023 16:52:49  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/12/2023 16:52:49  S    Exit_status=0 resources_used.cpupercent=181 resources_used.cput=00:07:51 resources_used.mem=5545776kb resources_used.ncpus=8 resources_used.vmem=16617400kb resources_used.walltime=00:06:37
