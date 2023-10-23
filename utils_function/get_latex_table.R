@@ -250,8 +250,8 @@ for (input in c("MM_psm", "MM_intensities")) {
 ####################################################################################################
 Data = rbind()
 
-for (ff in list.files(glue("{PATH_WD}/Benchmark_results"), pattern = "res_used")) {
-  res_used = readLines(glue("{PATH_WD}/Benchmark_results/{ff}"))
+for (ff in list.files(glue("{PATH_WD}/Benchmark_results/internal_results"), pattern = "res_used")) {
+  res_used = readLines(glue("{PATH_WD}/Benchmark_results/internal_results/{ff}"))
   
   i_name = grep('job name', res_used)
   job_name = gsub(".*job name = ", "", res_used[i_name])
@@ -268,86 +268,33 @@ for (ff in list.files(glue("{PATH_WD}/Benchmark_results"), pattern = "res_used")
   wallTime = round(wallTime$min + wallTime$sec / 60, 1)
   
   info_model = strsplit(job_name, "_")[[1]]
-  
-  if(info_model[3] == "IsoBayes" & info_model[[length(info_model)]] == "mRNA"){
-    info_model[3] = glue("{info_model[3]}_mRNA")
-  }
-  if(substr(info_model[3], 1, 8) == "IsoBayes" & info_model[5] == "TRUE"){
-    info_model[3] = glue("{info_model[3]}_PEP")
-  }
-  if(substr(info_model[3], 1, 8) == "IsoBayes"){
-    df = data.frame(Model = info_model[3], data = info_model[2], protease = info_model[7], RunTime = wallTime, RAM = ramMB)
-  }else{
-    df = data.frame(Model = info_model[3], data = info_model[2], protease = info_model[4], RunTime = wallTime, RAM = ramMB)
-  }
+  df = data.frame(Model = info_model[3], data = info_model[2],
+                  protease = info_model[7], mRNA = info_model[8],
+                  pep = info_model[5],
+                  RunTime = wallTime, RAM = ramMB
+                  )
   
   Data = rbind(Data, df)
 }
-Data$Model[grep("PiaTot", Data$Model)] = "PIA"
-Data$Model[grep("Epifany", Data$Model)] = "EPIFANY"
 
-data_protease_all = NULL
-data_protease_all_RAM = NULL
+Data[is.na(Data)] = ""
 
-for (protease in proteases) {
-  # select model to plot
-  data_protease = Data[Data$data == DATA & Data$protease == protease, ]
-  data_protease = data_protease[!grepl("_PEP", data_protease$Model), ]
-  data_protease_mean = aggregate.data.frame(data_protease[, c("RunTime", "RAM")], by = list(data_protease$Model), FUN = mean)
-  data_protease_sd = aggregate.data.frame(data_protease[, c("RunTime", "RAM")], by = list(data_protease$Model), FUN = sd)
-  colnames(data_protease_sd) = paste0(colnames(data_protease_sd), "_sd")
-  data_protease = merge(data_protease_mean, data_protease_sd, by.x = "Group.1", by.y = "Group.1_sd")
-  colnames(data_protease)[1] = "Model"
-  #data_protease = data_protease[!grepl("PEP", data_protease$Model), ]
-  
-  # RUN TIME
-  data_protease$RunTime = round(data_protease$RunTime, 1)
-  id_sort = sort(data_protease$RunTime, decreasing = TRUE, index.return = TRUE)$ix
-  data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
-  
-  pp = run_time_plot(data_protease, title = glue("Runtime - {protease} - {DATA_name}"))
-  ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Run-Time.png"), plot = pp)
-  
-  if(is.null(data_protease_all)){
-    data_protease_all = data_protease
-  }else{
-    data_protease_all$RunTime = data_protease_all$RunTime + data_protease$RunTime
-  }
-  
-  # Memory usage (RAM MB)
-  data_protease$RAM = round(data_protease$RAM)
-  id_sort = sort(data_protease$RAM, decreasing = TRUE, index.return = TRUE)$ix
-  data_protease$Model = factor(data_protease$Model, levels = data_protease$Model[id_sort])
-  
-  pp = memory_plot(data_protease, title = glue("RAM - {protease} - {DATA_name}"))
-  ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/Memory_usage.png"), plot = pp)
-  
-  if(is.null(data_protease_all_RAM)){
-    data_protease_all_RAM = data_protease
-  }else{
-    data_protease_all_RAM$RAM = data_protease_all_RAM$RAM + data_protease$RAM
+for (model in c("psm", "intensities")) {
+  for (dat in c("jurkat", "wtc11")){
+    row_dataset = cbind()
+    for (mrna in c("", "mRNA")) {
+      for (pep in c("TRUE", "FALSE")) {
+        data_protease_all = cbind()
+        for (protease in proteases){
+          data_protease = Data[Data$Model == model & Data$data == dat & Data$mRNA == mrna & Data$pep == pep & Data$protease == protease, ]
+          data_protease_mean = colMeans(data_protease[, c("RunTime", "RAM")])
+          data_protease_all = cbind(data_protease_all, as.matrix(data_protease_mean))
+        }
+        row_dataset = cbind(row_dataset, as.matrix(rowMeans(data_protease_all)))
+      }
+    }
+    print(model) ; print(dat)
+    row_dataset[2, ] = round(row_dataset[2, ]/1000, 1)
+    print(xtable(row_dataset, type = "latex", digits = 1), include.rownames=FALSE)
   }
 }
-#############################################
-# average time
-#############################################
-data_protease_all$RunTime = round(data_protease_all$RunTime / length(proteases), 1)
-id_sort = sort(data_protease_all$RunTime, decreasing = TRUE, index.return = TRUE)$ix
-data_protease_all$Model = factor(data_protease_all$Model, levels = data_protease_all$Model[id_sort])
-
-pp = run_time_plot(data_protease_all, title = glue("{DATA_name}"))
-write.csv(data_protease_all_RAM, glue("{PATH_RES_COMPETITORS}/Average_Run-Time.csv"))
-ggsave(glue("{PATH_RES_COMPETITORS}/Average_Run-Time.png"), plot = pp)
-save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Run-Time.rdata"))
-
-#############################################
-# average RAM
-#############################################
-data_protease_all_RAM$RAM = round(data_protease_all_RAM$RAM / length(proteases) / 1000, 1)
-id_sort = sort(data_protease_all_RAM$RAM, decreasing = TRUE, index.return = TRUE)$ix
-data_protease_all_RAM$Model = factor(data_protease_all_RAM$Model, levels = data_protease_all_RAM$Model[id_sort])
-
-pp = memory_plot(data_protease_all_RAM, title = glue("{DATA_name}")) + ylab("Memory (GB)")
-write.csv(data_protease_all_RAM, glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.csv"))
-ggsave(glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.png"), plot = pp)
-save(pp, file = glue("{PATH_RES_COMPETITORS}/Average_Memory_usage.rdata"))
