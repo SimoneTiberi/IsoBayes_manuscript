@@ -15,15 +15,11 @@ cp $PATH_WD/Benchmark_results/no_UP_scatterplot_abundance_*.png 2/
 cp $PATH_WD/Benchmark_results/no_UP_change_mrna_prot*.pdf 2/
 cp $PATH_WD/Benchmark_results/no_UP_scatterplot_log2fc*.png 2/
 
+
 # Chapter 3
-cp $PATH_WD/Robustness/ROC_OpenMS_vs_MM_psm.png 3/
-cp $PATH_WD/Robustness/ROC_MM_psm_vs_MM_intensities.png 3/
-
-cp $PATH_WD/Robustness/scatterplot_*OpenMS_vs_MM_psm.png 3/
-cp $PATH_WD/Robustness/scatterplot_*_MM_psm_vs_MM_intensities.png 3/
-
-cp $PATH_WD/Robustness/change_mrna_prot_*_OpenMS_vs_MM_psm.pdf 3/
-cp $PATH_WD/Robustness/change_mrna_prot_*_MM_psm_vs_MM_intensities.pdf 3/
+cp $PATH_WD/Robustness/ROC_MM_psm_vs_MM_intensities_vs_OpenMS.png 3/
+cp $PATH_WD/Robustness/scatterplot_*MM_psm_vs_MM_intensities_vs_OpenMS.png 3/
+cp $PATH_WD/Robustness/change_mrna_prot_*MM_psm_vs_MM_intensities_vs_OpenMS.pdf 3/
 
 # Chapter 4
 cp $PATH_WD/Robustness/ROC_*pep_vs_no_pep.png 4/
