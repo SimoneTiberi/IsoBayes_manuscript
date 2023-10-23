@@ -3,5 +3,8 @@
 *.mzTab
 *.sif
 *.mzTab.red
+*.rdata
+*.RData
+*Merged_validation_res*
 Data/jurkat
 Data/wtc11
