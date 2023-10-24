@@ -1,0 +1,46 @@
+
+Job: 1150321.5kgpsmhpcfe
+
+10/23/2023 15:50:26  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:26  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:26  S    enqueuing into cpunodes, state 1 hop 1
+10/23/2023 15:50:26  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_jurkat_intensities_pep_FALSE_2000_ArgC_mRNA, queue = cpunodes
+10/23/2023 15:50:26  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 15:50:27  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:27  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:27  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:38  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:43  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:50  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:50:57  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:51:07  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:51:21  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:51:49  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 15:53:01  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:53:01  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 15:53:25  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:53:44  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:53:57  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:54:00  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:54:23  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:54:38  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:54:39  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:54:52  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:55:05  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:55:19  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:55:31  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 15:55:43  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:55:43  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 15:55:58  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:03  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:04  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:08  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:09  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:10  L    Insufficient amount of resource: ncpus (R: 8 A: 5 T: 256)
+10/23/2023 15:56:34  L    Insufficient amount of resource: ncpus (R: 8 A: 6 T: 256)
+10/23/2023 15:56:34  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 15:56:36  L    Considering job to run
+10/23/2023 15:56:36  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc03:ncpus=8:mem=20971520kb)
+10/23/2023 15:56:36  L    Job run
+10/23/2023 15:56:48  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/23/2023 15:56:48  S    Exit_status=0 resources_used.cpupercent=90 resources_used.cput=00:00:10 resources_used.mem=597664kb resources_used.ncpus=8 resources_used.vmem=3443268kb resources_used.walltime=00:00:12

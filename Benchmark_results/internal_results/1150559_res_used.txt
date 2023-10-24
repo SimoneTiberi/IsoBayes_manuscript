@@ -1,0 +1,25 @@
+
+Job: 1150559.5kgpsmhpcfe
+
+10/23/2023 16:22:15  S    enqueuing into cpunodes, state 1 hop 1
+10/23/2023 16:22:15  S    Job Queued at request of jbollon@5kgpsmhpcfe.cmp3vda.it, owner = jbollon@5kgpsmhpcfe.cmp3vda.it, job name = competitors_wtc11_psm_pep_FALSE_2000_LysC, queue = cpunodes
+10/23/2023 16:22:15  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:25:47  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:26:01  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:01  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:26:05  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:18  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:22  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:30  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:42  L    Insufficient amount of resource: ncpus (R: 8 A: 2 T: 256)
+10/23/2023 16:26:46  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:29:55  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:30:06  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:30:36  L    Insufficient amount of resource: ncpus (R: 8 A: 3 T: 256)
+10/23/2023 16:30:41  S    Job Modified at request of Scheduler@5kgpsmhpcfe.cmp3vda.it
+10/23/2023 16:36:15  L    Insufficient amount of resource: ncpus (R: 8 A: 4 T: 256)
+10/23/2023 16:36:23  L    Considering job to run
+10/23/2023 16:36:23  S    Job Run at request of Scheduler@5kgpsmhpcfe.cmp3vda.it on exec_vnode (5kgpsmhpc05:ncpus=8:mem=20971520kb)
+10/23/2023 16:36:23  L    Job run
+10/23/2023 16:36:49  S    Obit received momhop:1 serverhop:1 state:4 substate:42
+10/23/2023 16:36:49  S    Exit_status=0 resources_used.cpupercent=136 resources_used.cput=00:00:26 resources_used.mem=264756kb resources_used.ncpus=8 resources_used.vmem=3025820kb resources_used.walltime=00:00:26
