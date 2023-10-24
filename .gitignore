@@ -5,6 +5,6 @@
 *.mzTab.red
 *.rdata
 *.RData
-*Merged_validation_res*
+Model_results
 Data/jurkat
 Data/wtc11
