@@ -120,7 +120,8 @@ Percentage of unique peptides:
 46.71%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 AspN
 We found:
@@ -131,7 +132,8 @@ Percentage of unique peptides:
 52.68%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 We found:
@@ -142,7 +144,8 @@ Percentage of unique peptides:
 46.26%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 GluC
 We found:
@@ -153,7 +156,8 @@ Percentage of unique peptides:
 53.02%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 We found:
@@ -164,7 +168,8 @@ Percentage of unique peptides:
 56.06%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 We found:
@@ -175,7 +180,8 @@ Percentage of unique peptides:
 55.04%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- MM_psm ----------
@@ -188,7 +194,8 @@ Percentage of unique peptides:
 40.02%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 AspN
 We found:
@@ -199,7 +206,8 @@ Percentage of unique peptides:
 41.81%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 We found:
@@ -210,7 +218,8 @@ Percentage of unique peptides:
 36.27%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 GluC
 We found:
@@ -221,7 +230,8 @@ Percentage of unique peptides:
 41.23%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 We found:
@@ -232,7 +242,8 @@ Percentage of unique peptides:
 44.73%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 We found:
@@ -243,6 +254,7 @@ Percentage of unique peptides:
 43.73%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image

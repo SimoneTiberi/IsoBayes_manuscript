@@ -132,7 +132,8 @@ Percentage of unique peptides:
 28.35%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 We found:
@@ -143,7 +144,8 @@ Percentage of unique peptides:
 23.48%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 We found:
@@ -154,7 +156,8 @@ Percentage of unique peptides:
 25.53%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 We found:
@@ -165,7 +168,8 @@ Percentage of unique peptides:
 26.04%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- OpenMS ----------
@@ -176,7 +180,8 @@ After FDR filtering (if used), we will analyze:
 32394 protein isoforms.
 Percentage of unique peptides:
 19.49%
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 We found:
@@ -185,7 +190,8 @@ After FDR filtering (if used), we will analyze:
 25899 protein isoforms.
 Percentage of unique peptides:
 20.94%
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 We found:
@@ -194,7 +200,8 @@ After FDR filtering (if used), we will analyze:
 44950 protein isoforms.
 Percentage of unique peptides:
 22.1%
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 We found:
@@ -203,7 +210,7 @@ After FDR filtering (if used), we will analyze:
 47150 protein isoforms.
 Percentage of unique peptides:
 20.76%
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
-[1] 0

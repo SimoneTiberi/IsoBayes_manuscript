@@ -39,4 +39,3 @@ while read -r line
 do
     tracejob "$line" > Benchmark_results/"$line"'_res_used.txt'
 done < Benchmark_results/list_jobid.txt
-

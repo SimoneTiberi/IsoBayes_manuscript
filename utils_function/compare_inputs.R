@@ -10,7 +10,7 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
       for (input in inputs) {
         attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
         # load res and validation merged together
-        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+        load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}.RData"))
         
         if(!grepl("_mRNA", model)){
           load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/{input}{attribute_model}_MCMC.RData"))

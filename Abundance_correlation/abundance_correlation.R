@@ -31,7 +31,7 @@ main = function(proteases){
         SumTab_corr_no_unique = rbind()
         for (protease in proteases) {
           # load validation dataset merged with model results
-          load(glue("{PATH_WD}/Model_results/{DATA}/{input}{mrna}{pep}/{protease}/Merged_validation_res_{input}{mrna}{pep}"))
+          load(glue("{PATH_WD}/Model_results/{DATA}/{input}{mrna}{pep}/{protease}/Merged_validation_res_{input}{mrna}{pep}.RData"))
           benchmark_df = validation_dat ; rm(validation_dat)
           
           benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
@@ -90,7 +90,7 @@ main = function(proteases){
     SumTab_corr = rbind()
     for (protease in proteases) {
       # load validation dataset merged with model results
-      load(glue("{PATH_RES_MODEL}/MM_psm_mRNA{model}/{protease}/Merged_validation_res_MM_psm_mRNA{model}"))
+      load(glue("{PATH_RES_MODEL}/MM_psm_mRNA{model}/{protease}/Merged_validation_res_MM_psm_mRNA{model}.RData"))
       benchmark_df = validation_dat ; rm(validation_dat)
       benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
       
@@ -143,7 +143,7 @@ main = function(proteases){
       
       for (protease in proteases) {
         # load validation dataset merged with model results
-        load(glue("{PATH_RES_MODEL}/{input}{model}_PEP/{protease}/Merged_validation_res_{input}{model}_PEP"))
+        load(glue("{PATH_RES_MODEL}/{input}{model}_PEP/{protease}/Merged_validation_res_{input}{model}_PEP.RData"))
         benchmark_df = validation_dat ; rm(validation_dat)
         benchmark_df_no_unique = benchmark_df[benchmark_df$Y_unique == 0, ]
         benchmark_df_all = rbind(benchmark_df_all, benchmark_df)

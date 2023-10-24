@@ -1,6 +1,6 @@
 plot_roc_model = function(path_to_res_mod, name, protease, name_models){
   
-  validation_dat_path = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}")
+  validation_dat_path = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}.RData")
   merge_validation(protease, name,
                    data_loaded_file = glue("{path_to_res_mod}/{name}_data_loaded.RData"),
                    MCMC_file = glue("{path_to_res_mod}/{name}_MCMC.RData"),

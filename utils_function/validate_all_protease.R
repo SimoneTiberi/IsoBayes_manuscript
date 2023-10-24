@@ -3,7 +3,7 @@ validate_all_protease = function(proteases, name, name_models){
   
   for (protease in proteases) {
     path_to_res_mod = paste0(PATH_TO_RES, "/", name, "/", protease)
-    validation_dat_path = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}")
+    validation_dat_path = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}.RData")
     
     if(!file.exists(validation_dat_path)){
       merge_validation(protease, name,

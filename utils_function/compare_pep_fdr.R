@@ -8,7 +8,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
       for (pep in c("_PEP", "")) {
         attribute_model = glue("{models[[model]][2]}{models[[model]][1]}") 
         # load res and validation merged together
-        load(glue("{PATH_RES}/{input}{attribute_model}{pep}/{protease}/Merged_validation_res_{input}{attribute_model}{pep}"))
+        load(glue("{PATH_RES}/{input}{attribute_model}{pep}/{protease}/Merged_validation_res_{input}{attribute_model}{pep}.RData"))
         
         if(!grepl("_mRNA", model)){
           load(glue("{PATH_RES}/{input}{attribute_model}{pep}/{protease}/{input}{attribute_model}{pep}_MCMC.RData"))

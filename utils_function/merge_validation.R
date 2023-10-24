@@ -7,5 +7,5 @@ merge_validation = function(protease, name, data_loaded_file, MCMC_file, validat
                          by.y = "protein_name", by.x = "Isoform", all.x = TRUE)
   validation_dat$Baseline = as.numeric(validation_dat$Y_unique > 0)
   
-  save(validation_dat, file = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}"))
+  save(validation_dat, file = glue("{PATH_WD}/Model_results/{DATA}/{name}/{protease}/Merged_validation_res_{name}.RData"))
 }

@@ -43,7 +43,7 @@ main = function(models, proteases){
   #     for (model in selected_models) {
   #       attribute_model = glue("{models[[model]][2]}{models[[model]][1]}")
   #       # load res and validation merged together
-  #       load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}"))
+  #       load(glue("{PATH_RES}/{input}{attribute_model}/{protease}/Merged_validation_res_{input}{attribute_model}.RData"))
   #       
   #       validation_dat = validation_dat[, c("Isoform", "Prob_present", "Present")]
   #       colnames(validation_dat)[2] = model

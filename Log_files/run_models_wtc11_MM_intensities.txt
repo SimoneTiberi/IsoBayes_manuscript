@@ -167,7 +167,8 @@ Percentage of unique peptides:
 43.41%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 Peptides with intensity equal to 0:
@@ -181,7 +182,8 @@ Percentage of unique peptides:
 37.12%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 Peptides with intensity equal to 0:
@@ -195,7 +197,8 @@ Percentage of unique peptides:
 51.78%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 Peptides with intensity equal to 0:
@@ -209,7 +212,8 @@ Percentage of unique peptides:
 57.68%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 ---------- MM_intensities ----------
@@ -225,7 +229,8 @@ Percentage of unique peptides:
 40.65%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Chym
 Peptides with intensity equal to 0:
@@ -239,7 +244,8 @@ Percentage of unique peptides:
 34.47%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 LysC
 Peptides with intensity equal to 0:
@@ -253,7 +259,8 @@ Percentage of unique peptides:
 47.69%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Trypsin
 Peptides with intensity equal to 0:
@@ -267,7 +274,8 @@ Percentage of unique peptides:
 52.84%
 'map_iso_gene' not specified.
             We return results without gene normalization.
-Transcriptomics data not loaded. Inference will be based only on proteomics data.
+Transcriptomics data not loaded.
+                Inference will be based only on proteomics data.
 Saving 7 x 7 in image
 Saving 7 x 7 in image
 [1] 0

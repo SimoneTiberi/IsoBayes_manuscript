@@ -31,7 +31,7 @@ main = function(proteases, no_unique = FALSE){
         benchmark_df_all = list()
         for (protease in proteases) {
           # load validation data with res
-          load(glue("{PATH_RES_MODEL}/{input}{mrna}{pep}/{protease}/Merged_validation_res_{input}{mrna}{pep}"))
+          load(glue("{PATH_RES_MODEL}/{input}{mrna}{pep}/{protease}/Merged_validation_res_{input}{mrna}{pep}.RData"))
           if(mrna == ""){
             validation_dat = add_mrna(input, protease, pep, validation_dat)
           }
@@ -105,7 +105,7 @@ main = function(proteases, no_unique = FALSE){
         benchmark_df_models = list()
         for (model in c("_PEP", "")) {
           # load validation data with res
-          load(glue("{PATH_RES_MODEL}/{input}{mrna}{model}/{protease}/Merged_validation_res_{input}{mrna}{model}"))
+          load(glue("{PATH_RES_MODEL}/{input}{mrna}{model}/{protease}/Merged_validation_res_{input}{mrna}{model}.RData"))
           if(mrna == ""){
             validation_dat = add_mrna(input, protease, model, validation_dat)
           }
@@ -151,7 +151,7 @@ main = function(proteases, no_unique = FALSE){
       benchmark_df_models = list()
       for (input in c("MM_psm", "OpenMS")) {
         # load validation data with res
-        load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}"))
+        load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}.RData"))
         if(mrna == ""){
           validation_dat = add_mrna(input, protease, "", validation_dat)
         }
@@ -187,7 +187,7 @@ main = function(proteases, no_unique = FALSE){
       benchmark_df_models = list()
       for (input in c("MM_psm", "MM_intensities")) {
         # load validation data with res
-        load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}"))
+        load(glue("{PATH_RES_MODEL}/{input}{mrna}/{protease}/Merged_validation_res_{input}{mrna}.RData"))
         if(mrna == ""){
           validation_dat = add_mrna(input, protease, "", validation_dat)
         }
@@ -225,7 +225,7 @@ main = function(proteases, no_unique = FALSE){
       benchmark_df_models = list()
       for (model in c("_mRNA", "")) {
         # load validation data with res
-        load(glue("{PATH_RES_MODEL}/{input}{model}/{protease}/Merged_validation_res_{input}{model}"))
+        load(glue("{PATH_RES_MODEL}/{input}{model}/{protease}/Merged_validation_res_{input}{model}.RData"))
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         
         if(model == ""){
