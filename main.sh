@@ -38,8 +38,8 @@ do
 	#echo '--- Run IsoBayes models ('$data') ---'
 	#singularity exec Containers/IsoBayes.img Rscript Model_results/run_models.R $MAIN_PATH $data
 
-	echo '--- Get benchmark results ---'
-        Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $data
+	#echo '--- Get benchmark results ---'
+        #Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $data
 
 	echo '--- Get robustness results ---'
 	Rscript Robustness/robustness_IsoBayes.R $MAIN_PATH $data

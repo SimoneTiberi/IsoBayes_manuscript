@@ -62,3 +62,9 @@ while read -r line
 do
     tracejob -n 3 "$line" > Benchmark_results/results/"$line"'_res_used.txt'
 done < Benchmark_results/list_jobid.txt
+
+echo '--- Get benchmark results ---'
+for dt in jurkat wtc11
+do
+	Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $dt
+done
