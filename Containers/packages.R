@@ -1,14 +1,4 @@
-ipak <- function(pkg){
-            new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg))
-                    install.packages(new.pkg, dependencies = TRUE, repos = "http://cran.us.r-project.org")
-        sapply(pkg, require, character.only = TRUE)
+if (!requireNamespace("BiocManager", quietly=TRUE)){
+	        install.packages("BiocManager")
 }
-
-# usage
-packages <- c("Rcpp", "doParallel", "foreach", "ggplot2", "parallel", "config", "data.table", "gdata", "pROC", "RcppArmadillo",
-              "methods", "glue", "doParallel", "doRNG", "iterators", "HDInterval", "readr", "SummarizedExperiment"
-              )
-ipak(packages)
-
-
+BiocManager::install("IsoBayes")
