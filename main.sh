@@ -1,6 +1,12 @@
 #!/bin/bash
 MAIN_PATH=$(pwd)
 
+# R and IsoBayes library, used for benchmarking and data analysis, have been packaged up in a Singularity container in order to be portable and reproducible.
+# All the results (plots and tables) in the paper "x" can be reproduce by launching the following code
+
+# We carried out the benchmark analysis on a HPC endowed with OpenPBS for job scheduling and workload management
+# The section code related to benchmark ananlysi assumes that code is run on a HPC with OpenPBS commands.
+
 #cd Containers
 #sudo singularity build IsoBayes.img IsoBayes.def
 #cd ..

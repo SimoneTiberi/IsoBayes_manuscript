@@ -30,7 +30,6 @@ load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 log_output(glue("benchmarking_results_{DATA}"))
 
 main = function(models, proteases){
-  if(TRUE){
     # COMPETITORS vs IsoBayes_openMS vs IsoBayes_openMS_mRNA [PERFORMANCE]
     benchmark_df_all = list()
     selected_models = c("IsoBayes", "IsoBayes_mRNA")
@@ -216,7 +215,7 @@ main = function(models, proteases){
         save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_gene{mrna}.rdata"))
       }
     }
-  }
+
   
   #################################################################################################
   # RUN_TIME and RAM

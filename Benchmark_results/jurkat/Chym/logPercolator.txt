@@ -1,9 +1,0 @@
-Loading input file: /homenfs/jbollon/RNA_PROT/IsoBayes_paper/Data/jurkat/OnlyChym/merge_index.idXML
-Merging peptide ids.
-Merging protein ids.
-Prepared percolator input.
-PSM-level FDR: All PSMs are returned by percolator. Reannotating all PSMs in input data with percolator output.
-Scores of all other PSMs will be set to 1.0.
-44061 suitable PeptideHits of 38772 PSMs were reannotated.
-PercolatorAdapter finished successfully!
-PercolatorAdapter took 16.61 s (wall), 4.34 s (CPU), 0.25 s (system), 4.09 s (user); Peak Memory Usage: 142 MB.

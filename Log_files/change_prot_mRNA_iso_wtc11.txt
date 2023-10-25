@@ -1,4 +1,0 @@
-Error in quantile.default(as.numeric(x), c(0.25, 0.75), na.rm = na.rm,  : 
-  missing values and NaN's not allowed if 'na.rm' is FALSE
-Calls: main ... plot_prob_change -> IQR -> diff -> quantile -> quantile.default
-Execution halted
