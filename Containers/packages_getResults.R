@@ -6,11 +6,6 @@ ipak <- function(pkg){
 }
 
 # usage
-packages <- c("Rcpp", "doParallel", "foreach", "ggplot2", "data.table", "RcppArmadillo",
-	      "glue", "doRNG", "iterators", "HDInterval")
+packages <- c("ggplot2", "readr")
 ipak(packages)
 
-if (!require("BiocManager", quietly = TRUE))
-	    install.packages("BiocManager")
-
-BiocManager::install("SummarizedExperiment")

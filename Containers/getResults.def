@@ -1,0 +1,12 @@
+Bootstrap: docker
+
+From: r-base
+
+%files
+packages_getResults.R /
+
+%post
+
+apt-get -y update
+apt-get -y upgrade
+Rscript packages_getResults.R

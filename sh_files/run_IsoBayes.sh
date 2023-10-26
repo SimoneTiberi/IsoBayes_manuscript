@@ -6,9 +6,9 @@ for pep in 'FALSE' 'TRUE'
 do
 	if [ "$pep" = "TRUE" ]
 	then
-		$FDR=0.1
+		FDR=0.1
 	else
-		$FDR=0.01
+		FDR=0.01
 	fi
 	echo "#!/bin/bash" >> temp.sh
        	echo "cd "$MAIN_PATH >> temp.sh
