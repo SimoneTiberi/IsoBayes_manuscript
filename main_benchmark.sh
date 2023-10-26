@@ -1,19 +1,25 @@
 #!/bin/bash
 
-# wget figshare
-echo "Downloading Data from.."
-path_data=/homenfs/jbollon/RNA_PROT/IsoBayes_paper/Data
+if [ ! -d "./Data" ]; then
 
+	echo "Downloading Data.zip from https://figshare.com/ndownloader/files/42894736"
+	wget -O ./Data.zip -c https://figshare.com/ndownloader/files/42894736
+
+	echo "Unzipping Data.zip"
+	unzip Data.zip
+fi
+
+path_data=Data
 export MAIN_PATH=$(pwd)
 export NTHREADS=8
-n_models=70
+n_models=50
 
 echo -n > Benchmark_results/list_jobid.txt
-
+mkdir jobs_log
 
 for n_run in {1..2}
 do
-	for dt in jurkat wtc11
+	for dt in jurkat #wtc11
 	do
 		export data=$dt
 		export path_to_data=$path_data/$data
@@ -36,14 +42,14 @@ do
 
 	check=0
 	tot_models=$(( $n_run * $n_models - 20 ))
-	echo "Number of models executed"
-	echo $tot_models
 
 	while [ $check -lt $tot_models ]
 	do
-		sleep 15
+		sleep 30
 		sh save_id.sh
 		check=$(wc -l Benchmark_results/list_jobid.txt | cut -f1 -d' ')
+		echo "Number of processed models"
+        	echo $check
 	done
 done
 			      
@@ -53,7 +59,7 @@ while [ $check != $tot_models ]
 do
 	sleep 30
 	sh save_id.sh
-	check=$(wc -l Benchmark_results/internal_list_jobid.txt | cut -f1 -d' ')	
+	check=$(wc -l Benchmark_results/list_jobid.txt | cut -f1 -d' ')	
 done
 
 mkdir Benchmark_results/results
@@ -63,8 +69,5 @@ do
     tracejob -n 3 "$line" > Benchmark_results/results/"$line"'_res_used.txt'
 done < Benchmark_results/list_jobid.txt
 
-echo '--- Get benchmark results ---'
-for dt in jurkat wtc11
-do
-	Rscript Benchmark_results/benchmarking_plot.R $MAIN_PATH $dt
-done
+mkdir Benchmark_results/results/tmp
+mv competitors* Benchmark_results/results/tmp

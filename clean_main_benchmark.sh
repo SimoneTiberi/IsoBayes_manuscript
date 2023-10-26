@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm competitors_*
+rm -r Benchmark_results/results
 rm -r Benchmark_results/internal_results
 rm -r Benchmark_results/jurkat
 rm -r Benchmark_results/wtc11
