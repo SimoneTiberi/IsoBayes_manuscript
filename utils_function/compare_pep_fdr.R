@@ -60,6 +60,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
       scat_bench = scatterplot(log10(benchmark_df_all[, c(glue("Abundance_IsoBayes{mrna}{pep}"),
                                                           glue("Y_validation_IsoBayes{mrna}{pep}"))] + 1))  + 
         labs(x = "Log10(Estimated Abundance + 1)", y = "Log10(Validated Abundance + 1)") 
+      
       ggsave(glue("{PATH_RES_roc}/scatterplot_{input}{pep}{mrna}_pep_vs_no_pep.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_{input}{pep}{mrna}_pep_vs_no_pep.rdata"))
       
@@ -104,10 +105,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
                                             sub_data_extreme[, c("class_Prob_prot_inc",
                                                                  "Log2_FC_validation",
                                                                  "Model", "mrna")]
-      )
-      
-      #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}{pep}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-      
+                                            )
       ths = 1.5e-06
       p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}{pep}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}{pep}")]+ths)
       pi = (sub_data[, glue("Pi_IsoBayes{mrna}{pep}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}{pep}")]+ths)

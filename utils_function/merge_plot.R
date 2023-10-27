@@ -16,7 +16,10 @@ for (noUP in c("", "no_UP_")) {
   list_plot_bench_memory = list()
   
   for (dat in c("jurkat", "wtc11")) {
-    proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+    proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"),
+                          recursive = FALSE,
+                          full.names = FALSE
+                          )
     for (prot in proteases) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{prot}/{noUP}ROC_main_result.rdata"))
       list_plot_bench = append(list_plot_bench, list(plot_tab))
@@ -136,7 +139,10 @@ list_plot_abundance = list()
 list_plot_change = list()
 
 for (dat in c("jurkat", "wtc11")) {
-  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"),
+                        recursive = FALSE,
+                        full.names = FALSE
+                        )
   for (prot in proteases) {
     load(glue("{PATH_WD}/Robustness/{dat}/{prot}/ROC_MM_psm_vs_MM_intensities_vs_OpenMS.rdata"))
     list_plot_roc = append(list_plot_roc, list(plot_tab))
@@ -204,25 +210,11 @@ list_plot_abundance = list()
 list_plot_change = list()
 
 for (dat in c("jurkat", "wtc11")) {
-  # proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
-  # for (prot in proteases) {
-  #   load(glue("{PATH_WD}/Robustness/{dat}/{prot}/ROC_MM_psm_vs_MM_intensities.rdata"))
-  #   list_plot_roc = append(list_plot_roc, list(plot_tab))
-  # }
-  
   for (mrna in c("", "_mRNA")) {
     for (input in c("MM_intensities", "MM_psm")) {
       load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS.rdata"))
       scat_bench$name = glue("scatterplot_{input}{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS")
       list_plot_abundance = append(list_plot_abundance, list(scat_bench))
-      
-      # load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS.rdata"))
-      # plot_change$name = glue("change_mrna_prot{mrna}_MM_psm_vs_MM_intensities")
-      # list_plot_change = append(list_plot_change, list(plot_change))
-      
-      # load(glue("{PATH_WD}/Robustness/{dat}/change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS.rdata"))
-      # plot_change$name = glue("change_mrna_prot_extreme{mrna}_MM_psm_vs_MM_intensities")
-      # list_plot_change = append(list_plot_change, list(plot_change))
       
       load(glue("{PATH_WD}/Robustness/{dat}/scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS.rdata"))
       scat_bench$name = glue("scatterplot_log2fc_{input}{mrna}_MM_psm_vs_MM_intensities_vs_OpenMS")
@@ -230,22 +222,6 @@ for (dat in c("jurkat", "wtc11")) {
     }
   }
 }
-
-# a = ggpubr::ggarrange(list_plot_roc[[1]]$gplot + xlab(NULL),
-#                       list_plot_roc[[2]]$gplot + xlab(NULL) + ylab(NULL),
-#                       list_plot_roc[[3]]$gplot + xlab(NULL) + ylab(NULL),
-#                       list_plot_roc[[4]]$gplot + xlab(NULL) + ylab(NULL),
-#                       list_plot_roc[[5]]$gplot + xlab(NULL) + ylab(NULL),
-#                       list_plot_roc[[6]]$gplot,
-#                       list_plot_roc[[7]]$gplot + ylab(NULL),
-#                       list_plot_roc[[8]]$gplot + ylab(NULL),
-#                       list_plot_roc[[9]]$gplot + ylab(NULL),
-#                       list_plot_roc[[10]]$gplot + ylab(NULL),
-#                       nrow = 2, ncol = 5, common.legend = TRUE, 
-#                       legend="bottom"
-#                       )
-# ggsave(glue("{PATH_WD}/Robustness/ROC_MM_psm_vs_MM_intensities_vs_OpenMS.png"), plot = a,
-#        height = size * scale, width = size)
 
 half_length = length(list_plot_abundance)/2
 for (i in 1:half_length) {
@@ -275,7 +251,6 @@ for (i in 1:half_length) {
 }
 
 ############################# 4 ###################################################
-
 for (input in c("MM_psm", "MM_intensities")) {
   list_plot_roc = list()
   list_plot_abundance = list()

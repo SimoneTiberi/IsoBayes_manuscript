@@ -10,11 +10,10 @@ memory_plot = function(df, title){
     theme(plot.title = element_text(size = 16, hjust = 0.5),
           axis.title.y = element_text(size = 15),
           axis.text.x = element_text(size = 12,
-                                     angle = 45, margin = margin(t = 40, r = 0,
-                                                                 b = -40, l = 0,
-                                                                 unit = "pt")),
+                                     angle = 45,
+                                     margin = margin(t = 40, r = 0,
+                                                     b = -40, l = 0,
+                                                     unit = "pt")),
           axis.text.y = element_text(size = 10),
-          legend.position = "none") #+
-    #geom_errorbar(aes(ymin=RAM-RAM_sd, ymax=RAM+RAM_sd), width=.1, size = 0.5,
-     #             position=position_dodge(.9))
+          legend.position = "none")
 }

@@ -12,16 +12,20 @@ for (dat in c("jurkat", "wtc11")) {
   }else{
     DATA_name = "jurkat"
   }
-  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"),
+                        recursive = FALSE,
+                        full.names = FALSE
+                        )
   for (prot in proteases) {
     vec_dat = c(vec_dat, DATA_name)
     vec_prot = c(vec_prot, prot)
     tab = data.table::fread(glue("{PATH_WD}/Benchmark_results/{dat}/{prot}/SumTab_main_result.csv"))
-    i_ord = match(c("IsoBayes_mRNA", "IsoBayes", "EPIFANY", "PIA", "Fido"), tab$Model)
+    i_ord = match(c("IsoBayes_mRNA", "IsoBayes", "EPIFANY", "PIA", "Fido"),
+                  tab$Model
+                  )
     final_tab = rbind(final_tab, t(tab[i_ord, "AUC"]))
   }
 }
-
 final_tab = rbind(final_tab, colMeans(final_tab))
 final_tab = round(final_tab, 2)
 final_tab = cbind(c(vec_dat, NA), c(vec_prot, NA), final_tab)
@@ -41,16 +45,20 @@ for (dat in c("jurkat", "wtc11")) {
   }else{
     DATA_name = "jurkat"
   }
-  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"), recursive = FALSE, full.names = FALSE)
+  proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{dat}"),
+                        recursive = FALSE,
+                        full.names = FALSE
+                        )
   for (prot in proteases) {
     vec_dat = c(vec_dat, DATA_name)
     vec_prot = c(vec_prot, prot)
     tab = data.table::fread(glue("{PATH_WD}/Benchmark_results/{dat}/{prot}/SumTab_main_result_no_UP.csv"))
-    i_ord = match(c("IsoBayes_mRNA", "IsoBayes", "EPIFANY", "PIA", "Fido"), tab$Model)
+    i_ord = match(c("IsoBayes_mRNA", "IsoBayes", "EPIFANY", "PIA", "Fido"),
+                  tab$Model
+                  )
     final_tab = rbind(final_tab, t(tab[i_ord, "AUC_only_shared"]))
   }
 }
-
 final_tab = rbind(final_tab, colMeans(final_tab))
 final_tab = round(final_tab, 2)
 final_tab = cbind(c(vec_dat, NA), c(vec_prot, NA), final_tab)
@@ -69,7 +77,6 @@ for (mrna in c("_mRNA", "")) {
     for (dat in c("jurkat", "wtc11")) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}scatterplot_benchmark{mrna}.rdata"))
       correlation = strsplit(scat_bench$labels$subtitle, " ")[[1]][2]
-      
       row_val = c(row_val, correlation)
     }
   }
@@ -91,7 +98,6 @@ for (mrna in c("_mRNA", "")) {
     for (dat in c("jurkat", "wtc11")) {
       load(glue("{PATH_WD}/Benchmark_results/{dat}/{noUP}scatterplot_log2fc{mrna}.rdata"))
       correlation = strsplit(scat_bench$labels$subtitle, " ")[[1]][2]
-      
       row_val = c(row_val, correlation)
     }
   }
@@ -156,13 +162,17 @@ for (dat in c("jurkat", "wtc11")) {
   }else{
     DATA_name = "jurkat"
   }
-  proteases = list.dirs(glue("{PATH_WD}/Robustness/{dat}"), recursive = FALSE, full.names = FALSE)
+  proteases = list.dirs(glue("{PATH_WD}/Robustness/{dat}"),
+                        recursive = FALSE,
+                        full.names = FALSE
+                        )
   for (prot in proteases) {
     vec_dat = c(vec_dat, DATA_name)
     vec_prot = c(vec_prot, prot)
     tab = data.table::fread(glue("{PATH_WD}/Robustness/{dat}/{prot}/SumTab_MM_psm_vs_MM_intensities_vs_OpenMS.csv"))
-    i_ord = match(c("IsoBayes_OpenMS", "IsoBayes_MM_psm", "IsoBayes_MM_intensities",
-                    "IsoBayes_mRNA_OpenMS", "IsoBayes_mRNA_MM_psm", "IsoBayes_mRNA_MM_intensities"),
+    i_ord = match(c("IsoBayes_OpenMS", "IsoBayes_MM_psm",
+                    "IsoBayes_MM_intensities", "IsoBayes_mRNA_OpenMS",
+                    "IsoBayes_mRNA_MM_psm", "IsoBayes_mRNA_MM_intensities"),
                   tab$Model
                   )
     final_tab = rbind(final_tab, t(tab[i_ord, "AUC"]))
@@ -190,10 +200,7 @@ for (dat in c("jurkat", "wtc11")) {
   }
   final_tab = rbind(final_tab, row_val)
 }
-
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
-
-##
 
 ####################################################################################
 # Pep vs no Pep -- MM_psm - MM_intensities
@@ -208,12 +215,16 @@ for (input in c("MM_psm", "MM_intensities")) {
     }else{
       DATA_name = "jurkat"
     }
-    proteases = list.dirs(glue("{PATH_WD}/Robustness/{dat}"), recursive = FALSE, full.names = FALSE)
+    proteases = list.dirs(glue("{PATH_WD}/Robustness/{dat}"),
+                          recursive = FALSE,
+                          full.names = FALSE
+                          )
     for (prot in proteases) {
       vec_dat = c(vec_dat, DATA_name)
       vec_prot = c(vec_prot, prot)
       tab = data.table::fread(glue("{PATH_WD}/Robustness/{dat}/{prot}/SumTab_{input}_pep_vs_no_pep.csv"))
-      i_ord = match(c("IsoBayes_PEP", "IsoBayes", "IsoBayes_mRNA_PEP", "IsoBayes_mRNA"),
+      i_ord = match(c("IsoBayes_PEP", "IsoBayes",
+                      "IsoBayes_mRNA_PEP", "IsoBayes_mRNA"),
                     tab$Model
                     )
       final_tab = rbind(final_tab, t(tab[i_ord, "AUC"]))

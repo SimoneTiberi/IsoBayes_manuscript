@@ -5,7 +5,7 @@ for data in 'jurkat' 'wtc11'
 do
         echo '--- Converting mzID files to idXML with OpenMS toolkit ('$data' dataset) ---'
         cd Data/$data
-        singularity exec ../../Containers/OpenMS.img sh ../get_openMS_file.sh > ../../Log_files/conversion_idXML_$data.txt 2>&1
+        singularity exec ../../Containers/OpenMS.img sh ../../sh_files/get_openMS_file.sh > ../../Log_files/conversion_idXML_$data.txt 2>&1
         cd ../../
 
         if [ "$data" = "wtc11" ]

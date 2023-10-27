@@ -8,7 +8,9 @@ get_roc = function(benchmark, name_models, protease = "", labs = NULL){
     scores = append(scores, list(benchmark[id_na, name_model]))
     labels = append(labels, list(benchmark[id_na, glue("Present_{name_model}")]))
   }
-  roc_pr_curves = precrec::mmdata(scores, labels, name_models, dsids = 1:length(name_models))
+  roc_pr_curves = precrec::mmdata(scores, labels, name_models,
+                                  dsids = 1:length(name_models)
+                                  )
   roc_pr_curves = precrec::evalmod(roc_pr_curves)
   
   auc_roc = round(precrec::auc(roc_pr_curves)[precrec::auc(roc_pr_curves)[, "curvetypes"] == "ROC", "aucs"], 3)
@@ -39,13 +41,11 @@ get_roc = function(benchmark, name_models, protease = "", labs = NULL){
     pp = pp + geom_line(linewidth = 1) + labs(title = glue("{DATA_name}{protease}")) +
       theme(plot.title = element_text(size = 11, hjust = 0.5),
             axis.title = element_text(size = 10),
-            #legend.title = element_text(size = 11, face = "bold"),
             axis.text.x = element_text(size = 8, angle = 45, vjust = 0.8),
             axis.text.y = element_text(size = 8),
             legend.text = element_text(size = 11)
       )
   }
-  
   pp = pp + xlab("FPR") + ylab("TPR")
   
   list(gplot = pp, sum_stat = sum_stat)

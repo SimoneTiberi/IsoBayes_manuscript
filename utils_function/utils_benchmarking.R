@@ -1,9 +1,12 @@
 get_attributes = function(record, begins, ends, isNumeric = FALSE){
-  out = vapply(record, function(x){gsub(paste0(".*", begins), "", x)}, FUN.VALUE = character(1))
+  out = vapply(record, function(x){gsub(paste0(".*", begins), "", x)},
+               FUN.VALUE = character(1))
   if(isNumeric){
-    out = vapply(out, function(x){as.numeric(gsub(paste0(ends, ".*"), "", x))}, FUN.VALUE = numeric(1))
+    out = vapply(out, function(x){as.numeric(gsub(paste0(ends, ".*"), "", x))},
+                 FUN.VALUE = numeric(1))
   }else{
-    out = vapply(out, function(x){gsub(paste0(ends, ".*"), "", x)}, FUN.VALUE = character(1))
+    out = vapply(out, function(x){gsub(paste0(ends, ".*"), "", x)},
+                 FUN.VALUE = character(1))
   }
   names(out) = NULL
   
@@ -17,15 +20,7 @@ get_score_from_idXML = function(path_to_xml){
   keep = keep + (substr(idXML$V1, 1, 14) == "\t\t\t<ProteinHit")
   idXML = idXML[keep > 0, ]
   
-  # get all the <record>s
-  #res = as.character(xml_find_all(pg, "//ProteinHit"))
-  
-  #isoform = sapply(strsplit(res, " "), function(x){gsub("accession=\"", "", x[3])})
-  #isoform = sapply(strsplit(isoform, " "), function(x){gsub("\"", "", x)})
   Isoform = get_attributes(idXML$V1, "accession=\"", "\" score=")
-  
-  #score = sapply(strsplit(res, " "), function(x){gsub("score=\"", "", x[4])})
-  #score = sapply(strsplit(score, " "), function(x){as.numeric(gsub("\"", "", x))})
   score = get_attributes(idXML$V1, "score=\"", "\" sequence", isNumeric = TRUE)
   
   data.frame(Isoform, score)
@@ -38,5 +33,6 @@ load_and_merge = function(path, name_model){
   results$isoform_results = results$isoform_results[, c("proteins", "Probability_present")]
   colnames(results$isoform_results) = paste0(colnames(results$isoform_results), name_model)
   
-  merge(benchmark_intersect, results$isoform_results, by.x = "proteins", by.y = paste0("proteins", name_model), all = T)
+  merge(benchmark_intersect, results$isoform_results, by.x = "proteins",
+        by.y = paste0("proteins", name_model), all = T)
 }

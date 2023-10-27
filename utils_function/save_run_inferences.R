@@ -1,4 +1,6 @@
-save_run_inferences = function(data_loaded, path_to_res_mod, name, map_iso_gene = NULL, long_mcmc = FALSE, save_chain = FALSE){
+save_run_inferences = function(data_loaded, path_to_res_mod, name,
+                               map_iso_gene = NULL, long_mcmc = FALSE,
+                               save_chain = FALSE){
   save(data_loaded, file = glue("{path_to_res_mod}/{name}_data_loaded.RData"))
   
   if(save_chain){

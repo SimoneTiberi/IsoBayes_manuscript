@@ -28,9 +28,10 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
           P_TPM = validation_dat$TPM/sum(validation_dat$TPM)
           validation_dat$Log2_FC = log2(validation_dat$Pi/P_TPM)
           
-          validation_dat$Prob_prot_inc = vapply(seq_len(nrow(validation_dat)), function(i){
+          validation_dat$Prob_prot_inc = vapply(seq_len(nrow(validation_dat)),
+                                                function(i){
             mean(res$chains$PI[, i] > P_TPM[i])}, FUN.VALUE = numeric(1))
-        }
+          }
         
         colnames(validation_dat)[grep("tpm", colnames(validation_dat))] = "tpm_validation"
         colnames(validation_dat) = glue("{colnames(validation_dat)}_{model}_{input}")
@@ -43,10 +44,14 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
     }
     benchmark_df = concat_models(benchmark_df, union = FALSE)
     
-    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, "_", rep(inputs, each=2)), protease = glue("- {protease}"))
+    plot_tab = get_roc(benchmark_df, paste0(sub_selected_models, "_", rep(inputs, each=2)),
+                       protease = glue("- {protease}")
+                       )
     ggsave(glue("{PATH_RES_roc}/{protease}/ROC_{name_file}.png"), plot = plot_tab$gplot)
     save(plot_tab, file = glue("{PATH_RES_roc}/{protease}/ROC_{name_file}.rdata"))
-    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_{name_file}.csv"), row.names = FALSE)
+    write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/{protease}/SumTab_{name_file}.csv"),
+              row.names = FALSE
+              )
     benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
   }
   
@@ -55,13 +60,15 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
                                                     "MM_int_mRNA", "MM_PSM_mRNA",
                                                     "OpenMS_mRNA", "OpenMS"))
   
-  plot_tab = plot_tab + scale_colour_manual("", values = PALETTE_MODELS[nm], labels = c("MM_int", "MM_PSM",
-                                                                    "MM_int_mRNA", "MM_PSM_mRNA",
-                                                                    "OpenMS_mRNA", "OpenMS"))
-  
+  plot_tab = plot_tab + scale_colour_manual("", values = PALETTE_MODELS[nm],
+                                            labels = c("MM_int", "MM_PSM",
+                                                       "MM_int_mRNA", "MM_PSM_mRNA",
+                                                       "OpenMS_mRNA", "OpenMS")
+                                            )
   ggsave(glue("{PATH_RES_roc}/ROC_{name_file}.png"), plot = plot_tab$gplot)
   save(plot_tab, file = glue("{PATH_RES_roc}/ROC_{name_file}.rdata"))
-  write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_{name_file}.csv"), row.names = FALSE)
+  write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_roc}/SumTab_{name_file}.csv"),
+            row.names = FALSE)
   
   ## abundance 
   plot_prob_change_data = rbind()
@@ -70,7 +77,8 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
     for (mrna in c("", "_mRNA")) {
       scat_bench = scatterplot(log10(benchmark_df_all[, c(glue("Abundance_IsoBayes{mrna}_{input}"),
                                                           glue("Y_validation_IsoBayes{mrna}_{input}"))] + 1))  + 
-        labs(x = "Log10(Estimated Abundance + 1)", y = "Log10(Validated Abundance + 1)") 
+        labs(x = "Log10(Estimated Abundance + 1)", y = "Log10(Validated Abundance + 1)")
+      
       ggsave(glue("{PATH_RES_roc}/scatterplot_{input}{mrna}_{name_file}.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_{input}{mrna}_{name_file}.rdata"))
       
@@ -110,10 +118,7 @@ compare_inputs = function(inputs, sub_selected_models, proteases, models){
                                             sub_data_extreme[, c("class_Prob_prot_inc",
                                                                  "Log2_FC_validation",
                                                                  "Model", "mrna")]
-      )
-      
-      #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}_{input}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-      
+                                            )
       ths = 1.5e-06
       p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}_{input}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}_{input}")]+ths)
       pi = (sub_data[, glue("Pi_IsoBayes{mrna}_{input}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}_{input}")]+ths)

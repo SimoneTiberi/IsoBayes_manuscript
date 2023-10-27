@@ -14,7 +14,6 @@ library(readr)
 library(glue)
 source(glue("{PATH_WD}/utils_function/utils_benchmarking.R"))
 source(glue("{PATH_WD}/utils_function/get_roc.R"))
-source(glue("{PATH_WD}/utils_function/prior_plot.R"))
 source(glue("{PATH_WD}/utils_function/memory_plot.R"))
 source(glue("{PATH_WD}/utils_function/run_time_plot.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
@@ -116,13 +115,15 @@ main = function(models, proteases){
         benchmark_df[, paste0("Present_", nm)] = benchmark_df$Present
       }
       
-      plot_tab = get_roc(benchmark_df, c(selected_models, "EPIFANY", "Fido", "PIA"),
+      plot_tab = get_roc(benchmark_df,
+                         c(selected_models, "EPIFANY", "Fido", "PIA"),
                          protease = glue(" - {protease}"))
       ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.png"), plot = plot_tab$gplot)
       save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result.rdata"))
       shared_vs_all_auc = plot_tab$sum_stat
       
-      write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"), row.names = FALSE)
+      write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"),
+                row.names = FALSE)
       benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
       
       # Focus on validation without isoform with Unique Peptide (UP)
@@ -135,7 +136,9 @@ main = function(models, proteases){
       shared_vs_all_auc = cbind(shared_vs_all_auc, plot_tab$sum_stat$AUC)
       colnames(shared_vs_all_auc) = c("Model", "AUC_all", "AUC_only_shared")
       
-      write.csv(shared_vs_all_auc, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"), row.names = FALSE)
+      write.csv(shared_vs_all_auc,
+                file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"),
+                row.names = FALSE)
     }
     
     for (noUP in c("", "no_UP_")) {
@@ -270,7 +273,6 @@ main = function(models, proteases){
     colnames(data_protease_sd) = paste0(colnames(data_protease_sd), "_sd")
     data_protease = merge(data_protease_mean, data_protease_sd, by.x = "Group.1", by.y = "Group.1_sd")
     colnames(data_protease)[1] = "Model"
-    #data_protease = data_protease[!grepl("PEP", data_protease$Model), ]
     
     # RUN TIME
     data_protease$RunTime = round(data_protease$RunTime, 1)
@@ -333,4 +335,3 @@ main(proteases = list.dirs(glue("{PATH_WD}/Benchmark_results/{DATA}"), recursive
                    IsoBayes_mRNA_PEP = c("_PEP", "_mRNA")
      )
 )
-

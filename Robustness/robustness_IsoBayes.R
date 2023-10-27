@@ -12,7 +12,6 @@ if(DATA == "wtc11"){
 library(ggplot2)
 library(glue)
 source(glue("{PATH_WD}/utils_function/get_roc.R"))
-source(glue("{PATH_WD}/utils_function/prior_plot.R"))
 source(glue("{PATH_WD}/utils_function/utils_benchmarking.R"))
 source(glue("{PATH_WD}/utils_function/concat_models.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))

@@ -2,7 +2,7 @@
 
 echo "#!/bin/bash" >> temp.sh
 echo "cd $MAIN_PATH" >> temp.sh
-echo "singularity run --bind $f Containers/PIA_tool/pia.sif -c -o $f/pia-compilation.xml $f/merge_index_percolator_pep_switched.idXML > $out/logPiaComp.txt" >> temp.sh
+echo "singularity run --bind $f Containers/PIA_tool/pia.sif -c -o $f/pia-compilation.xml $f/merge_index_percolator_pep_switched_0.01.idXML > $out/logPiaComp.txt" >> temp.sh
 echo "cp Containers/PIA_tool/pia.json $f/pia.json" >> temp.sh
 echo "sed -i "s+./piaExport-proteins.mzTab+$out/pia_results.mzTab+g" $f/pia.json" >> temp.sh
 echo "singularity run --bind $f Containers/PIA_tool/pia.sif $f/pia.json $f/pia-compilation.xml > $out/logPia.txt" >> temp.sh
