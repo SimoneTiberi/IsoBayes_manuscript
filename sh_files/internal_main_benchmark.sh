@@ -33,7 +33,7 @@ do
 	do
 		echo $tot_models
 		sleep 30
-		sh save_internal_id.sh
+		sh sh_files/save_internal_id.sh
 		check=$(wc -l Benchmark_results/internal_list_jobid.txt | cut -f1 -d' ')
 		echo $check
 	done
@@ -44,7 +44,7 @@ tot_models=$(( $n_run * $n_models ))
 while [ $check != $tot_models ]
 do
    sleep 30
-   sh save_id.sh
+   sh sh_files/save_internal_id.sh
    check=$(wc -l Benchmark_results/internal_list_jobid.txt | cut -f1 -d' ')
    echo $check
    echo $tot_models
@@ -56,3 +56,5 @@ do
     tracejob -n 5 "$line" > Benchmark_results/internal_results/"$line"'_res_used.txt'
 done < Benchmark_results/internal_list_jobid.txt
 
+mkdir Benchmark_results/internal_results/tmp
+mv competitors* Benchmark_results/internal_results/tmp

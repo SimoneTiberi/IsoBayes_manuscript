@@ -1,6 +1,6 @@
 #!/bin/bash
 
-a=$(find ./ -name "competitors_*")
+a=$(find ./ -maxdepth 1 -name "competitors_*")
 echo -n > Benchmark_results/internal_list_jobid.txt
 for file in $a
 do
