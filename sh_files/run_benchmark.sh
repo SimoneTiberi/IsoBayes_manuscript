@@ -1,15 +1,5 @@
 #!/bin/bash
 
-if [ ! -d "./Data" ]; then
-
-	echo "Downloading Data.zip from https://figshare.com/ndownloader/files/42894736"
-	wget -O ./Data.zip -c https://figshare.com/ndownloader/files/42894736
-
-	echo "Unzipping Data.zip"
-	unzip Data.zip
-fi
-
-path_data=Data
 export MAIN_PATH=$(pwd)
 export NTHREADS=8
 n_models=50
@@ -17,12 +7,12 @@ n_models=50
 echo -n > Benchmark_results/list_jobid.txt
 mkdir jobs_log
 
-for n_run in {1..2}
+for n_run in {1..10}
 do
-	for dt in jurkat #wtc11
+	for dt in jurkat wtc11
 	do
 		export data=$dt
-		export path_to_data=$path_data/$data
+		export path_to_data=$MAIN_PATH/Data/$data
         	export path_to_res=$MAIN_PATH/Benchmark_results/$data
         	mkdir $path_to_res
 
@@ -46,7 +36,7 @@ do
 	while [ $check -lt $tot_models ]
 	do
 		sleep 30
-		sh save_id.sh
+		sh sh_files/save_id.sh
 		check=$(wc -l Benchmark_results/list_jobid.txt | cut -f1 -d' ')
 		echo "Number of processed models"
         	echo $check
@@ -58,7 +48,7 @@ tot_models=$(( $n_run * $n_models ))
 while [ $check != $tot_models ]
 do
 	sleep 30
-	sh save_id.sh
+	sh sh_files/save_id.sh
 	check=$(wc -l Benchmark_results/list_jobid.txt | cut -f1 -d' ')	
 done
 
