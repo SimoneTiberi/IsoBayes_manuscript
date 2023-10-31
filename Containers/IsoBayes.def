@@ -2,6 +2,9 @@ Bootstrap: docker
 
 From: r-base
 
+%environment
+export R_LIBS_USER=/usr/local/lib/R/site-library
+
 %files
 packages.R /
 

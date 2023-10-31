@@ -12,18 +12,30 @@ if(DATA == "wtc11"){
 library(ggplot2)
 library(glue)
 
+source(glue("{PATH_WD}/utils_function/get_roc.R"))
+source(glue("{PATH_WD}/utils_function/prior_plot.R"))
+source(glue("{PATH_WD}/utils_function/utils_benchmarking.R"))
+source(glue("{PATH_WD}/utils_function/concat_models.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
+source(glue("{PATH_WD}/utils_function/scatterplot.R"))
+source(glue("{PATH_WD}/utils_function/utils_change_iso_mrna.R"))
+source(glue("{PATH_WD}/utils_function/plot_prob_change.R"))
+source(glue("{PATH_WD}/utils_function/plot_prob_change_group.R"))
 source(glue("{PATH_WD}/utils_function/compare_inputs.R"))
 source(glue("{PATH_WD}/utils_function/compare_pep_fdr.R"))
 
 PATH_TO_DATA = glue("{PATH_WD}/Data/{DATA}") 
 PATH_RES = glue("{PATH_WD}/Model_results/{DATA}")
 PATH_RES_roc = glue("{PATH_WD}/Robustness/{DATA}")
+dir.create(PATH_RES_roc)
 load(glue("{PATH_WD}/utils_function/PALETTE_MODELS"))
 
 log_output(glue("robustness_results_{DATA}"))
 
 main = function(models, proteases){
+  for (prot in proteases) {
+    dir.create(paste0(PATH_RES_roc, "/", prot))
+  }
   ###################################################################
   # PEP/no PEP and mRNA vs prot (OpenMS and MM)  
   ###################################################################

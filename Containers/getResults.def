@@ -2,11 +2,18 @@ Bootstrap: docker
 
 From: r-base
 
+%environment
+export R_LIBS_USER=/usr/local/lib/R/site-library
+
 %files
 packages_getResults.R /
 
 %post
-
 apt-get -y update
 apt-get -y upgrade
+apt-get install -y libcurl4-openssl-dev
+apt-get install -y libssl-dev
+apt-get install -y libxml2-dev 
+apt-get install -y cmake
+
 Rscript packages_getResults.R

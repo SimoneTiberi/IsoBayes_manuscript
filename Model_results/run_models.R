@@ -1,16 +1,23 @@
 PATH_WD = commandArgs(trailingOnly = TRUE)[1]
 DATA = commandArgs(trailingOnly = TRUE)[2]
 
+if(DATA == "wtc11"){
+  DATA_name = "WTC-11"
+}else{
+  DATA_name = "jurkat"
+}
+
 # Set path, global variable and libraries
 ###########################################################################################
 library(glue)
 library(IsoBayes)
 library(ggplot2)
 
+source(glue("{PATH_WD}/utils_function/merge_validation.R"))
 source(glue("{PATH_WD}/utils_function/validate_all_protease.R"))
 source(glue("{PATH_WD}/utils_function/save_run_inferences.R"))
-source(glue("{PATH_WD}/utils_function/plot_roc_model.R"))
 source(glue("{PATH_WD}/utils_function/log_output.R"))
+source(glue("{PATH_WD}/utils_function/change_inference_f.R"))
 
 PATH_TO_DATA = glue("{PATH_WD}/Data/{DATA}")
 PATH_TO_RES = glue("{PATH_WD}/Model_results/{DATA}")
@@ -46,8 +53,6 @@ main = function(proteases, run_model = TRUE){
       save_run_inferences(data_loaded, path_to_res_mod, name,
                           map_iso_gene = map_iso_gene, save_chain = TRUE)
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -73,8 +78,6 @@ main = function(proteases, run_model = TRUE){
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -99,8 +102,6 @@ main = function(proteases, run_model = TRUE){
       )
       save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -126,8 +127,6 @@ main = function(proteases, run_model = TRUE){
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = T)
     }
-    pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-    ggsave(glue("{path_to_res_mod}/{name}.png"))
   }
   pp = validate_all_protease(proteases, name, name_models)
   ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -162,8 +161,6 @@ main = function(proteases, run_model = TRUE){
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
         save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
       }
-      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -189,8 +186,6 @@ main = function(proteases, run_model = TRUE){
         )
         save_run_inferences(data_loaded, path_to_res_mod, name, long_mcmc = FALSE, save_chain = TRUE)
       }
-      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -216,8 +211,6 @@ main = function(proteases, run_model = TRUE){
         )
         save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
-      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))
@@ -243,8 +236,6 @@ main = function(proteases, run_model = TRUE){
         )
         save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
-      pp = plot_roc_model(path_to_res_mod, name, protease, name_models)
-      ggsave(glue("{path_to_res_mod}/{name}.png"))
     }
     pp = validate_all_protease(proteases, name, name_models)
     ggsave(glue("{PATH_TO_RES}/{name}/{name}.png"))

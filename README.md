@@ -2,7 +2,7 @@ This repository gathers all the scripts required to reproduce the results (plots
 Input data are stored [here](https://figshare.com/account/home#/projects/183988).
 
 ### Reproducibility
-R and IsoBayes library, used for benchmarking and data analysis, have been packaged up in a Singularity container in order to be portable and reproducible.
+R and IsoBayes library, used for benchmarking and data analysis, have been packaged up in a Singularity container in order to be portable and reproducible. We built the container with IsoBayes version 1.0.0 from [Bioconductor repository](doi:10.18129/B9.bioc.IsoBayes).
 Please, install [singularity](https://docs.sylabs.io/guides/3.5/user-guide/quick_start.html#quick-installation-steps) before proceeding.
 Once Singularity has been installed, all the results (plots and tables) in the IsoBayes paper can be reproduce by following the next four steps:
 

@@ -1,9 +1,10 @@
+PATH_WD = commandArgs(trailingOnly = TRUE)[1]
+
 library(glue)
 library(gridExtra)
 library(grid)
 library(ggplot2)
 
-PATH_WD = "/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper"
 size = 10 ; scale = 0.5
 source(glue("{PATH_WD}/utils_function/grid_arrange_shared_legend.R"))
 list_plot_bench = list()

@@ -12,13 +12,5 @@ validate_all_protease = function(proteases, name, name_models){
                        validation_file = glue("{PATH_TO_DATA}/No{protease}/Validation_prot_psm")
       )
     }
-    load(validation_dat_path)
-    all_validation_res = rbind(all_validation_res, validation_dat)
   }
-  colnames(all_validation_res)[colnames(all_validation_res) == "Prob_present"] = name_models[1]
-  for (nm in name_models) {
-    all_validation_res[, paste0("Present_", nm)] =  all_validation_res$Present
-  }
-
-  get_roc(all_validation_res, name_models)
 }

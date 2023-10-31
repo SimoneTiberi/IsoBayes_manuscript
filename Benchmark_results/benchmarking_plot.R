@@ -184,8 +184,6 @@ main = function(models, proteases){
         ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.pdf"), plot = plot_change)
         save(plot_change, file = glue("{PATH_RES_COMPETITORS}/{noUP}change_mrna_prot_extreme{mrna}.rdata"))
         
-        #sub_sel = sub_data[, glue("TPM_IsoBayes{mrna}")] != 0 & sub_data$tpm_validation != 0 & sub_data$Y_validation != 0 & sub_data$Pi != 0
-        
         ths = 1.5e-06
         p_tpm_adj = (sub_data[, glue("TPM_IsoBayes{mrna}")]+ths)/sum(sub_data[, glue("TPM_IsoBayes{mrna}")]+ths)
         pi = (sub_data[, glue("Pi_IsoBayes{mrna}")]+ths)/sum(sub_data[, glue("Pi_IsoBayes{mrna}")]+ths)
@@ -225,8 +223,8 @@ main = function(models, proteases){
   #################################################################################################
   Data = rbind()
   
-  for (ff in list.files(glue("{PATH_WD}/Benchmark_results"), pattern = "res_used")) {
-    res_used = readLines(glue("{PATH_WD}/Benchmark_results/{ff}"))
+  for (ff in list.files(glue("{PATH_WD}/Benchmark_results/results"), pattern = "res_used")) {
+    res_used = readLines(glue("{PATH_WD}/Benchmark_results/results/{ff}"))
     
     i_name = grep('job name', res_used)
     job_name = gsub(".*job name = ", "", res_used[i_name])
