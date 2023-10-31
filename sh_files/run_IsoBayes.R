@@ -9,20 +9,25 @@ if(PEP){
   FDR_thd = 0.01
 }
 
+path_to_tpm=commandArgs(trailingOnly = TRUE)[3]
+if(path_to_tpm == "NULL"){
+        path_to_tpm=NULL
+}
+
 set.seed(0)
 system.time(data_loaded <- load_data(path_to_peptides_psm = commandArgs(trailingOnly = TRUE)[1],
                         path_to_peptides_intensities = commandArgs(trailingOnly = TRUE)[2], 
-                        path_to_tpm = commandArgs(trailingOnly = TRUE)[3],
+                        path_to_tpm = path_to_tpm,
                         input_type = commandArgs(trailingOnly = TRUE)[4], 
                         abundance_type = commandArgs(trailingOnly = TRUE)[5],
                         PEP = PEP,
                         FDR_thd = FDR_thd
-			)
+                        )
 )
 
 system.time(res_pack <- inference(data_loaded,
-		     K = as.numeric(commandArgs(trailingOnly = TRUE)[8]),
+                     K = as.numeric(commandArgs(trailingOnly = TRUE)[8]),
                      n_cores = as.numeric(commandArgs(trailingOnly = TRUE)[9]),
-		     thin = as.numeric(commandArgs(trailingOnly = TRUE)[10])
-		     )
+                     thin = as.numeric(commandArgs(trailingOnly = TRUE)[10])
+                     )
 )
