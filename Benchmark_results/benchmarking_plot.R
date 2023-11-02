@@ -192,7 +192,7 @@ main = function(models, proteases){
         scat_bench = scatterplot(sub_data[, c(glue("Log2_FC_adj"), "Log2_FC_validation")])  + 
           labs(x = "Log2-FC", y = "Validated Log2-FC")
 
-        ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.png"), plot = scat_bench)
+        #ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.png"), plot = scat_bench)
         save(scat_bench, file = glue("{PATH_RES_COMPETITORS}/{noUP}scatterplot_log2fc{mrna}.rdata"))
       }
       

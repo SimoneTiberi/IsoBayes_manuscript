@@ -114,7 +114,7 @@ compare_pep_fdr = function(input, sub_selected_models, proteases, models){
       scat_bench = scatterplot(sub_data[, c("Log2_FC_adj", "Log2_FC_validation")])  + 
         labs(x = "Log2-FC", y = "Validated Log2-FC")
       
-      ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.png"), plot = scat_bench)
+      #ggsave(glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.png"), plot = scat_bench)
       save(scat_bench, file = glue("{PATH_RES_roc}/scatterplot_log2fc_{input}{pep}{mrna}_pep_vs_no_pep.rdata"))
     }
   }
