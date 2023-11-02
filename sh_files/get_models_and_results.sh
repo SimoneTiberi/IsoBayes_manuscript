@@ -13,6 +13,7 @@ do
 	singularity exec Containers/getResults.img Rscript Robustness/robustness_IsoBayes.R $MAIN_PATH $data      
 done
 
+singularity exec Containers/getResults.img Rscript utils_function/get_latex_table.R $MAIN_PATH >> Chapters/tables.txt
 singularity exec Containers/getResults.img Rscript utils_function/merge_plot.R $MAIN_PATH
 
 cd Chapters

@@ -1,6 +1,7 @@
+PATH_WD = commandArgs(trailingOnly = TRUE)[1]
+
 library(xtable)
 library(glue)
-PATH_WD = "/home/jbollon/prot_iso_mrna_dev/IsoBayes_paper"
 
 final_tab = rbind()
 vec_dat = c()
@@ -33,7 +34,7 @@ final_tab = cbind(c(vec_dat, NA), c(vec_prot, NA), final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ##################################################################################################
-# no up
+print("no up")
 ##################################################################################################
 final_tab = rbind()
 vec_dat = c()
@@ -66,7 +67,7 @@ final_tab = cbind(c(vec_dat, NA), c(vec_prot, NA), final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ##################################################################################################
-# Correlation openms 
+print("Correlation openms") 
 ##################################################################################################
 final_tab = rbind()
 vec_method = c("IsoBayes_mRNA", "IsoBayes")
@@ -87,7 +88,7 @@ final_tab = cbind(vec_method, final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ##################################################################################################
-# Correlation openms log2fc
+print("Correlation openms log2fc")
 ##################################################################################################
 final_tab = rbind()
 vec_method = c("IsoBayes_mRNA", "IsoBayes")
@@ -108,7 +109,7 @@ final_tab = cbind(vec_method, final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ##################################################################################################
-# Correlation Gene Abundance
+print("Correlation Gene Abundance")
 ##################################################################################################
 final_tab = rbind()
 vec_method = c("IsoBayes_mRNA", "IsoBayes")
@@ -129,7 +130,7 @@ final_tab = cbind(vec_method, final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ##################################################################################################
-# Correlation log2fc openms
+print("Correlation log2fc openms")
 ##################################################################################################
 final_tab = rbind()
 vec_method = c("IsoBayes_mRNA", "IsoBayes")
@@ -151,7 +152,7 @@ final_tab = cbind(vec_method, final_tab)
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ####################################################################################
-# OpenMS - MM_psm - MM_intensities
+print("OpenMS - MM_psm - MM_intensities")
 ####################################################################################
 for (dat in c("jurkat", "wtc11")) {
   final_tab = rbind()
@@ -185,7 +186,7 @@ for (dat in c("jurkat", "wtc11")) {
 }
 
 ##################################################################################################
-# Correlation OpenMS - MM_psm - MM_intensities
+print("Correlation OpenMS - MM_psm - MM_intensities")
 ##################################################################################################
 final_tab = rbind()
 
@@ -203,7 +204,7 @@ for (dat in c("jurkat", "wtc11")) {
 print(xtable(final_tab, type = "latex"), include.rownames=FALSE)
 
 ####################################################################################
-# Pep vs no Pep -- MM_psm - MM_intensities
+print("Pep vs no Pep -- MM_psm - MM_intensities")
 ####################################################################################
 for (input in c("MM_psm", "MM_intensities")) {
   for (dat in c("jurkat", "wtc11")) {
@@ -239,7 +240,7 @@ for (input in c("MM_psm", "MM_intensities")) {
 }
 
 ##################################################################################################
-# Correlation (pep vs no pep) MM_psm - MM_intensities 
+print("Correlation (pep vs no pep) MM_psm - MM_intensities") 
 ##################################################################################################
 for (input in c("MM_psm", "MM_intensities")) {
   for (dat in c("jurkat", "wtc11")) {
@@ -257,7 +258,7 @@ for (input in c("MM_psm", "MM_intensities")) {
 }
 
 ####################################################################################################
-# MM - Run time & memory
+print("MM - Run time & memory")
 ####################################################################################################
 Data = rbind()
 
@@ -309,3 +310,4 @@ for (model in c("psm", "intensities")) {
     print(xtable(row_dataset, type = "latex", digits = 1), include.rownames=FALSE)
   }
 }
+

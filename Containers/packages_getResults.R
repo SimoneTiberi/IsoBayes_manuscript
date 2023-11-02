@@ -6,6 +6,6 @@ ipak <- function(pkg){
 }
 
 # usage
-packages <- c("stringi", "ggplot2", "readr", "precrec", "pROC", "ggpubr", "latex2exp")
+packages <- c("stringi", "ggplot2", "readr", "precrec", "pROC", "ggpubr", "latex2exp", "xtable", "data.table", "glue")
 ipak(packages)
 
