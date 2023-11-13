@@ -18,7 +18,7 @@ main = function(){
   fasta$gene = gsub(".*GN=", "", fasta$V1)
   fasta$V1 = NULL
   
-  print("Number of genes: {nrow(fasta)}")
+  print(glue("Number of genes: {nrow(fasta)}"))
   
   data.table::fwrite(fasta, glue("{PATH_WD}/Data/jurkat/map_iso_gene_jurkat.csv"))
 }
