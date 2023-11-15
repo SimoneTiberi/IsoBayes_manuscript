@@ -1,0 +1,10 @@
+*.img
+*.idXML
+*.mzTab
+*.sif
+*.mzTab.red
+*.rdata
+*.RData
+Model_results
+Data/jurkat
+Data/wtc11

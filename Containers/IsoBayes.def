@@ -1,0 +1,25 @@
+Bootstrap: docker
+
+From: r-base
+
+%environment
+export R_LIBS_USER=/usr/local/lib/R/site-library
+
+%files
+packages.R /
+
+%post
+
+apt-get -y update
+apt-get -y upgrade
+apt-get install -y libcurl4-openssl-dev
+apt-get install -y libssl-dev
+apt-get install -y libxml2-dev
+apt-get install -y git
+
+git clone https://github.com/SimoneTiberi/IsoBayes.git
+
+Rscript packages.R
+
+R CMD build IsoBayes --no-build-vignettes
+R CMD INSTALL IsoBayes_0.99.12.tar.gz

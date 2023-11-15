@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: eclipse-temurin:latest
+
+%POST
+apt -y update
+apt -y install wget unzip
+cd /opt
+wget https://github.com/mpc-bioinformatics/pia/releases/download/1.4.7/pia-1.4.7.zip
+unzip pia-1.4.7.zip -d pia-1.4.7
+rm *.zip
+
+%RUNSCRIPT
+java -jar /opt/pia-1.4.7/pia-1.4.7.jar $@ 
