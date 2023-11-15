@@ -1,5 +1,5 @@
 This repository gathers all the scripts required to reproduce the results (plots and tables) reported in the paper "IsoBayes: a Bayesian approach for single-isoform proteomics inference".
-Input data are stored [here](https://figshare.com/account/home#/projects/183988).
+Input data are stored in figshare [here](https://figshare.com/account/home#/projects/183988).
 
 ### Reproducibility
 R and IsoBayes library, used for benchmarking and data analysis, have been packaged up in a Singularity container in order to be portable and reproducible. We built the container with IsoBayes version 1.0.0 from [Bioconductor repository](doi:10.18129/B9.bioc.IsoBayes).
