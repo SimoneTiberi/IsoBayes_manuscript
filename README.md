@@ -5,7 +5,7 @@ The code is organized in 7 folder:
 
 - Benchmark_results, which contains the R code to process the benchmark results. At the end of the analysis, the folder will store the benchmark results;
 - Chapters, which at the end of the analysis will store the main results reported in the aforementioned paper;
-- Containers, that stores all the containers required to execute the entire analysis;
+- Containers, that stores all the Singularity Recipes to build the containers required to execute the entire analysis;
 - Model_results, which contains the R code to run the IsoBayes model with different parameters and datasets. At the end of the analysis, the folder will store the model results;
 - Robustness, that includes the R code to perform the robustness analysis. At the end of the analysis, the folder will store the robustness results;
 - sh_files, which contains the bash files to execute the sequential tasks required by the benchmark and data analysis;
@@ -17,7 +17,7 @@ R and IsoBayes library, used for benchmarking and data analysis, have been packa
 Please, install [singularity](https://docs.sylabs.io/guides/3.5/user-guide/quick_start.html#quick-installation-steps) before proceeding.
 Once Singularity has been installed, all the results (plots and tables) in the IsoBayes paper can be reproduce by following the next four steps:
 
-1 - download the input data required to perform the entire analysis:
+1 - download the singularity containers and the input data required to perform the entire analysis:
 ```shell
 wget https://github.com/SimoneTiberi/IsoBayes_manuscript.git
 cd IsoBayes_manuscript
