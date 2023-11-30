@@ -124,7 +124,6 @@ main = function(models, proteases){
       
       write.csv(plot_tab$sum_stat, file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result.csv"),
                 row.names = FALSE)
-      benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
       
       # Focus on validation without isoform with Unique Peptide (UP)
       plot_tab = get_roc(benchmark_df[benchmark_df$Y_unique_IsoBayes == 0, ],
@@ -139,13 +138,32 @@ main = function(models, proteases){
       write.csv(shared_vs_all_auc,
                 file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_no_UP.csv"),
                 row.names = FALSE)
+
+      # Focus on validation without genes with just one isoform
+      count_iso_gene = table(benchmark_df$Gene_IsoBayes)
+      benchmark_df$count_iso_gene = count_iso_gene[benchmark_df$Gene_IsoBayes]
+      plot_tab = get_roc(benchmark_df[benchmark_df$count_iso_gene > 1, ],
+                         c(selected_models, "EPIFANY", "Fido", "PIA"),
+                         protease = glue(" - {protease}")
+      )
+      ggsave(glue("{PATH_RES_COMPETITORS}/{protease}/ROC_main_result_gene_w_more_ISO.png"), plot = plot_tab$gplot)
+      save(plot_tab, file = glue("{PATH_RES_COMPETITORS}/{protease}/gene_w_more_ISO_ROC_main_result.rdata"))
+      gene_w_more_ISO_auc = plot_tab$sum_stat
+      
+      write.csv(gene_w_more_ISO_auc,
+                file = glue("{PATH_RES_COMPETITORS}/{protease}/SumTab_main_result_gene_w_more_ISO.csv"),
+                row.names = FALSE)
+      
+      benchmark_df_all = rbind(benchmark_df_all, benchmark_df)
     }
-    
-    for (noUP in c("", "no_UP_")) {
+
+  for (noUP in c("", "no_UP_", "gene_w_more_ISO_")) { 
       if(noUP == "no_UP_"){
         sel = benchmark_df_all$Y_unique_IsoBayes == 0 # equal to Y_unique_IsoBayes_mRNA
-      }else{
+      }else if (noUP == ""){
         sel = benchmark_df_all$Y_unique_IsoBayes > -Inf
+      }else{
+        sel = benchmark_df_all$count_iso_gene > 1
       }
       plot_tab = get_roc(benchmark_df_all[sel, ], c(selected_models, "EPIFANY", "Fido", "PIA"))
       ggsave(glue("{PATH_RES_COMPETITORS}/{noUP}ROC_main_result.png"), plot = plot_tab$gplot)
