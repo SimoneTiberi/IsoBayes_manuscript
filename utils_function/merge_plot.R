@@ -9,7 +9,7 @@ size = 10 ; scale = 0.5
 source(glue("{PATH_WD}/utils_function/grid_arrange_shared_legend.R"))
 list_plot_bench = list()
 
-for (noUP in c("", "no_UP_")) {
+for (noUP in c("", "no_UP_", "gene_w_more_ISO_")) {
 
   list_plot_bench_abundance = list()
   list_plot_bench_change = list()
@@ -132,6 +132,21 @@ a = ggpubr::ggarrange(list_plot_bench[[11]]$gplot + xlab(NULL),
                       nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
 
 ggsave(glue("{PATH_WD}/Benchmark_results/no_UP_ROC_main_result.png"), plot = a,
+       height = size * scale, width = size)
+
+a = ggpubr::ggarrange(list_plot_bench[[21]]$gplot + xlab(NULL),
+                      list_plot_bench[[22]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_bench[[23]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_bench[[24]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_bench[[25]]$gplot + xlab(NULL) + ylab(NULL),
+                      list_plot_bench[[26]]$gplot,
+                      list_plot_bench[[27]]$gplot + ylab(NULL),
+                      list_plot_bench[[28]]$gplot + ylab(NULL),
+                      list_plot_bench[[29]]$gplot + ylab(NULL),
+                      list_plot_bench[[30]]$gplot + ylab(NULL),
+                      nrow = 2, ncol = 5, common.legend = TRUE, legend="bottom")
+
+ggsave(glue("{PATH_WD}/Benchmark_results/gene_w_more_ISO_ROC_main_result.png"), plot = a,
        height = size * scale, width = size)
 
 ############################# 3.1 ###################################################
