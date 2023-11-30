@@ -14,6 +14,13 @@ cp ../Benchmark_results/no_UP_ROC_main_result.png 2/
 cp ../Benchmark_results/no_UP_scatterplot_abundance_*.png 2/
 cp ../Benchmark_results/no_UP_change_mrna_prot*.pdf 2/
 
+# Chapter 2_bis
+mkdir 2_bis
+cp ../Benchmark_results/gene_w_more_ISO_ROC_main_result.png 2_bis/
+cp ../Benchmark_results/gene_w_more_ISO_scatterplot_abundance_*.png 2_bis/
+cp ../Benchmark_results/gene_w_more_ISO_change_mrna_prot*.pdf 2_bis/
+
+
 # Chapter 3
 mkdir 3
 cp ../Robustness/ROC_MM_psm_vs_MM_intensities_vs_OpenMS.png 3/
