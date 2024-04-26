@@ -25,6 +25,7 @@ sh sh_files/download_data.sh
 ```
 2 - preprocess the input data in order to get all the required files (.idXML files, mRNA dataset, validation set) to run benchmark and validation analysis:
 ```shell
+mkdir Log_files
 sh sh_files/pre_process_data.sh
 ```
 3 - once data have been downloaded and preprocessed, to run the entire benchmark analysis, move the IsoBayes\_manuscript folder on a HPC infrastructure endowed with OpenPBS software and then execute the next two lines:
