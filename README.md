@@ -19,7 +19,7 @@ Once Singularity has been installed, all the results (plots and tables) in the I
 
 1 - download the singularity containers and the input data required to perform the entire analysis:
 ```shell
-wget https://github.com/SimoneTiberi/IsoBayes_manuscript.git
+git clone https://github.com/SimoneTiberi/IsoBayes_manuscript.git
 cd IsoBayes_manuscript
 sh sh_files/download_data.sh
 ```
