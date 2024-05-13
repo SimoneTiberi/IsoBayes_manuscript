@@ -1,13 +1,14 @@
 This repository gathers all the scripts required to reproduce the results (plots and tables) reported in the paper "IsoBayes: a Bayesian approach for single-isoform proteomics inference".
 Input data are stored in figshare [here](https://figshare.com/account/home#/projects/183988).
 
-The code is organized in 7 folder:
+The code is organized in 8 folder:
 
 - Benchmark_results, which contains the R code to process the benchmark results. At the end of the analysis, the folder will store the benchmark results;
 - Chapters, which at the end of the analysis will store the main results reported in the aforementioned paper;
 - Containers, that stores all the Singularity Recipes to build the containers required to execute the entire analysis;
 - Model_results, which contains the R code to run the IsoBayes model with different parameters and datasets. At the end of the analysis, the folder will store the model results;
 - Robustness, that includes the R code to perform the robustness analysis. At the end of the analysis, the folder will store the robustness results;
+- Simulation study, which contains the R code to run the simulation study;
 - sh_files, which contains the bash files to execute the sequential tasks required by the benchmark and data analysis;
 - utils_function, that includes several R files with functions called during the entire analysis.
 
