@@ -1,3 +1,7 @@
+# For this script, install the R package "IsoBayes_0.0.0.tar.gz",
+# which allows changing the values of "c",
+# that determines how important the mRNA prior is with respect to the proteomics data.
+
 rm(list = ls())
 setwd("~/Desktop/codice_simone")
 PATH_WD = "~/Desktop/codice_simone"
