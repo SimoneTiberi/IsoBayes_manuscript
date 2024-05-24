@@ -78,6 +78,8 @@ for(data in datasets){
       if(x > 0){
         index = Peptides_per_protein[[i]]
         len = length(index)
+        
+        #X_peptide[index] = X_peptide[index] + rpois(len, x/len)
         if(len > 1){
           # consider the PEP here?
           X_peptide[index] = X_peptide[index] + c(rmultinom(n = 1, size = x, prob = rep(1, len) ))
@@ -89,7 +91,7 @@ for(data in datasets){
     sum(X_protein); sum(X_peptide)
     
     N_peptides_per_protein = sapply(Peptides_per_protein, length)
-  
+    
     # simulated data in:
     head(X_peptide); length(X_peptide) # peptide abundance
     head(EC_numeric); length(EC_numeric) # proteins each peptide is associated to

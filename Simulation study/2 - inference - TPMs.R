@@ -21,9 +21,6 @@ for(id in 1:length(names) ){
   filename = paste0("simulated data/", name)
   load(filename)
   
-  # DO NOT Account for protein length:
-  DATA$PROTEIN_DF$protein_length = 1
-  
   library(IsoBayes)
   set.seed(169612)
   res = inference(DATA)[[1]]
@@ -87,19 +84,20 @@ xtable(PERFORMANCE)
 \centering
 \begin{tabular}{rrrrrrrr}
 \hline
-& AUC & log2corr & HPDCI\_coverage & abundance\_absent & abundance\_present & prob\_absent & prob\_present \\ 
+& AUC & log10corr & HPDCI\_coverage & abundance\_absent & abundance\_present & prob\_absent & prob\_present \\ 
 \hline
-jurkat\_ArgC & 0.96 & 0.95 & 0.99 & 0.24 & 6.01 & 0.09 & 0.68 \\ 
+jurkat\_ArgC & 0.97 & 0.95 & 0.99 & 0.24 & 6.01 & 0.09 & 0.68 \\ 
 jurkat\_AspN & 0.97 & 0.97 & 0.99 & 0.16 & 8.97 & 0.10 & 0.70 \\ 
-jurkat\_Chym & 0.96 & 0.96 & 0.98 & 0.16 & 4.91 & 0.09 & 0.68 \\ 
-jurkat\_GluC & 0.98 & 0.97 & 0.99 & 0.15 & 9.40 & 0.09 & 0.71 \\ 
-jurkat\_LysC & 0.98 & 0.98 & 0.98 & 0.14 & 11.98 & 0.10 & 0.72 \\ 
+jurkat\_Chym & 0.96 & 0.96 & 0.99 & 0.16 & 4.91 & 0.09 & 0.68 \\ 
+jurkat\_GluC & 0.98 & 0.97 & 0.99 & 0.16 & 9.40 & 0.09 & 0.71 \\ 
+jurkat\_LysC & 0.98 & 0.98 & 0.99 & 0.15 & 11.98 & 0.10 & 0.72 \\ 
 jurkat\_Trypsin & 0.98 & 0.98 & 0.99 & 0.13 & 11.46 & 0.09 & 0.72 \\ 
-WTC-11\_AspN & 0.97 & 0.96 & 0.99 & 0.17 & 7.62 & 0.10 & 0.68 \\ 
-WTC-11\_Chymo & 0.97 & 0.96 & 0.99 & 0.18 & 10.14 & 0.11 & 0.64 \\ 
-WTC-11\_LysC & 0.96 & 0.96 & 0.98 & 0.16 & 7.68 & 0.11 & 0.73 \\ 
-WTC-11\_Trypsin & 0.96 & 0.96 & 0.97 & 0.16 & 7.47 & 0.12 & 0.76 \\ 
-11 & 0.97 & 0.97 & 0.98 & 0.16 & 8.56 & 0.10 & 0.70 \\ 
+WTC-11\_AspN & 0.97 & 0.96 & 0.99 & 0.17 & 7.62 & 0.11 & 0.68 \\ 
+WTC-11\_Chymo & 0.97 & 0.97 & 1.00 & 0.18 & 10.13 & 0.11 & 0.64 \\ 
+WTC-11\_LysC & 0.97 & 0.97 & 0.99 & 0.17 & 7.68 & 0.11 & 0.73 \\ 
+WTC-11\_Trypsin & 0.96 & 0.96 & 0.99 & 0.18 & 7.46 & 0.13 & 0.77 \\ 
+11 & 0.97 & 0.97 & 0.99 & 0.17 & 8.56 & 0.10 & 0.70 \\ 
 \hline
 \end{tabular}
 \end{table}
+

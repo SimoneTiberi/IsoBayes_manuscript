@@ -20,10 +20,7 @@ for(id in 1:length(names) ){
   
   filename = paste0("simulated data/", name)
   load(filename)
-  
-  # DO NOT Account for protein length:
-  DATA$PROTEIN_DF$protein_length = 1
-  
+
   # remove TPMs
   DATA$PROTEIN_DF$TPM = NULL
 
@@ -75,7 +72,6 @@ colMeans(PERFORMANCE)
 
 save(PERFORMANCE, file = "results/PERFORMANCE.RData")
 
-
 # AUC , logCORR high
 # coverage > 0.95
 # abundance present = 51 * abundance absent
@@ -86,23 +82,24 @@ PERFORMANCE = rbind(PERFORMANCE, colMeans(PERFORMANCE))
 library(xtable)
 xtable(PERFORMANCE)
 
+
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
 \hline
-& AUC & log2corr & HPDCI\_coverage & abundance\_absent & abundance\_present & prob\_absent & prob\_present \\ 
+& AUC & log10corr & HPDCI\_coverage & abundance\_absent & abundance\_present & prob\_absent & prob\_present \\ 
 \hline
-jurkat\_ArgC & 0.91 & 0.86 & 0.98 & 0.68 & 5.73 & 0.27 & 0.78 \\ 
-jurkat\_AspN & 0.93 & 0.89 & 0.98 & 0.58 & 8.74 & 0.26 & 0.79 \\ 
-jurkat\_Chym & 0.87 & 0.83 & 0.98 & 0.70 & 4.42 & 0.31 & 0.73 \\ 
-jurkat\_GluC & 0.93 & 0.90 & 0.98 & 0.60 & 9.14 & 0.25 & 0.79 \\ 
-jurkat\_LysC & 0.95 & 0.92 & 0.97 & 0.46 & 11.85 & 0.23 & 0.82 \\ 
-jurkat\_Trypsin & 0.95 & 0.92 & 0.98 & 0.46 & 11.31 & 0.22 & 0.82 \\ 
-WTC-11\_AspN & 0.92 & 0.82 & 0.96 & 0.79 & 7.30 & 0.29 & 0.81 \\ 
-WTC-11\_Chymo & 0.89 & 0.78 & 0.94 & 1.15 & 9.63 & 0.35 & 0.80 \\ 
-WTC-11\_LysC & 0.93 & 0.86 & 0.97 & 0.62 & 7.44 & 0.28 & 0.82 \\ 
-WTC-11\_Trypsin & 0.94 & 0.88 & 0.97 & 0.65 & 7.28 & 0.28 & 0.85 \\ 
-11 & 0.92 & 0.86 & 0.97 & 0.67 & 8.28 & 0.27 & 0.80 \\ 
+jurkat\_ArgC & 0.91 & 0.86 & 0.98 & 0.69 & 5.73 & 0.27 & 0.78 \\ 
+jurkat\_AspN & 0.93 & 0.89 & 0.98 & 0.60 & 8.73 & 0.27 & 0.80 \\ 
+jurkat\_Chym & 0.87 & 0.83 & 0.98 & 0.71 & 4.41 & 0.31 & 0.74 \\ 
+jurkat\_GluC & 0.93 & 0.90 & 0.98 & 0.59 & 9.14 & 0.26 & 0.80 \\ 
+jurkat\_LysC & 0.95 & 0.92 & 0.99 & 0.48 & 11.84 & 0.23 & 0.82 \\ 
+jurkat\_Trypsin & 0.95 & 0.92 & 0.98 & 0.47 & 11.30 & 0.22 & 0.82 \\ 
+WTC-11\_AspN & 0.92 & 0.82 & 0.96 & 0.82 & 7.28 & 0.30 & 0.81 \\ 
+WTC-11\_Chymo & 0.89 & 0.78 & 0.94 & 1.16 & 9.62 & 0.35 & 0.80 \\ 
+WTC-11\_LysC & 0.93 & 0.86 & 0.97 & 0.65 & 7.43 & 0.29 & 0.83 \\ 
+WTC-11\_Trypsin & 0.93 & 0.88 & 0.98 & 0.70 & 7.26 & 0.29 & 0.85 \\ 
+11 & 0.92 & 0.87 & 0.98 & 0.69 & 8.28 & 0.28 & 0.80 \\ 
 \hline
 \end{tabular}
 \end{table}
