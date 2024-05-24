@@ -4,7 +4,7 @@ PATH_WD = "~/Desktop/codice_simone"
 id = 0
 gg = list()
 for(DATA in c("jurkat", "wtc11")){
-  for(PEP in c(TRUE, FALSE)){
+  for(PEP in c(FALSE, TRUE)){
     id = id + 1
     name = paste0("AUC_", DATA, "_PEP_", PEP,".RData")
     load(name)
