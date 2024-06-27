@@ -1,5 +1,5 @@
 change_inference_f = function(){
-  env_iso = environment(load_data)
+  env_iso = environment(inference)
   inference_mod = function (loaded_data,
                             map_iso_gene = NULL,
                             n_cores = 1,
