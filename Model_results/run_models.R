@@ -42,13 +42,14 @@ main = function(proteases, run_model = TRUE){
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
       path_to_peptides = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.1.idXML")
       
-      data_loaded = load_data(path_to_peptides_psm = path_to_peptides,
-                              path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = TRUE,
-                              FDR_thd = 0.1
-      )
+      SE <- generate_SE(path_to_peptides_psm = path_to_peptides,
+                        input_type = "openMS",
+                        abundance_type = "psm",
+                        PEP = TRUE,
+                        FDR_thd = 0.1
+                        )
+      data_loaded <- input_data(SE, path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"))
+      
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name,
                           map_iso_gene = map_iso_gene, save_chain = TRUE)
@@ -68,13 +69,15 @@ main = function(proteases, run_model = TRUE){
     path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
-                              path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = FALSE,
-                              FDR_thd = 0.01
-      )
+      
+      SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
+                        input_type = "openMS",
+                        abundance_type = "psm",
+                        PEP = FALSE,
+                        FDR_thd = 0.01
+                        )
+      data_loaded <- input_data(SE, path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"))
+      
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
     }
@@ -94,12 +97,14 @@ main = function(proteases, run_model = TRUE){
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
       
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.1.idXML"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = TRUE,
-                              FDR_thd = 0.1
-      )
+      SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.1.idXML"),
+                        input_type = "openMS",
+                        abundance_type = "psm",
+                        PEP = TRUE,
+                        FDR_thd = 0.1
+                        )
+      data_loaded <- input_data(SE)
+      
       save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
     }
   }
@@ -118,12 +123,14 @@ main = function(proteases, run_model = TRUE){
     if (run_model) {
       if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
       
-      data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
-                              input_type = "openMS",
-                              abundance_type = "psm",
-                              PEP = FALSE,
-                              FDR_thd = 0.01
-      )
+      SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/merge_index_percolator_pep_switched_0.01.idXML"),
+                        input_type = "openMS",
+                        abundance_type = "psm",
+                        PEP = FALSE,
+                        FDR_thd = 0.01
+                        )
+      data_loaded <- input_data(SE)
+
       map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
       save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = T)
     }
@@ -150,14 +157,16 @@ main = function(proteases, run_model = TRUE){
       if (run_model) {
         if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
         
-        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
-                                path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
-                                path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                                input_type = "metamorpheus",
-                                abundance_type = abundance_type,
-                                PEP = TRUE,
-                                FDR_thd = 0.1
-        )
+        SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
+                          path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
+                          input_type = "metamorpheus",
+                          abundance_type = abundance_type,
+                          PEP = TRUE,
+                          FDR_thd = 0.1
+                          )
+
+        data_loaded <- input_data(SE, path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"))
+
         map_iso_gene = glue("{PATH_WD}/Data/{DATA}/map_iso_gene_{DATA}.csv")
         save_run_inferences(data_loaded, path_to_res_mod, name, map_iso_gene = map_iso_gene, save_chain = TRUE)
       }
@@ -176,14 +185,17 @@ main = function(proteases, run_model = TRUE){
       path_to_res_mod = glue("{PATH_TO_RES}/{name}/{protease}")
       if (run_model) {
         if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
-        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
-                                path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
-                                path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"),
-                                input_type = "metamorpheus",
-                                abundance_type = abundance_type,
-                                PEP = FALSE,
-                                FDR_thd = 0.01
-        )
+        
+        SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
+                          path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
+                          input_type = "metamorpheus",
+                          abundance_type = abundance_type,
+                          PEP = FALSE,
+                          FDR_thd = 0.01
+                          )
+
+        data_loaded <- input_data(SE, path_to_tpm = paste0(PATH_TO_DATA, "/mrna_isoform.tsv"))
+
         save_run_inferences(data_loaded, path_to_res_mod, name, long_mcmc = FALSE, save_chain = TRUE)
       }
     }
@@ -202,13 +214,16 @@ main = function(proteases, run_model = TRUE){
       if (run_model) {
         if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
         
-        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
-                                path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
-                                input_type = "metamorpheus",
-                                abundance_type = abundance_type,
-                                PEP = TRUE,
-                                FDR_thd = 0.1
-        )
+        SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
+                          path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
+                          input_type = "metamorpheus",
+                          abundance_type = abundance_type,
+                          PEP = TRUE,
+                          FDR_thd = 0.1
+                          )
+
+        data_loaded <- input_data(SE)
+
         save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
     }
@@ -227,13 +242,16 @@ main = function(proteases, run_model = TRUE){
       if (run_model) {
         if(!dir.exists(path_to_res_mod)){dir.create(path_to_res_mod, recursive = TRUE)}
         
-        data_loaded = load_data(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
-                                path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
-                                input_type = "metamorpheus",
-                                abundance_type = abundance_type,
-                                PEP = FALSE,
-                                FDR_thd = 0.01
-        )
+        SE <- generate_SE(path_to_peptides_psm = paste0(PATH_TO_DATA, "/Only", protease, "/AllPeptides.psmtsv"),
+                          path_to_peptides_intensities = paste0(PATH_TO_DATA, "/Only", protease, "/AllQuantifiedPeptides.tsv"),
+                          input_type = "metamorpheus",
+                          abundance_type = abundance_type,
+                          PEP = FALSE,
+                          FDR_thd = 0.01
+                          )
+
+        data_loaded <- input_data(SE)
+
         save_run_inferences(data_loaded, path_to_res_mod, name, save_chain = TRUE)
       }
     }
