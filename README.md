@@ -6,6 +6,7 @@ The code is organized in 8 folder:
 - Benchmark_results, which contains the R code to process the benchmark results. At the end of the analysis, the folder will store the benchmark results;
 - Chapters, which at the end of the analysis will store the main results reported in the aforementioned paper;
 - Containers, that stores all the Singularity Recipes to build the containers required to execute the entire analysis;
+- Hexbin plots, where are the script and data to obtain the hexbin plots in the manuscript;
 - Model_results, which contains the R code to run the IsoBayes model with different parameters and datasets. At the end of the analysis, the folder will store the model results;
 - Robustness, that includes the R code to perform the robustness analysis. At the end of the analysis, the folder will store the robustness results;
 - Simulation study, which contains the R code to run the simulation study;
